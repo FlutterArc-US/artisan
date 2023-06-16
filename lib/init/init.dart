@@ -7,5 +7,5 @@ init() async {
   print(assetsPath);
 
   String destinationPath = Directory.current.path;
-  print(destinationPath)
+  print(destinationPath);
 }
