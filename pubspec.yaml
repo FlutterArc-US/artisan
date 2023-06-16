@@ -3,7 +3,7 @@ version: 0.0.1
 publish_to: https://onepub.dev/api/ksdbxpsdav/
 description: A new Flutter project.
 environment:
-  sdk: '>=3.0.1 <4.0.0'
+  sdk: '>=2.19.6 <3.0.0'
   flutter: '>=1.17.0'
 dependencies:
   flutter:
