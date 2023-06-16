@@ -1,8 +1,11 @@
 import 'dart:io';
-
-import 'package:flutter/services.dart';
+import 'package:path/path.dart' as path;
 
 init() async {
-  final a = await rootBundle.load('lib');
-  print(a.toString());
+  String packageDirectory = path.dirname(Platform.script.toFilePath());
+  String assetsPath = path.join(packageDirectory, 'lib');
+  print(assetsPath);
+
+  String destinationPath = Directory.current.path;
+  print(destinationPath)
 }
