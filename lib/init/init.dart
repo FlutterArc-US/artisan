@@ -7,7 +7,7 @@ init() async {
   String assetsPath = path.join(packageDirectory, 'artisan');
   print(assetsPath);
 
-  print(Directory(assetsPath));
+  print(Directory(assetsPath).existsSync());
 
   String destinationPath = Directory.current.path;
   print(destinationPath);
