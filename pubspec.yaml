@@ -8,6 +8,14 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+
+
+dev_dependencies:
+  flutter_lints: ^2.0.0
+  build_runner: ^2.3.3
+  freezed: ^2.3.2
+  injectable_generator: ^2.1.4
+  json_serializable: ^6.6.1
   injectable: ^2.1.2
   local_auth: ^2.1.6
   google_sign_in: ^6.1.4
@@ -21,13 +29,6 @@ dependencies:
   fluttertoast: ^8.2.2
   freezed_annotation: ^2.2.0
   json_annotation: ^4.8.0
-
-dev_dependencies:
-  flutter_lints: ^2.0.0
-  build_runner: ^2.3.3
-  freezed: ^2.3.2
-  injectable_generator: ^2.1.4
-  json_serializable: ^6.6.1
 
   flutter_test:
     sdk: flutter
