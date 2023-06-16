@@ -2,6 +2,8 @@ library artisan;
 
 import 'package:artisan/init/init.dart';
 import 'package:artisan/make/make.dart';
+import 'package:flutter/services.dart';
+
 
 void main(List<String> arguments) {
   var command = arguments.join(' ');
@@ -24,6 +26,7 @@ void main(List<String> arguments) {
     if (commandType == 'make') {
       makeFile(command);
     } else if (commandType == 'init') {
+
       init();
     } else {
       print('Invalid Command $command');
