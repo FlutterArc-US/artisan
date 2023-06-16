@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:path/path.dart' as path;
 
 void copyDirectory(Directory sourceDir, Directory destinationDir) {
   // Create the destination directory if it doesn't exist
@@ -26,7 +27,8 @@ void copyDirectory(Directory sourceDir, Directory destinationDir) {
 
 void init() {
   try {
-    final fromPath = '${Directory.current.path}/lib/files/init';
+    final packageDirectory = path.dirname(Platform.script.toFilePath());
+    final fromPath = path.join(packageDirectory, 'lib', 'files', 'init');
     print(fromPath);
 
     final toPath = Directory('./lib');
