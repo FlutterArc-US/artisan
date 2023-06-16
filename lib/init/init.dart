@@ -25,9 +25,16 @@ void copyDirectory(Directory sourceDir, Directory destinationDir) {
 }
 
 void init() {
-  print("INININ");
-  final fromPath = '${Directory.current.path}/lib/files/init';
-  final toPath = Directory('./lib');
+  try {
+    final fromPath = '${Directory.current.path}/lib/files/init';
+    print(fromPath);
 
-  copyDirectory(Directory(fromPath), toPath);
+    final toPath = Directory('./lib');
+
+    print(toPath);
+
+    copyDirectory(Directory(fromPath), toPath);
+  } catch (e) {
+    print(e);
+  }
 }
