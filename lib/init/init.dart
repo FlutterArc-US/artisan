@@ -1,5 +1,8 @@
 import 'dart:io';
 
-init() {
-  print(Directory.current.absolute.path);
+import 'package:flutter/services.dart';
+
+init() async {
+  final a = await rootBundle.load('lib');
+  print(a.toString());
 }
