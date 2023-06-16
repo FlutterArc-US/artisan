@@ -4,7 +4,6 @@ import 'package:artisan/init/init.dart';
 import 'package:artisan/make/make.dart';
 import 'package:flutter/services.dart';
 
-
 void main(List<String> arguments) {
   var command = arguments.join(' ');
   if (arguments.isEmpty) {
@@ -26,6 +25,8 @@ void main(List<String> arguments) {
     if (commandType == 'make') {
       makeFile(command);
     } else if (commandType == 'init') {
+      final path = rootBundle.load('./lib/files/init');
+      print(path.toString());
 
       init();
     } else {
