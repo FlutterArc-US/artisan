@@ -1,10 +1,10 @@
 import 'dart:io';
-import 'package:flutter/services.dart';
+// import 'package:flutter/services.dart';
 import 'package:path/path.dart' as path;
 
 void init() async{
   try {
-    final a = await rootBundle.load('package:artisan/');
+    final a = await "rootBundle.load('package:artisan/')";
     print(a.toString());
     return;
     final packageDirectory = path.dirname(Platform.script.toFilePath());
