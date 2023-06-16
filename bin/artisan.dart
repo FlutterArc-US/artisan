@@ -1,5 +1,6 @@
 library artisan;
 
+import 'package:artisan/init/init.dart';
 import 'package:artisan/make/make.dart';
 
 void main(List<String> arguments) {
@@ -10,7 +11,8 @@ void main(List<String> arguments) {
     return;
   }
 
-  if (!command.contains(':') || !command.contains('on')) {
+  if ((!command.contains(':') || !command.contains('on')) &&
+      command != 'init') {
     print('Invalid Command $command');
     return;
   }
@@ -22,6 +24,9 @@ void main(List<String> arguments) {
     /// [Command Types]
     if (commandType == 'make') {
       makeFile(command);
+    }
+    if (commandType == 'init') {
+      init();
     }
   } catch (e) {
     print('Invalid Command ${arguments.join()}');

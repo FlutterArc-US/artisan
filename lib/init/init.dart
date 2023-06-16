@@ -4,17 +4,17 @@ Future<void> init() async {
   addInfrastructure();
 }
 
-Directory getDirectory(String address) {
+String getDirectory(String address) {
   var directory = Directory(address);
   if (!directory.existsSync()) {
     directory.createSync(recursive: true);
   }
 
-  return directory;
+  return directory.path;
 }
 
 Future<void> addInfrastructure() async {
-  final infrastructure = getDirectory('lib/infrastructure/');
+  final infrastructure = getDirectory('lib/infrastructure');
 
   /// [Datasource]
   const datasource = '''abstract class DataSource {}''';
@@ -49,4 +49,6 @@ class NoInput extends Input {}
   const usecaseOutput = '''abstract class Output {}''';
   final usecaseOutputFile = File('$infrastructure/usecase_output.dart');
   usecaseOutputFile.writeAsStringSync(usecaseOutput);
+
+  print('Artisan init successfully!');
 }
