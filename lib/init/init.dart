@@ -1,7 +1,11 @@
 import 'dart:io';
 
 Future<void> init() async {
+  /// [Add Infrastructure]
   addInfrastructure();
+
+  /// [Add Common]
+  addCommon();
 }
 
 String getDirectory(String address) {
@@ -51,4 +55,11 @@ class NoInput extends Input {}
   usecaseOutputFile.writeAsStringSync(usecaseOutput);
 
   print('Artisan init successfully!');
+}
+
+Future<void> addCommon() async {
+  // final commonExtensions = getDirectory('lib/common/extension');
+  final assetPath = Directory('${Directory.current.path}/assets');
+
+  print(assetPath.existsSync());
 }
