@@ -11,7 +11,7 @@ import 'package:artisan/files/repository_method.dart';
 import 'package:artisan/files/usecase_file.dart';
 
 ///[Make File]
-makeFile(String makeCommand) {
+void makeFile(String makeCommand) {
   final fileType = makeCommand.split(' ').first;
   final file = makeCommand
       .split(' ')
