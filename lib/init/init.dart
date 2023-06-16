@@ -14,7 +14,6 @@ void copyDirectory(Directory sourceDir, Directory destinationDir) {
       String relativePath = file.path.replaceFirst(sourceDir.path, '');
       String destinationPath = destinationDir.path + relativePath;
       file.copySync(destinationPath);
-      print('Copied ${entity.path} to $destinationPath');
     } else if (entity is Directory) {
       // If it's a directory, recursively copy it
       Directory subDirectory = Directory(entity.path);
@@ -26,6 +25,7 @@ void copyDirectory(Directory sourceDir, Directory destinationDir) {
 }
 
 void init() {
+  print("INININ");
   final fromPath = '${Directory.current.path}/lib/files/init';
   final toPath = Directory('./lib');
 
