@@ -4,6 +4,7 @@ import 'package:artisan/make/make.dart';
 
 Future<void> addColor(String colorName, String code) async {
   try {
+    code = code.replaceAll('#', '');
     final colorFile =
         File('${Directory.current.path}/lib/util/resource/data/colors.dart');
 
