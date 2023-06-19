@@ -139,14 +139,14 @@ void registerInPubspec(List<String> assetFolderPaths) {
 
         slices.removeLast();
 
-        return slices.reduce((value, element) => "$value/$element/");
+        return slices.reduce((value, element) => "$value/$element");
       })
       .toSet()
       .toList();
 
   assetTypes.removeWhere((element) => element.isEmpty);
 
-  assetTypes = assetTypes.map((e) => "    - assets$e").toList();
+  assetTypes = assetTypes.map((e) => "    - assets$e/").toList();
 
   final pubspec = File("${Directory.current.path}/pubspec.yaml");
 
