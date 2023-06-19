@@ -29,6 +29,9 @@ Future<void> assets() async {
     /// [Register in R]
     registerAssetTypesInR(assetTypes);
 
+    /// [Pubspec]
+    registerInPubspec(list.map((e) => e.path).toList());
+
     for (final type in assetTypes) {
       final typedAssets = list.where((element) {
         final namePieces = element.path.split('/');
@@ -71,11 +74,16 @@ void registerAssetTypesInR(List<String> assetTypes) {
   var typesText = '''''';
   var imports = '''''';
 
+  /// [Colors]
+  handleColorsFile();
+  imports += "part './data/colors.dart';\n";
+  typesText += "\tstatic const colors = _Colors();\n";
+
   for (final type in assetTypes) {
+    imports += "part './data/$type.dart';\n";
+
     typesText +=
         "\tstatic const ${convertToCamelCase(type)} = _${convertToPascalCase(type)}();\n";
-
-    imports += "part './data/$type.dart';\n";
   }
 
   var fileContent = '''
@@ -101,4 +109,59 @@ bool isValid(String filePath) {
   }
 
   return true;
+}
+
+void handleColorsFile() {
+  final colorFile =
+      File("${Directory.current.path}/lib/util/resource/data/colors.dart");
+
+  if (!colorFile.existsSync()) {
+    colorFile.createSync(recursive: true);
+    const fileContent = '''
+part of r;
+
+class _Colors{
+  const _Colors();
+}
+''';
+
+    colorFile.writeAsStringSync(fileContent);
+  }
+}
+
+void registerInPubspec(List<String> assetFolderPaths) {
+  var assetTypes = assetFolderPaths
+      .map((e) => e.split('assets').last)
+      .map((e) => e.split('.').first)
+      .map((e) {
+        final slices = e.split('/').toList();
+        slices.removeLast();
+        return slices.reduce((value, element) => "$value/$element");
+      })
+      .toSet()
+      .toList();
+
+  assetTypes.removeWhere((element) => element.isEmpty);
+
+  assetTypes = assetTypes.map((e) => "    - assets$e").toList();
+
+  final pubspec = File("${Directory.current.path}/pubspec.yaml");
+
+  var pubspecLines = pubspec.readAsLinesSync();
+  final indexOfAsset = pubspecLines.indexOf("  assets:") + 1;
+
+  for (final assetType in assetTypes) {
+    if (!pubspecLines.contains(assetType)) {
+      pubspecLines.insert(indexOfAsset, assetType);
+    }
+  }
+
+  /// [Uniqify Assets]
+
+  final sink = pubspec.openWrite();
+
+  for (final line in pubspecLines) {
+    sink.writeln(line);
+  }
+  sink.close();
 }
