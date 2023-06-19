@@ -15,8 +15,5 @@ dev_dependencies:
     sdk: flutter
 
 flutter:
-  assets:
-    - assets/images/svgs
-    - assets/images/pngs
-    - assets/images
+
 

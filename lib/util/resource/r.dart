@@ -1,5 +1,7 @@
 library r;
 
+import 'package:flutter/material.dart';
+
 part './data/colors.dart';
 part './data/pngs.dart';
 part './data/svgs.dart';

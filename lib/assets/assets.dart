@@ -76,6 +76,7 @@ void registerAssetTypesInR(List<String> assetTypes) {
 
   /// [Colors]
   handleColorsFile();
+  imports += "part 'import 'package:flutter/material.dart';\n";
   imports += "part './data/colors.dart';\n";
   typesText += "\tstatic const colors = _Colors();\n";
 
