@@ -141,6 +141,10 @@ void registerInPubspec(List<String> assetFolderPaths) {
         }
 
         slices.removeLast();
+
+        if (slices.isEmpty) {
+          return '';
+        }
         return slices.reduce((value, element) => "$value/$element");
       })
       .toSet()
