@@ -27,7 +27,7 @@ part of r;
 
   class _Colors{
   const _Colors();
-  ${newLines.fold('', (previousValue, element) => '$previousValue\n\t${element}')}
+  ${newLines.fold('', (previousValue, element) => '$previousValue\n\t$element')}
   }
   ''';
 
