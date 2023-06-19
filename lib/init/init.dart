@@ -59,13 +59,5 @@ class NoInput extends Input {}
 
 Future<void> addCommon() async {
   // final commonExtensions = getDirectory('lib/common/extension');
-  final assetPath = Directory('${Directory.current.path}/assets');
 
-  if (assetPath.existsSync()) {
-    final list = assetPath.listSync(recursive: true);
-
-    for (final item in list) {
-      print(item.toString());
-    }
-  }
 }
