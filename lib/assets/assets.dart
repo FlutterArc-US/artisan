@@ -135,6 +135,11 @@ void registerInPubspec(List<String> assetFolderPaths) {
       .map((e) => e.split('.').first)
       .map((e) {
         final slices = e.split('/').toList();
+
+        if (slices.isEmpty) {
+          return '';
+        }
+
         slices.removeLast();
         return slices.reduce((value, element) => "$value/$element");
       })
