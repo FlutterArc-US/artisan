@@ -2,14 +2,22 @@ name: artisan
 version: 0.0.1
 publish_to: https://onepub.dev/api/ksdbxpsdav/
 description: A new Flutter project.
-environment: 
+environment:
   sdk: '>=3.0.1 <4.0.0'
   flutter: '>=1.17.0'
-dependencies: 
-  flutter: 
+dependencies:
+  flutter:
     sdk: flutter
-dev_dependencies: 
+
+dev_dependencies:
   flutter_lints: ^2.0.0
-  flutter_test: 
+  flutter_test:
     sdk: flutter
-flutter: null
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/svgs
+    - assets/images/pngs
+    - assets/images
+
