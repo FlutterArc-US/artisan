@@ -38,7 +38,7 @@ Future<void> assets() async {
       }).toList();
 
       final writeAt =
-          File("${Directory.current.path}/lib/util/resources/data/$type.dart");
+          File("${Directory.current.path}/lib/util/resource/data/$type.dart");
       writeAt.createSync(recursive: true);
 
       var assetsContent = '''''';
@@ -65,7 +65,7 @@ $assetsContent
 
 /// [registerAssetTypesInR]
 void registerAssetTypesInR(List<String> assetTypes) {
-  final rFile = File("${Directory.current.path}/lib/util/resources/r.dart");
+  final rFile = File("${Directory.current.path}/lib/util/resource/r.dart");
 
   rFile.createSync(recursive: true);
   var typesText = '''''';
