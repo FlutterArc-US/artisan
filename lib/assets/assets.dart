@@ -30,11 +30,11 @@ Future<void> assets() async {
     registerAssetTypesInR(assetTypes);
 
     /// [Pubspec]
-    registerInPubspec(list.map((e) => e.path).toList());
+    registerInPubspec(list.map((e) => e.path.replaceAll('\\', '/')).toList());
 
     for (final type in assetTypes) {
       final typedAssets = list.where((element) {
-        final namePieces = element.path.split('/');
+        final namePieces = element.path.replaceAll('\\', '/').split('/');
         final typePiece = namePieces[namePieces.length - 2];
 
         return typePiece == type;
@@ -48,7 +48,7 @@ Future<void> assets() async {
 
       for (final assetContent in typedAssets) {
         assetsContent +=
-            "\tfinal ${(assetContent.path.split('/').last.split('.').first.replaceAll('-', '_')).toUpperCase()} = 'assets${assetContent.path.split('assets').last}';\n";
+            "\tfinal ${(assetContent.path.replaceAll('\\', '/').split('/').last.split('.').first.replaceAll('-', '_')).toUpperCase()} = 'assets${assetContent.path.replaceAll('\\', '/').split('assets').last}';\n";
       }
 
       final file = '''
@@ -102,7 +102,7 @@ $typesText
 }
 
 bool isValid(String filePath) {
-  final fileName = filePath.split('/').last;
+  final fileName = filePath.replaceAll('\\', '/').split('/').last;
 
   if (fileName.startsWith('.') || !fileName.contains('.')) {
     return false;
