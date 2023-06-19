@@ -12,6 +12,10 @@ Future<void> assets() async {
     final assetTypes = <String>[];
 
     for (final item in list) {
+      if (!isValid(item.toString())) {
+        continue;
+      }
+
       if (item.toString().startsWith('File')) {
         final assetFileName = item.path.split('/');
         final assetType = assetFileName[assetFileName.length - 2];
@@ -87,4 +91,14 @@ $typesText
 ''';
 
   rFile.writeAsStringSync(fileContent);
+}
+
+bool isValid(String filePath) {
+  final fileName = filePath.split('/').last;
+
+  if (fileName.startsWith('.') || !fileName.contains('.')) {
+    return false;
+  }
+
+  return true;
 }
