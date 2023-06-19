@@ -1,13 +1,12 @@
 import 'dart:io';
 
-import 'package:artisan/assets/assets.dart';
 import 'package:artisan/make/make.dart';
 
 Future<void> addColor(String colorName, String code) async {
   final colorFile =
-  File('${Directory.current.path}/lib/util/resource/colors.dart');
+      File('${Directory.current.path}/lib/util/resource/colors.dart');
 
-  final newLines = [];
+  final newLines = <String>[];
 
   if (colorFile.existsSync()) {
     final lines = colorFile.readAsLinesSync();
@@ -19,8 +18,7 @@ Future<void> addColor(String colorName, String code) async {
     }
 
     newLines.add(
-        'final Color ${convertToPascalCase(
-            colorName)}_FF$code = const Color(0xFF$code);');
+        'final Color ${convertToPascalCase(colorName)}_FF$code = const Color(0xFF$code);');
 
     newLines.sort();
 
@@ -29,7 +27,7 @@ part of r;
 
   class _Colors{
   const _Colors();
-  $newLines
+  ${newLines.fold('', (previousValue, element) => '$previousValue\n\t${element}')}
   }
   ''';
 
