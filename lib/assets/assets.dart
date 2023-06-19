@@ -17,7 +17,7 @@ Future<void> assets() async {
       }
 
       if (item.toString().startsWith('File')) {
-        final assetFileName = item.path.split('/');
+        final assetFileName = item.path.replaceAll('\\', '/').split('/');
         final assetType = assetFileName[assetFileName.length - 2];
 
         if (!assetTypes.any((element) => element == assetType)) {
@@ -136,15 +136,8 @@ void registerInPubspec(List<String> assetFolderPaths) {
       .map((e) {
         final slices = e.split('/').toList();
 
-        if (slices.isEmpty) {
-          return '';
-        }
-
         slices.removeLast();
 
-        if (slices.isEmpty) {
-          return '';
-        }
         return slices.reduce((value, element) => "$value/$element");
       })
       .toSet()
