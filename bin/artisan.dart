@@ -24,16 +24,14 @@ void main(List<String> arguments) {
   }
 
   if (command.startsWith('add')) {
-    final addRunes = command.split('add').last.trim();
+    final addRunes = command.split(':').last.trim();
 
-    final addItem = addRunes.split(':').first;
+    final addItem = addRunes.split(' ').first;
 
     if (addItem == 'color') {
       try {
-        final colorAndCode = addItem.split(':').last.trim();
-        final color = colorAndCode.split(' ').first.trim();
-        final code = colorAndCode.split(' ').last.trim();
-        addColor(color, code);
+        final colorAndCode = addRunes.split(' ');
+        addColor(colorAndCode[1], colorAndCode.last);
         return;
       } catch (e) {
         print('Invalid Command $command');
