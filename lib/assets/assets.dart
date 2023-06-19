@@ -45,7 +45,7 @@ Future<void> assets() async {
 
       for (final assetContent in typedAssets) {
         assetsContent +=
-            "final ${(assetContent.path.split('/').last.split('.').first.replaceAll('-', '_')).toUpperCase()} = 'assets${assetContent.path.split('assets').last}';\n";
+            "\tfinal ${(assetContent.path.split('/').last.split('.').first.replaceAll('-', '_')).toUpperCase()} = 'assets${assetContent.path.split('assets').last}';\n";
       }
 
       final file = '''
@@ -53,8 +53,8 @@ part of r;
 
 class _${convertToPascalCase(type)}{
   const _${convertToPascalCase(type)}();
-  
-  $assetsContent
+
+$assetsContent
 }
 ''';
 
