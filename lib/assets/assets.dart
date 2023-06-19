@@ -5,53 +5,56 @@ import 'package:artisan/make/make.dart';
 Future<void> assets() async {
   final assetPath = Directory('${Directory.current.path}/assets');
 
-  if (assetPath.existsSync()) {
-    final list = assetPath.listSync(recursive: true);
+  if (!assetPath.existsSync()) {
+    assetPath.createSync(recursive: true);
+  }
 
-    /// [AssetTypes]
-    final assetTypes = <String>[];
+  final list = assetPath.listSync(recursive: true);
 
-    for (final item in list) {
-      if (!isValid(item.toString())) {
-        continue;
-      }
+  /// [AssetTypes]
+  final assetTypes = <String>[];
 
-      if (item.toString().startsWith('File')) {
-        final assetFileName = item.path.replaceAll('\\', '/').split('/');
-        final assetType = assetFileName[assetFileName.length - 2];
-
-        if (!assetTypes.any((element) => element == assetType)) {
-          assetTypes.add(assetType);
-        }
-      }
+  for (final item in list) {
+    if (!isValid(item.toString())) {
+      continue;
     }
 
-    /// [Register in R]
-    registerAssetTypesInR(assetTypes);
+    if (item.toString().startsWith('File')) {
+      final assetFileName = item.path.replaceAll('\\', '/').split('/');
+      final assetType = assetFileName[assetFileName.length - 2];
 
-    /// [Pubspec]
-    registerInPubspec(list.map((e) => e.path.replaceAll('\\', '/')).toList());
-
-    for (final type in assetTypes) {
-      final typedAssets = list.where((element) {
-        final namePieces = element.path.replaceAll('\\', '/').split('/');
-        final typePiece = namePieces[namePieces.length - 2];
-
-        return typePiece == type;
-      }).toList();
-
-      final writeAt =
-          File("${Directory.current.path}/lib/util/resource/data/$type.dart");
-      writeAt.createSync(recursive: true);
-
-      var assetsContent = '''''';
-
-      for (final assetContent in typedAssets) {
-        assetsContent +=
-            "\tfinal ${(assetContent.path.replaceAll('\\', '/').split('/').last.split('.').first.replaceAll('-', '_')).toUpperCase()} = 'assets${assetContent.path.replaceAll('\\', '/').split('assets').last}';\n";
+      if (!assetTypes.any((element) => element == assetType)) {
+        assetTypes.add(assetType);
       }
+    }
+  }
 
-      final file = '''
+  /// [Register in R]
+  registerAssetTypesInR(assetTypes);
+
+  /// [Pubspec]
+  registerInPubspec(list.map((e) => e.path.replaceAll('\\', '/')).toList());
+
+  for (final type in assetTypes) {
+    final typedAssets = list.where((element) {
+      final namePieces = element.path.replaceAll('\\', '/').split('/');
+      final typePiece = namePieces[namePieces.length - 2];
+
+      return typePiece == type;
+    }).toList();
+
+    final writeAt =
+        File("${Directory.current.path}/lib/util/resource/data/$type.dart");
+    writeAt.createSync(recursive: true);
+
+    var assetsContent = '''''';
+
+    for (final assetContent in typedAssets) {
+      assetsContent +=
+          "\tfinal ${(assetContent.path.replaceAll('\\', '/').split('/').last.split('.').first.replaceAll('-', '_')).toUpperCase()} = 'assets${assetContent.path.replaceAll('\\', '/').split('assets').last}';\n";
+    }
+
+    final file = '''
 part of r;
 
 class _${convertToPascalCase(type)}{
@@ -61,8 +64,7 @@ $assetsContent
 }
 ''';
 
-      writeAt.writeAsStringSync(file);
-    }
+    writeAt.writeAsStringSync(file);
   }
 }
 
