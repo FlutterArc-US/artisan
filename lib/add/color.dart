@@ -19,7 +19,7 @@ Future<void> addColor(String colorName, String code) async {
       }
 
       newLines.add(
-          'final Color ${convertToPascalCase(colorName)}_FF$code = const Color(0xFF$code);');
+          '\tfinal Color ${convertToPascalCase(colorName)}_FF$code = const Color(0xFF$code);');
 
       newLines.sort();
 
