@@ -150,6 +150,21 @@ void registerInPubspec(List<String> assetFolderPaths) {
   final pubspec = File("${Directory.current.path}/pubspec.yaml");
 
   var pubspecLines = pubspec.readAsLinesSync();
+
+  if (!pubspecLines.contains("  assets:")) {
+    if (pubspecLines.contains("flutter:")) {
+      final flutterBlocIndex = pubspecLines.indexOf("flutter:") + 1;
+
+      if (pubspecLines.length == flutterBlocIndex) {
+        pubspecLines.add("  assets:");
+      } else {
+        pubspecLines.insert(flutterBlocIndex, "  assets:");
+      }
+    } else {
+      throw Exception("No Flutter Bloc found");
+    }
+  }
+
   final indexOfAsset = pubspecLines.indexOf("  assets:") + 1;
 
   for (final assetType in assetTypes) {
