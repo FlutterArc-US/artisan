@@ -1,11 +1,15 @@
 import 'dart:io';
 
+import 'package:artisan/files/pubspec.yaml.dart';
+
 Future<void> init() async {
   /// [Add Infrastructure]
   addInfrastructure();
 
   /// [Add Common]
   addCommon();
+
+  /// [Add Pubspec]
 }
 
 String getDirectory(String address) {
@@ -57,7 +61,11 @@ class NoInput extends Input {}
   print('Artisan init successfully!');
 }
 
-Future<void> addCommon() async {
-  // final commonExtensions = getDirectory('lib/common/extension');
-
+Future<void> addPubspecYaml() async {
+  final pubspecExisting = File("${Directory.current.path}/pubspec.yaml");
+  final lines = pubspecExisting.readAsLinesSync();
+  final contents = '${lines.first}\n$pubspecFile';
+  pubspecExisting.writeAsStringSync(contents);
 }
+
+Future<void> addCommon() async {}

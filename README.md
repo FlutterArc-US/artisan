@@ -11,3 +11,5 @@
 [//]: # (TODO:)
 
 # dart run artisan add:api login /login
+
+# dart run artisan make:view login_view on auth
