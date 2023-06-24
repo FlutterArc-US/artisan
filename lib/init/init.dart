@@ -10,6 +10,7 @@ Future<void> init() async {
   addCommon();
 
   /// [Add Pubspec]
+  addPubspecYaml();
 }
 
 String getDirectory(String address) {
@@ -62,10 +63,12 @@ class NoInput extends Input {}
 }
 
 Future<void> addPubspecYaml() async {
+  print("Adding pubspec.yaml");
   final pubspecExisting = File("${Directory.current.path}/pubspec.yaml");
   final lines = pubspecExisting.readAsLinesSync();
   final contents = '${lines.first}\n$pubspecFile';
   pubspecExisting.writeAsStringSync(contents);
+  print("Added pubspec.yaml");
 }
 
 Future<void> addCommon() async {}
