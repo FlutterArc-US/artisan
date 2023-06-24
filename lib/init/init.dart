@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:artisan/files/main_file.dart';
 import 'package:artisan/files/pubspec.yaml.dart';
 
 Future<void> init() async {
@@ -7,7 +8,7 @@ Future<void> init() async {
   addInfrastructure();
 
   /// [Add Common]
-  addCommon();
+  addMain();
 
   /// [Add Pubspec]
   addPubspecYaml();
@@ -71,4 +72,8 @@ Future<void> addPubspecYaml() async {
   print("Added pubspec.yaml");
 }
 
-Future<void> addCommon() async {}
+Future<void> addMain() async {
+  final mainDart = File("${Directory.current.path}/lib/main.dart");
+  mainDart.writeAsStringSync(mainFile);
+  print("Added main");
+}
