@@ -1,17 +1,21 @@
 import 'dart:io';
 
 import 'package:artisan/files/main_file.dart';
+import 'package:artisan/files/num_extension_file.dart';
 import 'package:artisan/files/pubspec.yaml.dart';
 
 Future<void> init() async {
   /// [Add Infrastructure]
   addInfrastructure();
 
-  /// [Add Common]
+  /// [Add Main]
   addMain();
 
   /// [Add Pubspec]
   addPubspecYaml();
+
+  /// [Add Common]
+  addCommon();
 }
 
 String getDirectory(String address) {
@@ -76,4 +80,12 @@ Future<void> addMain() async {
   final mainDart = File("${Directory.current.path}/lib/main.dart");
   mainDart.writeAsStringSync(mainFile);
   print("Added main");
+}
+
+Future<void> addCommon() async {
+  final numExtension =
+      File("${Directory.current.path}/lib/common/extensions/num.dart");
+  numExtension.createSync(recursive: true);
+  numExtension.writeAsStringSync(numExtensionContents);
+  print("Num Extension Added");
 }
