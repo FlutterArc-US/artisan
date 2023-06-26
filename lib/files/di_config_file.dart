@@ -35,7 +35,7 @@ extension GetItInjectableX on _i1.GetIt {
     gh.lazySingleton<_i20.Logger>(() => _i21.LoggerImp());
     gh.lazySingleton<_i24.NetworkCallHelper>(
         () => _i25.HttpNetworkCallHelperImpl(logger: gh<_i20.Logger>()));
-    gh.singleton<_i26.PersistanceHelper>(_i27.PersistanceHelperImpl());
+    gh.singleton<_i26.PersistenceHelper>(_i27.PersistenceHelperImpl());
     return this;
   }
 }
