@@ -5,7 +5,7 @@ import 'package:artisan/files/di_file.dart';
 import 'package:artisan/files/main_file.dart';
 import 'package:artisan/files/num_extension_file.dart';
 import 'package:artisan/files/pubspec.yaml.dart';
-import 'package:artisan/helpers/persistance_helper.dart';
+import 'package:artisan/helpers/persistence_helper.dart';
 
 Future<void> init() async {
   /// [Add Infrastructure]

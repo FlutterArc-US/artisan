@@ -77,7 +77,7 @@ String _localDataSourceFileImp(
 ////********** START IMPORTS **********////
 import 'package:injectable/injectable.dart';
 import 'package:logger/logger.dart';
-import '../../../../helpers/persistance/persistance_helper.dart';
+import '../../../../helpers/persistence/persistence_helper.dart';
 import '../../domain/usecases/$usecaseFileName.dart';
 import '${featureName}_${dataSource}_datasource.dart';
 ////********** END IMPORTS **********////
@@ -85,13 +85,13 @@ import '${featureName}_${dataSource}_datasource.dart';
 @LazySingleton(as: ${convertToPascalCase(featureName)}${convertToPascalCase(dataSource)}DataSource)
 class ${convertToPascalCase(featureName)}${convertToPascalCase(dataSource)}DataSourceImp implements ${convertToPascalCase(featureName)}${convertToPascalCase(dataSource)}DataSource {
   final Logger _logger;
-  final PersistanceHelper _persistanceHelper;
+  final PersistanceHelper _persistenceHelper;
 
   ${convertToPascalCase(featureName)}${convertToPascalCase(dataSource)}DataSourceImp({
     required Logger logger,
-    required PersistanceHelper persistanceHelper,
+    required PersistanceHelper persistenceHelper,
   })  : _logger = logger,
-        _persistanceHelper = persistanceHelper;
+        _persistenceHelper = persistenceHelper;
 
 ////********** START METHODS **********////
   @override

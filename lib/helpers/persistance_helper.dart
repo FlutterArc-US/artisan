@@ -20,8 +20,8 @@ void addPersistenceHelper() {
 }
 
 const _helperContents = '''
-abstract class PersistanceHelper {
-  /// [Iitialize the persistance helper]
+abstract class PersistenceHelper {
+  /// [Iitialize the persistence helper]
   Future<void> init();
 
   /// [Save the data]
@@ -51,10 +51,10 @@ abstract class PersistanceHelper {
 const _helperImpContents = '''
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:injectable/injectable.dart';
-import 'persistance_helper.dart';
+import 'persistence_helper.dart';
 
-@Singleton(as: PersistanceHelper)
-class PersistanceHelperImpl implements PersistanceHelper {
+@Singleton(as: PersistenceHelper)
+class PersistenceHelperImpl implements PersistenceHelper {
   late final Box _settingsBox;
 
   final _settingBoxName = 'settings';

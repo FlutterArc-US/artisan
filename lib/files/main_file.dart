@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import './common/extensions/num.dart';
 import './util/router/router.dart';
-import './helpers/persistance/persistance_helper.dart';
+import './helpers/persistence/persistence_helper.dart';
 import './util/di/di.dart';
 
 final navigatorKey = GlobalKey<NavigatorState>();
