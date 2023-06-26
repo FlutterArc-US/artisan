@@ -134,8 +134,9 @@ final router = GoRouter(
 }
 
 void addDi() {
-  final diFile = File("${Directory.current.path}/util/di/di.dart");
-  final diConfigFile = File("${Directory.current.path}/util/di/di.config.dart");
+  final diFile = File("${Directory.current.path}/lib/util/di/di.dart");
+  final diConfigFile =
+      File("${Directory.current.path}/lib/util/di/di.config.dart");
 
   if (!diFile.existsSync()) {
     diFile.createSync(recursive: true);
