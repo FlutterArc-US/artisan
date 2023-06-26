@@ -7,6 +7,8 @@ import 'package:artisan/files/num_extension_file.dart';
 import 'package:artisan/files/pubspec.yaml.dart';
 import 'package:artisan/helpers/persistence_helper.dart';
 
+import '../helpers/network_call_helper.dart';
+
 Future<void> init() async {
   /// [Add Infrastructure]
   addInfrastructure();
@@ -27,6 +29,8 @@ Future<void> init() async {
   addPersistenceHelper();
 
   /// [Add NetworkCall Helper]
+  addNetworkCallHelper();
+
   /// [Add Di]
   addDi();
 }
