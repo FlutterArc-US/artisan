@@ -3,10 +3,10 @@ import 'dart:io';
 void addNetworkCallHelper() {
   print("Adding network call helper");
   final networkCallHelper = File(
-      "${Directory.current.path}/lib/helpers/persistence/network_call_helper.dart");
+      "${Directory.current.path}/lib/helpers/network_call_helper/network_call_helper.dart");
 
   final networkCallHelperImpl = File(
-      "${Directory.current.path}/lib/helpers/persistence/network_call_helper_impl.dart");
+      "${Directory.current.path}/lib/helpers/network_call_helper/network_call_helper_impl.dart");
 
   if (!networkCallHelper.existsSync()) {
     networkCallHelper.createSync(recursive: true);
