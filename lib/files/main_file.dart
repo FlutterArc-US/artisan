@@ -11,7 +11,7 @@ final navigatorKey = GlobalKey<NavigatorState>();
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   configureDependencies();
-  await sl<PersistanceHelper>().init();
+  await sl<PersistenceHelper>().init();
   runApp(const MyApp());
 }
 
