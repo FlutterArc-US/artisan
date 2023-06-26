@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:artisan/files/di_config_file.dart';
+import 'package:artisan/files/di_file.dart';
 import 'package:artisan/files/main_file.dart';
 import 'package:artisan/files/num_extension_file.dart';
 import 'package:artisan/files/pubspec.yaml.dart';
@@ -19,6 +21,11 @@ Future<void> init() async {
 
   /// [Add Router]
   addRouter();
+
+  /// [Add persistence Helper]
+  /// [Add NetworkCall Helper]
+  /// [Add Di]
+  addDi();
 }
 
 String getDirectory(String address) {
@@ -124,4 +131,20 @@ final router = GoRouter(
   pathsFile.writeAsStringSync(pathsContent);
 
   routerFile.writeAsStringSync(routerContents);
+}
+
+void addDi() {
+  final diFile = File("${Directory.current.path}/util/di/di.dart");
+  final diConfigFile = File("${Directory.current.path}/util/di/di.config.dart");
+
+  if (!diFile.existsSync()) {
+    diFile.createSync(recursive: true);
+  }
+
+  if (!diConfigFile.existsSync()) {
+    diConfigFile.createSync(recursive: true);
+  }
+
+  diFile.writeAsStringSync(diFileContent);
+  diConfigFile.writeAsStringSync(diConfigFileContent);
 }
