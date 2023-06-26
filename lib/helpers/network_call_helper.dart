@@ -6,7 +6,7 @@ void addNetworkCallHelper() {
       "${Directory.current.path}/lib/helpers/network_call_helper/network_call_helper.dart");
 
   final networkCallHelperImpl = File(
-      "${Directory.current.path}/lib/helpers/network_call_helper/network_call_helper_impl.dart");
+      "${Directory.current.path}/lib/helpers/network_call_helper/http_network_call_helper_impl.dart");
 
   if (!networkCallHelper.existsSync()) {
     networkCallHelper.createSync(recursive: true);
