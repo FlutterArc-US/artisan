@@ -13,11 +13,7 @@ import 'package:artisan/files/usecase_file.dart';
 ///[Make File]
 makeFile(String makeCommand) {
   final fileType = makeCommand.split(' ').first;
-  final file = makeCommand
-      .split(' ')
-      .map((e) => e == fileType ? '' : e)
-      .toList()
-      .reduce((value, element) => "$value $element");
+  final file = makeCommand.split(' ').map((e) => e == fileType ? '' : e).toList().reduce((value, element) => "$value $element");
 
   if (fileType == 'model') {
     makeModel(file);
@@ -90,9 +86,7 @@ void makeUsecase(String usecaseName, String featureName, bool onlyUsecase) {
   }
 
   // Your logic to generate the model file
-  var content = onlyUsecase
-      ? onlyUsecaseFile(usecaseName, featureName)
-      : usecaseFile(usecaseName, featureName);
+  var content = onlyUsecase ? onlyUsecaseFile(usecaseName, featureName) : usecaseFile(usecaseName, featureName);
 
   // Create the file
   var file = File("$fileAddress/$usecaseName.dart");
@@ -130,11 +124,9 @@ void makeRepository({
       }
 
       final writeSink = file.openWrite(mode: FileMode.writeOnlyAppend);
-      final indexToPlaceImport =
-          sink.indexOf("////********** END IMPORTS **********////");
+      final indexToPlaceImport = sink.indexOf("////********** END IMPORTS **********////");
 
-      final indexToPlaceMethod =
-          sink.indexOf("////********** END METHODS **********////");
+      final indexToPlaceMethod = sink.indexOf("////********** END METHODS **********////");
 
       for (var i = 0; i < sink.length; i++) {
         final line = sink[i];
@@ -182,34 +174,26 @@ void makeRepositoryImp({
       }
 
       final writeSink = file.openWrite(mode: FileMode.writeOnlyAppend);
-      final indexToPlaceImport =
-          sink.indexOf("////********** END IMPORTS **********////");
+      final indexToPlaceImport = sink.indexOf("////********** END IMPORTS **********////");
 
-      final indexToPlaceMethod =
-          sink.indexOf("////********** END METHODS **********////");
+      final indexToPlaceMethod = sink.indexOf("////********** END METHODS **********////");
 
-      final indexToReceiveValues =
-          sink.indexOf('////********** START RECEIVE VALUES **********////');
-      final indexToEndReceiveValues =
-          sink.indexOf('////********** END RECEIVE VALUES **********////');
+      final indexToReceiveValues = sink.indexOf('////********** START RECEIVE VALUES **********////');
+      final indexToEndReceiveValues = sink.indexOf('////********** END RECEIVE VALUES **********////');
 
-      final indexOfEndVariables =
-          sink.indexOf("////********** END VARIABLES **********////");
+      final indexOfEndVariables = sink.indexOf("////********** END VARIABLES **********////");
 
-      final indexOfEndSetValues =
-          sink.indexOf('////********** END SET VALUES **********////');
+      final indexOfEndSetValues = sink.indexOf('////********** END SET VALUES **********////');
 
       final isImportedDatasource = sink
           .getRange(indexToReceiveValues, indexToEndReceiveValues + 1)
-          .any((element) => element.contains(
-              '${convertToCamelCase(featureName)}${convertToPascalCase(datasourceName)}DataSource'));
+          .any((element) => element.contains('${convertToCamelCase(featureName)}${convertToPascalCase(datasourceName)}DataSource'));
 
       for (var i = 0; i < sink.length; i++) {
         var line = sink[i];
         if (!isImportedDatasource) {
           if (indexToPlaceImport == i) {
-            writeSink.writeln(
-                "import '../../data/$datasourceName/${featureName}_${datasourceName}_datasource.dart';");
+            writeSink.writeln("import '../../data/$datasourceName/${featureName}_${datasourceName}_datasource.dart';");
           }
 
           if (indexToEndReceiveValues == i) {
@@ -258,7 +242,7 @@ void makeDatasourceImp({
   required String featureName,
   required String datasourceName,
 }) async {
-  final fileAddress = 'lib/features/$featureName/data/$datasourceName';
+  final fileAddress = 'lib/features/$featureName/data/source/$datasourceName';
   var directory = Directory(fileAddress);
   if (!directory.existsSync()) {
     directory.createSync(recursive: true);
@@ -268,8 +252,7 @@ void makeDatasourceImp({
   var content = datasourceFileImp(usecaseName, featureName, datasourceName);
 
   // Create the file
-  var file =
-      File("$fileAddress/${featureName}_${datasourceName}_datasource_imp.dart");
+  var file = File("$fileAddress/${featureName}_${datasourceName}_datasource_imp.dart");
 
   if (file.existsSync()) {
     final sink = file.readAsLinesSync();
@@ -282,18 +265,15 @@ void makeDatasourceImp({
       }
 
       final writeSink = file.openWrite(mode: FileMode.writeOnlyAppend);
-      final indexToPlaceImport =
-          sink.indexOf("////********** END IMPORTS **********////");
+      final indexToPlaceImport = sink.indexOf("////********** END IMPORTS **********////");
 
-      final indexToPlaceMethod =
-          sink.indexOf("////********** END METHODS **********////");
+      final indexToPlaceMethod = sink.indexOf("////********** END METHODS **********////");
 
       for (var i = 0; i < sink.length; i++) {
         var line = sink[i];
 
         if (i == indexToPlaceImport) {
-          writeSink
-              .writeln("import '../../domain/usecases/$usecaseName.dart';");
+          writeSink.writeln("import '../../../domain/usecases/$usecaseName.dart';");
         }
 
         if (i == indexToPlaceMethod) {
@@ -318,7 +298,7 @@ void makeDatasource({
   required String featureName,
   required String datasourceName,
 }) async {
-  final fileAddress = 'lib/features/$featureName/data/$datasourceName';
+  final fileAddress = 'lib/features/$featureName/data/source/$datasourceName';
 
   var directory = Directory(fileAddress);
   if (!directory.existsSync()) {
@@ -329,8 +309,7 @@ void makeDatasource({
   var content = datasourceFile(usecaseName, featureName, datasourceName);
 
   // Create the file
-  var file =
-      File("$fileAddress/${featureName}_${datasourceName}_datasource.dart");
+  var file = File("$fileAddress/${featureName}_${datasourceName}_datasource.dart");
 
   if (file.existsSync()) {
     final sink = file.readAsLinesSync();
@@ -343,18 +322,15 @@ void makeDatasource({
       }
 
       final writeSink = file.openWrite(mode: FileMode.writeOnlyAppend);
-      final indexToPlaceImport =
-          sink.indexOf("////********** END IMPORTS **********////");
+      final indexToPlaceImport = sink.indexOf("////********** END IMPORTS **********////");
 
-      final indexToPlaceMethod =
-          sink.indexOf("////********** END METHODS **********////");
+      final indexToPlaceMethod = sink.indexOf("////********** END METHODS **********////");
 
       for (var i = 0; i < sink.length; i++) {
         final line = sink[i];
 
         if (i == indexToPlaceImport) {
-          writeSink
-              .writeln("import '../../domain/usecases/$usecaseName.dart';");
+          writeSink.writeln("import '../../../domain/usecases/$usecaseName.dart';");
         }
 
         if (i == indexToPlaceMethod) {
