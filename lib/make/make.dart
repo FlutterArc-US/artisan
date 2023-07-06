@@ -193,7 +193,7 @@ void makeRepositoryImp({
         var line = sink[i];
         if (!isImportedDatasource) {
           if (indexToPlaceImport == i) {
-            writeSink.writeln("import '../../data/$datasourceName/${featureName}_${datasourceName}_datasource.dart';");
+            writeSink.writeln("import '../../data/source/$datasourceName/${featureName}_${datasourceName}_datasource.dart';");
           }
 
           if (indexToEndReceiveValues == i) {
