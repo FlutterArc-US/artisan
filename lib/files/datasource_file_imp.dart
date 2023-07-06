@@ -85,11 +85,11 @@ import '${featureName}_${dataSource}_datasource.dart';
 @LazySingleton(as: ${convertToPascalCase(featureName)}${convertToPascalCase(dataSource)}DataSource)
 class ${convertToPascalCase(featureName)}${convertToPascalCase(dataSource)}DataSourceImp implements ${convertToPascalCase(featureName)}${convertToPascalCase(dataSource)}DataSource {
   final Logger _logger;
-  final PersistanceHelper _persistenceHelper;
+  final PersistenceHelper _persistenceHelper;
 
   ${convertToPascalCase(featureName)}${convertToPascalCase(dataSource)}DataSourceImp({
     required Logger logger,
-    required PersistanceHelper persistenceHelper,
+    required PersistenceHelper persistenceHelper,
   })  : _logger = logger,
         _persistenceHelper = persistenceHelper;
 
