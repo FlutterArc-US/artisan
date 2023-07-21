@@ -151,7 +151,7 @@ void makeRepositoryImp({
   required String featureName,
   required String datasourceName,
 }) async {
-  final fileAddress = 'lib/features/$featureName/domain/repository';
+  final fileAddress = 'lib/features/$featureName/data/repository';
   var directory = Directory(fileAddress);
   if (!directory.existsSync()) {
     directory.createSync(recursive: true);
@@ -298,7 +298,7 @@ void makeDatasource({
   required String featureName,
   required String datasourceName,
 }) async {
-  final fileAddress = 'lib/features/$featureName/data/source/$datasourceName';
+  final fileAddress = 'lib/features/$featureName/domain/data';
 
   var directory = Directory(fileAddress);
   if (!directory.existsSync()) {
