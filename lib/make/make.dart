@@ -73,7 +73,7 @@ void makeModel(String modelName) {
   // Your logic to generate the model file
   var content = modelFile(className, fileName);
   var abstractClassContent = '''
-abstract class ${convertToCamelCase(fileName.split('.').first)}{
+abstract class ${convertToPascalCase(fileName.split('.').first)}{
  
 } 
   ''';

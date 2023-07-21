@@ -11,7 +11,7 @@ part '${fileName.split('.').first}.freezed.dart';
 part '${fileName.split('.').first}.g.dart';
 
 @freezed
-class ${className}Imp with _\$$className implements ${convertToCamelCase(fileName.split('.').first)} {
+class ${className}Imp with _\$$className implements ${convertToPascalCase(fileName.split('.').first)} {
   const factory ${className}Imp({
   }) = _${className}Imp;
 
