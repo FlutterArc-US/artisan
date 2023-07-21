@@ -82,8 +82,16 @@ abstract class ${convertToCamelCase(fileName.split('.').first)}{
   var file = File("$fileAddress/$fileName.dart");
   file.writeAsStringSync(content);
 
-  var absFile =
-      File("lib/features/$featureName/domain/models/$fileName/entity.dart");
+  var absFileAdress =
+      "lib/features/$featureName/domain/models/$fileName/entity.dart";
+
+  var absDir = Directory(absFileAdress);
+  if (!absDir.existsSync()) {
+    absDir.createSync(recursive: true);
+  }
+
+  var absFile = File("$absFileAdress");
+
   absFile.writeAsStringSync(abstractClassContent);
 
   print('Entity $modelName created successfully!');
