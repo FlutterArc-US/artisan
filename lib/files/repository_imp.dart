@@ -14,8 +14,8 @@ String repositoryFileImp(
 ////********** START IMPORTS **********////
 import '../../domain/repository/${featureName}_repository.dart';
 import 'package:injectable/injectable.dart';
-import '../../data/source/$dataSource/${featureName}_${dataSource}_datasource.dart';
-import '../usecases/$usecaseFileName.dart';
+import '../../domain/data/${featureName}_${dataSource}_datasource.dart';
+import '../../domain/usecases/$usecaseFileName.dart';
 ////********** END IMPORTS **********////
 
 @LazySingleton(as: ${convertToPascalCase(featureName)}Repository)
