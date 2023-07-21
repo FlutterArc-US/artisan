@@ -330,7 +330,7 @@ void makeDatasource({
         final line = sink[i];
 
         if (i == indexToPlaceImport) {
-          writeSink.writeln("import '../../../domain/usecases/$usecaseName.dart';");
+          writeSink.writeln("import '../usecases/$usecaseName.dart';");
         }
 
         if (i == indexToPlaceMethod) {
