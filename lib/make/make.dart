@@ -19,7 +19,7 @@ makeFile(String makeCommand) {
       .toList()
       .reduce((value, element) => "$value $element");
 
-  if (fileType == 'model') {
+  if (fileType == 'entity') {
     makeModel(file);
   } else if (fileType == 'usecase') {
     final usecaseName = file.split(' on ').first.trim();
@@ -63,7 +63,7 @@ void makeModel(String modelName) {
   final className = convertToPascalCase(fileName).trim();
   final featureName = modelName.split(' on ').last.trim();
 
-  final fileAddress = 'lib/features/$featureName/domain/models/$fileName';
+  final fileAddress = 'lib/features/$featureName/data/entities/$fileName';
 
   var directory = Directory(fileAddress);
   if (!directory.existsSync()) {
@@ -77,7 +77,7 @@ void makeModel(String modelName) {
   var file = File("$fileAddress/$fileName.dart");
   file.writeAsStringSync(content);
 
-  print('Model $modelName created successfully!');
+  print('Entity $modelName created successfully!');
 }
 
 /// [Make Usecase]
