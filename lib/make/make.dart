@@ -72,10 +72,19 @@ void makeModel(String modelName) {
 
   // Your logic to generate the model file
   var content = modelFile(className, fileName);
+  var abstractClassContent = '''
+abstract class ${convertToCamelCase(fileName.split('.').first)}{
+ 
+} 
+  ''';
 
   // Create the file
   var file = File("$fileAddress/$fileName.dart");
   file.writeAsStringSync(content);
+
+  var absFile =
+      File("lib/features/$featureName/domain/models/$fileName/entity.dart");
+  absFile.writeAsStringSync(abstractClassContent);
 
   print('Entity $modelName created successfully!');
 }
