@@ -79,7 +79,7 @@ import 'package:injectable/injectable.dart';
 import 'package:logger/logger.dart';
 import '../../../../../helpers/persistence/persistence_helper.dart';
 import '../../../domain/usecases/$usecaseFileName.dart';
-import '${featureName}_${dataSource}_datasource.dart';
+import '../../../domain/data/${featureName}_${dataSource}_datasource.dart';
 ////********** END IMPORTS **********////
 
 @LazySingleton(as: ${convertToPascalCase(featureName)}${convertToPascalCase(dataSource)}DataSource)

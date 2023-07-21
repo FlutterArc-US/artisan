@@ -193,7 +193,7 @@ void makeRepositoryImp({
         var line = sink[i];
         if (!isImportedDatasource) {
           if (indexToPlaceImport == i) {
-            writeSink.writeln("import '../../data/source/$datasourceName/${featureName}_${datasourceName}_datasource.dart';");
+            writeSink.writeln("import '../../domain/data/$datasourceName/${featureName}_${datasourceName}_datasource.dart';");
           }
 
           if (indexToEndReceiveValues == i) {
@@ -217,7 +217,7 @@ void makeRepositoryImp({
         }
 
         if (i == indexToPlaceImport) {
-          writeSink.writeln("import '../usecases/$usecaseName.dart';");
+          writeSink.writeln("import '../../domain/usecases/$usecaseName.dart';");
         }
 
         if (i == indexToPlaceMethod) {
