@@ -33,7 +33,7 @@ Future<void> addColor(String colorName, String code) async {
     newLines.sort();
 
     final content = '''
-part of r;
+part of '../r.dart';
 
 class _Colors{
   const _Colors();

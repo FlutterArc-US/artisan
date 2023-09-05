@@ -130,7 +130,7 @@ void handleColorsFile() {
   if (!colorFile.existsSync()) {
     colorFile.createSync(recursive: true);
     const fileContent = '''
-part of r;
+part of '../r.dart';
 
 class _Colors{
   const _Colors();
