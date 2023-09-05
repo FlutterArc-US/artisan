@@ -50,16 +50,25 @@ Future<void> assets() async {
     var assetsContent = '''''';
 
     for (final assetContent in typedAssets) {
+      final varName = (assetContent.path
+              .replaceAll('\\', '/')
+              .split('/')
+              .last
+              .split('.')
+              .first
+              .replaceAll('-', '_'))
+          .toLowerCase();
+
+      final camelCaseVarName = convertToCamelCase(varName);
+
       assetsContent +=
-          "\tfinal ${(assetContent.path.replaceAll('\\', '/').split('/').last.split('.').first.replaceAll('-', '_')).toUpperCase()} = 'assets${assetContent.path.replaceAll('\\', '/').split('assets').last}';\n";
+          "\tfinal $camelCaseVarName = 'assets${assetContent.path.replaceAll('\\', '/').split('assets').last}';\n";
     }
 
     final file = '''
 part of r;
 
 class _${convertToPascalCase(type)}{
-  const _${convertToPascalCase(type)}();
-
 $assetsContent
 }
 ''';
@@ -86,7 +95,7 @@ void registerAssetTypesInR(List<String> assetTypes) {
     imports += "part './data/$type.dart';\n";
 
     typesText +=
-        "\tstatic const ${convertToCamelCase(type)} = _${convertToPascalCase(type)}();\n";
+        "\tstatic final ${convertToCamelCase(type)} = _${convertToPascalCase(type)}();\n";
   }
 
   var fileContent = '''

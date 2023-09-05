@@ -28,7 +28,7 @@ Future<void> addColor(String colorName, String code) async {
     }
 
     newLines.add(
-        '\tfinal Color ${convertToCamelCase(colorName)}_FF$code = const Color(0xFF$code);');
+        '\tfinal Color ${convertToCamelCase(colorName)}Ff$code = const Color(0xFF$code);');
 
     newLines.sort();
 
