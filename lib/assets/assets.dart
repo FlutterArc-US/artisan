@@ -89,7 +89,7 @@ void registerAssetTypesInR(List<String> assetTypes) {
   handleColorsFile();
   imports += "import 'package:flutter/material.dart';\n";
   imports += "part './data/colors.dart';\n";
-  typesText += "\tstatic const colors = _Colors();\n";
+  typesText += "\tstatic final colors = _Colors();\n";
 
   for (final type in assetTypes) {
     imports += "part './data/$type.dart';\n";
@@ -133,7 +133,6 @@ void handleColorsFile() {
 part of '../r.dart';
 
 class _Colors{
-  const _Colors();
 }
 ''';
 
