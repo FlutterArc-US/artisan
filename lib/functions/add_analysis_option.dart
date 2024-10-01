@@ -16,25 +16,25 @@ Future<void> addAnalysisOptions() async {
     // Check if the file already exists
     if (await analysisOptionsFile.exists()) {
       // File exists, overwrite its contents
-      'File exists, overwriting analysis_options.yaml...'.printGreen();
+      'File exists, overwriting analysis_options.yaml...'.printYellow(); // Update File
 
       // Overwrite the content with new content
       analysisOptionsFile.writeAsStringSync(newContent);
-      'File overwritten: analysis_options.yaml'.printGreen();
+      'File overwritten: analysis_options.yaml'.printYellow(); // Update File
     } else {
       // File does not exist, create a new one
-      'Creating new analysis_options.yaml...'.printGreen();
+      'Creating new analysis_options.yaml...'.printGreen(); // Create File
       await analysisOptionsFile.writeAsString(newContent);
-      'File created successfully: analysis_options.yaml'.printGreen();
+      'File created successfully: analysis_options.yaml'.printGreen(); // Create File
     }
   } catch (e) {
-    // Error handling using a switch-case approach
+    // Error handling using Red color for errors
     switch (e.runtimeType) {
       case FileSystemException:
-        'Error: Unable to create or write to the file.'.printRed();
+        'Error: Unable to create or write to the file.'.printRed(); // File System Error
         break;
       default:
-        'An unknown error occurred: $e'.printRed();
+        'An unknown error occurred: $e'.printRed(); // Other Errors
     }
   }
 }
