@@ -20,6 +20,9 @@ Future<void> init() async {
   /// [Add Pubspec]
   addPubspecYaml();
 
+  /// [Add Assets Folder]
+  addAssetsFolder();
+
   /// [Add Analysis Options]
   addAnalysisOptions();
 
@@ -97,9 +100,30 @@ Future<void> addPubspecYaml() async {
   print("Added pubspec.yaml");
 }
 
+//add Directory in main project assets and assets/pngs and assets/svgs
+
+Future<void> addAssetsFolder() async {
+  final assetsFolder = Directory("${Directory.current.path}/assets");
+  final pngsFolder = Directory("${Directory.current.path}/assets/pngs");
+  final svgsFolder = Directory("${Directory.current.path}/assets/svgs");
+
+  if (!assetsFolder.existsSync()) {
+    assetsFolder.createSync(recursive: true);
+  }
+
+  if (!pngsFolder.existsSync()) {
+    pngsFolder.createSync(recursive: true);
+  }
+
+  if (!svgsFolder.existsSync()) {
+    svgsFolder.createSync(recursive: true);
+  }
+}
+
 Future<void> addAnalysisOptions() async {
   print("Adding analysis_options.yaml");
-  final analysisOptionsExisting = File("${Directory.current.path}/analysis_options.yaml");
+  final analysisOptionsExisting =
+      File("${Directory.current.path}/analysis_options.yaml");
   final lines = analysisOptionsExisting.readAsLinesSync();
   final contents = '${lines.first}\n$analysisOptionsFile';
   analysisOptionsExisting.writeAsStringSync(contents);
