@@ -76,4 +76,5 @@ class _ProviderAppState extends State<ProviderApp> {
 // dart run artisan make:feature home
 // artisan make:usecase createUser on authentication --local
 // dart run artisan make:feature profile
+// dart run artisan create:view viewName featureName
 ''';
