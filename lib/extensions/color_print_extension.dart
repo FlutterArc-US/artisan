@@ -81,7 +81,7 @@ extension ColorfulPrint on String {
 }
 
 void printColorfulPrints() {
-  String message = "Hello World";
+  String message = "Flutter Project with Artisan Beta initializing... Please wait...";
 
   // Example usage
   message.printNormal();         // Normal text
