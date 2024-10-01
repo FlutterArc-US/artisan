@@ -103,7 +103,7 @@ Future<void> addPubspecYaml() async {
 //add Folder in main project with name assets
 Future<void> addAssetsFolder() async {
   print("Adding assets folder");
-  final assetsFolder = Directory("${Directory.current.path}/assets");
+  final assetsFolder = File("${Directory.current.path}/assets/pngs/pngs.dart");
   if (!assetsFolder.existsSync()) {
     assetsFolder.createSync();
   }
