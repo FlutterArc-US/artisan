@@ -7,24 +7,12 @@ void main(List<String> args) {
   }
 
   final command = args[0];
-  final name = args.length > 1 ? args[1] : null;
+  final featureName = args.length > 1 ? args[1] : null;
 
   switch (command) {
     case 'make:feature':
-      if (name != null) {
-        createFeature(name);
-      } else {
-        print("Please provide a feature name.");
-      }
-      break;
-
-    case 'make:usecase':
-      if (name != null) {
-        if (args.length > 2) {
-          createUseCase(name, args[2]);
-        } else {
-          print("Please provide a use case name.");
-        }
+      if (featureName != null) {
+        createFeature(featureName);
       } else {
         print("Please provide a feature name.");
       }
@@ -35,74 +23,68 @@ void main(List<String> args) {
   }
 }
 
-/// Function to create a feature with domain, application, data, and presentation layers.
+/// Function to create a feature with the specified structure.
 void createFeature(String featureName) {
   print("Creating feature: $featureName");
 
-  // Create folder structure for the feature
+  // Create the feature directory
   final featureDir = Directory('lib/features/$featureName');
   if (!featureDir.existsSync()) {
     featureDir.createSync(recursive: true);
     print('Feature folder created at lib/features/$featureName');
 
-    // Create Domain Layer
-    final domainDir = Directory('lib/features/$featureName/domain');
-    domainDir.createSync();
-    print('Domain folder created');
+    // Create Data Layer with subfolders
+    createDataLayer(featureName);
 
-    // Create Application Layer (Use Cases)
-    final usecaseDir = Directory('lib/features/$featureName/application');
-    usecaseDir.createSync();
-    print('Application (Use Case) folder created');
+    // Create Domain Layer with subfolders
+    createDomainLayer(featureName);
 
-    // Create Data Layer
-    final dataDir = Directory('lib/features/$featureName/data');
-    dataDir.createSync();
-    print('Data folder created');
+    // Create Presentation Layer with subfolders
+    createPresentationLayer(featureName);
 
-    // Create Presentation Layer
-    final presentationDir = Directory('lib/features/$featureName/presentation');
-    presentationDir.createSync();
-    print('Presentation folder created');
-
-    // Create Placeholder Files
-    File('lib/features/$featureName/domain/entities.dart')
-        .writeAsStringSync('// Domain entities for $featureName');
-    File('lib/features/$featureName/application/usecases.dart')
-        .writeAsStringSync('// Application use cases for $featureName');
-    File('lib/features/$featureName/data/repositories.dart')
-        .writeAsStringSync('// Data repositories for $featureName');
-    File('lib/features/$featureName/presentation/widgets.dart')
-        .writeAsStringSync('// UI widgets for $featureName');
-
-    print('Feature created successfully.');
+    print('Feature $featureName created successfully.');
   } else {
     print('Feature folder already exists.');
   }
 }
 
-/// Function to create a use case within a feature.
-void createUseCase(String featureName, String useCaseName) {
-  final usecaseDir = Directory('lib/features/$featureName/application');
-  if (!usecaseDir.existsSync()) {
-    print('Feature $featureName does not exist.');
-    return;
-  }
+/// Creates the data layer structure
+void createDataLayer(String featureName) {
+  final dataDir = Directory('lib/features/$featureName/data');
+  dataDir.createSync(recursive: true);
 
-  final usecaseFile =
-  File('lib/features/$featureName/application/${useCaseName}_usecase.dart');
-  usecaseFile.writeAsStringSync('''
-class ${useCaseName.capitalize()}UseCase {
-  // Add logic for $useCaseName use case
-}
-''');
+  // Create entities, repository, and source folders
+  Directory('lib/features/$featureName/data/entities').createSync(recursive: true);
+  Directory('lib/features/$featureName/data/repository').createSync(recursive: true);
+  Directory('lib/features/$featureName/data/source/local').createSync(recursive: true);
+  Directory('lib/features/$featureName/data/source/remote').createSync(recursive: true);
 
-  print('$useCaseName use case created.');
+  print('Data layer structure created for $featureName');
 }
 
-/// Extension to capitalize the first letter of the use case name.
-extension StringExtension on String {
-  String capitalize() {
-    return this[0].toUpperCase() + substring(1);
-  }
+/// Creates the domain layer structure
+void createDomainLayer(String featureName) {
+  final domainDir = Directory('lib/features/$featureName/domain');
+  domainDir.createSync(recursive: true);
+
+  // Create data, models, repository, and usecases folders
+  Directory('lib/features/$featureName/domain/data').createSync(recursive: true);
+  Directory('lib/features/$featureName/domain/models').createSync(recursive: true);
+  Directory('lib/features/$featureName/domain/repository').createSync(recursive: true);
+  Directory('lib/features/$featureName/domain/usecases').createSync(recursive: true);
+
+  print('Domain layer structure created for $featureName');
+}
+
+/// Creates the presentation layer structure
+void createPresentationLayer(String featureName) {
+  final presentationDir = Directory('lib/features/$featureName/presentation');
+  presentationDir.createSync(recursive: true);
+
+  // Create providers, views, and widgets folders
+  Directory('lib/features/$featureName/presentation/providers').createSync(recursive: true);
+  Directory('lib/features/$featureName/presentation/views').createSync(recursive: true);
+  Directory('lib/features/$featureName/presentation/widgets').createSync(recursive: true);
+
+  print('Presentation layer structure created for $featureName');
 }
