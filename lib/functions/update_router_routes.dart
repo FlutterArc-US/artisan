@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:artisan/extensions/color_print_extension.dart';
 import 'package:artisan/functions/create_view.dart';
-import 'package:artisan/functions/name_cases/name_cases_extension.dart';
+import 'package:artisan/functions/name_cases/naming_conventions_extension.dart';
 
 /// Function to update router routes
 Future<bool> updateRouterRoutes(String featureName, String viewName) async {
