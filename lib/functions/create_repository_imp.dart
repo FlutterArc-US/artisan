@@ -3,8 +3,8 @@ import 'dart:io';
 import 'package:artisan/files/repository_imp.dart';
 import 'package:artisan/files/repository_imp_method.dart';
 
-import 'conver_to_camel_case.dart';
-import 'convert_to_pascal_case.dart';
+import 'name_cases/conver_to_camel_case.dart';
+import 'name_cases/convert_to_pascal_case.dart';
 
 /// [Make Repository]
 void createRepositoryImp({

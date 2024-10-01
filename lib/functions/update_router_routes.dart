@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:artisan/extensions/color_print_extension.dart';
 import 'package:artisan/functions/create_view.dart';
+import 'package:artisan/functions/name_cases/name_cases_extension.dart';
 
 /// Function to update router routes
 Future<bool> updateRouterRoutes(String featureName, String viewName) async {
@@ -32,14 +33,15 @@ Future<bool> updateRouterRoutes(String featureName, String viewName) async {
   GoRoute(
     path: RoutePaths.${viewName.toLowerCase()},
     builder: (context, state) {
-      return const ${viewName.capitalize()}View();
+      return const ${viewName.toPascalCase()}View();
     },
   ),
   ''';
 
   // Check if the route already exists
   if (routerContent.contains(routeEntry)) {
-    'Error: Route already exists for: ${viewName.capitalize()}View'.printRed();
+    'Error: Route already exists for: ${viewName.toPascalCase()}View'
+        .printRed();
     return false; // Indicate the route already existed
   }
 

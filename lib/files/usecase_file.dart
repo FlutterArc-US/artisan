@@ -1,5 +1,5 @@
-import 'package:artisan/functions/conver_to_camel_case.dart';
-import 'package:artisan/functions/convert_to_pascal_case.dart';
+import 'package:artisan/functions/name_cases/conver_to_camel_case.dart';
+import 'package:artisan/functions/name_cases/convert_to_pascal_case.dart';
 import 'package:artisan/make/make.dart';
 
 //////*********************** Usecase File ***********************//////

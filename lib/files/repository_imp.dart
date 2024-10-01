@@ -1,7 +1,7 @@
-import 'package:artisan/functions/conver_to_camel_case.dart';
+import 'package:artisan/functions/name_cases/conver_to_camel_case.dart';
 import 'package:artisan/make/make.dart';
 
-import '../functions/convert_to_pascal_case.dart';
+import '../functions/name_cases/convert_to_pascal_case.dart';
 
 //////*********************** Repository File ***********************//////
 String repositoryFileImp(

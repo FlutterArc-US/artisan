@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:artisan/extensions/color_print_extension.dart';
 import 'package:artisan/functions/create_feature.dart';
+import 'package:artisan/functions/name_cases/name_cases_extension.dart';
 import 'package:artisan/functions/update_router_paths.dart';
 import 'package:artisan/functions/update_router_routes.dart';
 
@@ -25,7 +26,7 @@ Future<void> createView(String viewName, String featureName) async {
       // Check if the route already exists
       if (routerContent
           .contains('path: RoutePaths.${viewName.toLowerCase()}')) {
-        'Error: Route already exists for: ${viewName.capitalize()}View'
+        'Error: Route already exists for: ${viewName.toPascalCase()}View'
             .printRed();
         return;
       }
@@ -33,7 +34,7 @@ Future<void> createView(String viewName, String featureName) async {
       // Check if the path already exists
       if (pathsContent
           .contains('static const String ${viewName.toLowerCase()} =')) {
-        'Error: Path already exists for: ${viewName.capitalize()}View'
+        'Error: Path already exists for: ${viewName.toPascalCase()}View'
             .printRed();
         return;
       }
@@ -67,8 +68,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:artisan_learning/util/router/paths.dart'; // Auto-import for paths
 
-class ${viewName.capitalize()}View extends StatelessWidget {
-  const ${viewName.capitalize()}View({super.key});
+class ${viewName.toPascalCase()}View extends StatelessWidget {
+  const ${viewName.toPascalCase()}View({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -92,7 +93,7 @@ class ${viewName.capitalize()}View extends StatelessWidget {
 
     // Check for existing paths and routes
     if (!routerPathsResult && !routerResult) {
-      'Error: Both path and route already exist for ${viewName.capitalize()}View.'
+      'Error: Both path and route already exist for ${viewName.toPascalCase()}View.'
           .printRed();
       // Clean up the created view file if paths or routes already existed
       await File(viewFilePath).delete();
@@ -110,7 +111,7 @@ class ${viewName.capitalize()}View extends StatelessWidget {
   }
 }
 
-// Extension to capitalize the first letter of a string
-extension StringCapitalization on String {
-  String capitalize() => this[0].toUpperCase() + this.substring(1);
-}
+// // Extension to capitalize the first letter of a string
+// extension StringCapitalization on String {
+//   String capitalize() => this[0].toUpperCase() + this.substring(1);
+// }

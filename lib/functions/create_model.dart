@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:artisan/files/model_file.dart';
 
-import 'convert_to_pascal_case.dart';
+import 'name_cases/convert_to_pascal_case.dart';
 
 /// [Create Model]
 void createModel(String modelName) {
