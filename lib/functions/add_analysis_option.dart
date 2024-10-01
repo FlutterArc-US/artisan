@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:artisan/extensions/color_print_extension.dart';
 import 'package:artisan/files/analysis_options.dart'; // Import the file that contains your analysis options
 
 /// Function to add or update the `analysis_options.yaml` file
@@ -16,7 +17,7 @@ Future<void> addAnalysisOptions() async {
     // Check if the file already exists
     if (await analysisOptionsFile.exists()) {
       // File exists, update its contents
-      print('File exists, updating analysis_options.yaml...');
+      'File exists, updating analysis_options.yaml...'.printGreen();
 
       // Read the existing content
       final existingContent = await analysisOptionsFile.readAsString();
@@ -27,21 +28,21 @@ Future<void> addAnalysisOptions() async {
 
       // Write the updated content back to the file
       analysisOptionsFile.writeAsStringSync(updatedContent);
-      print('File updated: analysis_options.yaml');
+      'File updated: analysis_options.yaml'.printGreen();
     } else {
       // File does not exist, create a new one
-      print('Creating new analysis_options.yaml...');
+      'Creating new analysis_options.yaml...'.printGreen();
       await analysisOptionsFile.writeAsString(newContent);
-      print('File created successfully: analysis_options.yaml');
+      'File created successfully: analysis_options.yaml'.printGreen();
     }
   } catch (e) {
     // Error handling using a switch-case approach
     switch (e.runtimeType) {
       case FileSystemException:
-        print('Error: Unable to create or write to the file.');
+        'Error: Unable to create or write to the file.'.printRed();
         break;
       default:
-        print('An unknown error occurred: $e');
+        'An unknown error occurred: $e'.printRed();
     }
   }
 }

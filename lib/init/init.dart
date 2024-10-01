@@ -1,3 +1,4 @@
+import 'package:artisan/extensions/color_print_extension.dart';
 import 'package:artisan/functions/add_analysis_option.dart';
 import 'package:artisan/functions/add_assets_folder.dart';
 import 'package:artisan/functions/add_github_workflow.dart';
@@ -11,6 +12,7 @@ import '../functions/add_di.dart';
 import '../helpers/network_call_helper.dart';
 
 Future<void> init() async {
+  'Initializing project...'.printGreen();
   /// [Add Infrastructure]
   addInfrastructure();
 
@@ -43,4 +45,6 @@ Future<void> init() async {
 
   /// [Create GitHub Workflow]
   createGitHubWorkflow();
+
+  'Project initialized successfully.'.printRed();
 }
