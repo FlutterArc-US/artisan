@@ -102,13 +102,18 @@ Future<void> addPubspecYaml() async {
 
 //add Folder in main project with name assets
 Future<void> addAssetsFolder() async {
-  print("Adding assets folder");
-  final assetsFolder = File("${Directory.current.path}/assets/pngs/pngs.dart");
-  if (!assetsFolder.existsSync()) {
-    assetsFolder.createSync();
-  }
-  print("Added assets folder");
+  // Create the assets/pngs and assets/svgs directories
+  final pngsFolder = Directory("${Directory.current.path}/assets/pngs");
+  final svgsFolder = Directory("${Directory.current.path}/assets/svgs");
+
+  // Create the directories recursively
+  pngsFolder.createSync(recursive: true);
+  svgsFolder.createSync(recursive: true);
+
+  // Output confirmation messages
+  print("Assets folder with pngs and svgs subfolders created.");
 }
+
 
 
 Future<void> addAnalysisOptions() async {
