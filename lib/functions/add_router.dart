@@ -3,10 +3,13 @@ import 'package:artisan/extensions/color_print_extension.dart';
 
 /// Function to create or update router files in the project
 Future<void> addRouter() async {
+  final projectName = Directory.current.path.split(Platform.pathSeparator).last;
   try {
     // Define paths for the router files
-    final pathsFile = File("${Directory.current.path}/lib/util/router/paths.dart");
-    final routerFile = File("${Directory.current.path}/lib/util/router/router.dart");
+    final pathsFile =
+        File("${Directory.current.path}/lib/util/router/paths.dart");
+    final routerFile =
+        File("${Directory.current.path}/lib/util/router/router.dart");
 
     // Content for the paths.dart file
     const pathsContent = '''
@@ -16,11 +19,9 @@ class RoutePaths {
   ''';
 
     // Content for the router.dart file
-    const routerContents = '''
-import '/util/router/paths.dart';
+    final routerContents = '''
+    import 'package:$projectName/util/router/paths.dart';
 import 'package:go_router/go_router.dart';
-
-
 final router = GoRouter(
   routes: [],
 );
@@ -31,7 +32,8 @@ final router = GoRouter(
       'Creating paths.dart file...'.printGreen(); // Create File
       pathsFile.createSync(recursive: true);
     } else {
-      'paths.dart file already exists, overwriting...'.printYellow(); // Update File
+      'paths.dart file already exists, overwriting...'
+          .printYellow(); // Update File
     }
     pathsFile.writeAsStringSync(pathsContent);
 
@@ -40,16 +42,19 @@ final router = GoRouter(
       'Creating router.dart file...'.printGreen(); // Create File
       routerFile.createSync(recursive: true);
     } else {
-      'router.dart file already exists, overwriting...'.printYellow(); // Update File
+      'router.dart file already exists, overwriting...'
+          .printYellow(); // Update File
     }
     routerFile.writeAsStringSync(routerContents);
 
-    'Router files created/updated successfully.'.printBlue(); // Success message for file operations
+    'Router files created/updated successfully.'
+        .printBlue(); // Success message for file operations
   } catch (e) {
     // Error handling with colorful prints
     switch (e.runtimeType) {
       case FileSystemException:
-        'Error: Failed to create or write to the router files.'.printRed(); // File system error
+        'Error: Failed to create or write to the router files.'
+            .printRed(); // File system error
         break;
       default:
         'An unknown error occurred: $e'.printRed(); // Unknown error
