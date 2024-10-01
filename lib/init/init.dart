@@ -13,6 +13,15 @@ import '../helpers/network_call_helper.dart';
 
 Future<void> init() async {
   'Initializing project...'.printGreen();
+
+  // Example usage
+  "Hello Red World".printRed();
+  "Hello Green World".printGreen();
+  "Hello Yellow World".printYellow();
+  "Hello Blue World".printBlue();
+  "Hello Purple World".printPurple();
+  "Hello Indigo World".printIndigo();
+  "Hello Orange World".printOrange();
   /// [Add Infrastructure]
   addInfrastructure();
 
