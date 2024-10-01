@@ -17,8 +17,9 @@ class RoutePaths {
 
     // Content for the router.dart file
     const routerContents = '''
+import '/util/router/paths.dart';
 import 'package:go_router/go_router.dart';
-import 'paths.dart';
+
 
 final router = GoRouter(
   routes: [],
