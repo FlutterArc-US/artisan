@@ -31,13 +31,14 @@ void newUseCase(String useCaseName, String featureName, bool isRemote, bool isLo
 
 
 /// [Make File]
-makeFile(String makeCommand) {
-  final fileType = makeCommand.split(' ').first;
+void makeFile(String makeCommand) {
+  final fileType = makeCommand.split(' ').first; // Extract the command type
   final file = makeCommand
       .split(' ')
       .map((e) => e == fileType ? '' : e)
       .toList()
-      .reduce((value, element) => "$value $element");
+      .reduce((value, element) => "$value$element") // Remove extra spaces
+      .trim();
 
   if (fileType == 'model') {
     makeModel(file);
@@ -50,8 +51,7 @@ makeFile(String makeCommand) {
     makeUsecase(usecaseName, featureName, featureName == datasource);
 
     if (featureName == datasource) {
-      /// When no arguments with -- given.
-      return;
+      return; // When no arguments with -- given
     }
 
     makeRepository(
@@ -78,6 +78,8 @@ makeFile(String makeCommand) {
     /// Handle new feature creation
     final featureName = file.trim();
     newFeature(featureName);
+  } else {
+    print('Invalid Command: $makeCommand');
   }
 }
 
@@ -108,51 +110,20 @@ void makeModel(String modelName) {
 ///[Make New Feature]
 
 void newFeature(String featureName) {
-  final featureFolder = 'lib/features/$featureName';
+  // Define logic to create a new feature
+  print('Creating a new feature: $featureName');
 
-  // Directories for data, domain, and presentation
-  final dataFolder = '$featureFolder/data';
-  final domainFolder = '$featureFolder/domain';
-  final presentationFolder = '$featureFolder/presentation';
-
-  // Subfolders for data
-  final dataRepositoryFolder = '$dataFolder/repository';
-  final dataSourceFolder = '$dataFolder/source';
-
-  // Subfolders for domain
-  final domainDataFolder = '$domainFolder/data';
-  final domainModelsFolder = '$domainFolder/models';
-  final domainRepositoryFolder = '$domainFolder/repository';
-  final domainUsecasesFolder = '$domainFolder/usecases';
-
-  // Subfolders for presentation
-  final presentationProviderFolder = '$presentationFolder/provider';
-  final presentationViewsFolder = '$presentationFolder/views';
-
-  // List of directories to create
-  final directories = [
-    dataFolder,
-    dataRepositoryFolder,
-    dataSourceFolder,
-    domainFolder,
-    domainDataFolder,
-    domainModelsFolder,
-    domainRepositoryFolder,
-    domainUsecasesFolder,
-    presentationFolder,
-    presentationProviderFolder,
-    presentationViewsFolder,
-  ];
-
-  // Create all directories recursively
-  for (var dir in directories) {
-    var directory = Directory(dir);
-    if (!directory.existsSync()) {
-      directory.createSync(recursive: true);
-    }
+  // Example: You can create directories or files here
+  // For example, if you want to create a directory for the feature:
+  final featureDir = Directory(featureName);
+  if (!featureDir.existsSync()) {
+    featureDir.createSync(); // Create the feature directory
+    print('Feature directory created: ${featureDir.path}');
+  } else {
+    print('Feature directory already exists: ${featureDir.path}');
   }
 
-  print('Feature $featureName with folder structure created successfully!');
+  // Add any additional logic for creating files related to the feature
 }
 
 /// [Make Usecase]
