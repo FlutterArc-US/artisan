@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:artisan/files/repository_imp.dart';
 import 'package:artisan/files/repository_imp_method.dart';
+import 'package:artisan/functions/create_view.dart';
+import 'package:artisan/functions/name_cases/naming_conventions_extension.dart';
 
 import 'name_cases/conver_to_camel_case.dart';
 import 'name_cases/convert_to_pascal_case.dart';
@@ -55,7 +57,7 @@ void createRepositoryImp({
       final isImportedDatasource = sink
           .getRange(indexToReceiveValues, indexToEndReceiveValues + 1)
           .any((element) => element.contains(
-              '${convertToCamelCase(featureName)}${convertToPascalCase(datasourceName)}DataSource'));
+              '${featureName.toCamelCase()}${datasourceName.toPascalCase()}DataSource'));
 
       for (var i = 0; i < sink.length; i++) {
         var line = sink[i];
@@ -67,17 +69,17 @@ void createRepositoryImp({
 
           if (indexToEndReceiveValues == i) {
             writeSink.writeln(
-                "    required ${convertToPascalCase(featureName)}${convertToPascalCase(datasourceName)}DataSource ${convertToCamelCase(featureName)}${convertToPascalCase(datasourceName)}DataSource,");
+                "    required ${convertToPascalCase(featureName)}${convertToPascalCase(datasourceName)}DataSource ${featureName.toCamelCase()}${datasourceName.toPascalCase()}DataSource,");
           }
 
           if ((indexOfEndVariables == i)) {
             writeSink.writeln(
-                "  final ${convertToPascalCase(featureName)}${convertToPascalCase(datasourceName)}DataSource _${convertToCamelCase(featureName)}${convertToPascalCase(datasourceName)}DataSource;");
+                "  final ${convertToPascalCase(featureName)}${convertToPascalCase(datasourceName)}DataSource _${featureName.toCamelCase()}${datasourceName.toPascalCase()}DataSource;");
           }
 
           if (indexOfEndSetValues == i) {
             writeSink.writeln(
-                '        _${convertToCamelCase(featureName)}${convertToPascalCase(datasourceName)}DataSource = ${convertToCamelCase(featureName)}${convertToPascalCase(datasourceName)}DataSource');
+                '        _${featureName.toCamelCase()}${datasourceName.toPascalCase()}DataSource = ${featureName.toCamelCase()}${datasourceName.toPascalCase()}DataSource');
           }
 
           if (indexOfEndSetValues - 1 == i) {

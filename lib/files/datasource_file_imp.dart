@@ -1,5 +1,7 @@
+import 'package:artisan/files/datasource_file.dart';
 import 'package:artisan/functions/name_cases/conver_to_camel_case.dart';
 import 'package:artisan/functions/name_cases/convert_to_pascal_case.dart';
+import 'package:artisan/functions/name_cases/naming_conventions_extension.dart';
 import 'package:artisan/make/make.dart';
 
 //////*********************** Repository File ***********************//////
@@ -55,7 +57,7 @@ class ${convertToPascalCase(featureName)}${convertToPascalCase(dataSource)}DataS
 
 ////********** START METHODS **********////
   @override
-  Future<${usecaseClassName}UsecaseOutput> ${convertToCamelCase(usecaseFileName)}(${usecaseClassName}UsecaseInput input) {
+  Future<${usecaseClassName}UsecaseOutput> ${usecaseFileName.toCamelCase()}(${usecaseClassName}UsecaseInput input) {
     throw UnimplementedError();
   }
 

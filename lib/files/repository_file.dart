@@ -1,5 +1,7 @@
+import 'package:artisan/files/datasource_file.dart';
 import 'package:artisan/functions/name_cases/conver_to_camel_case.dart';
 import 'package:artisan/functions/name_cases/convert_to_pascal_case.dart';
+import 'package:artisan/functions/name_cases/naming_conventions_extension.dart';
 
 
 //////*********************** Repository File ***********************//////
@@ -9,7 +11,7 @@ String repositoryFile(
 ) {
   final usecaseClassName = convertToPascalCase(usecaseFileName);
   final usecaseMethodName =
-      convertToCamelCase(usecaseFileName).replaceAll('Usecase', '');
+      usecaseFileName.toCamelCase().replaceAll('Usecase', '');
 
   return '''
 ////********** START IMPORTS **********////
