@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:artisan/files/main.yaml.dart';
+import 'package:artisan/init/init.dart';
 
 void main(List<String> args) {
   if (args.isEmpty) {
@@ -78,16 +79,4 @@ void createPresentationLayer(String featureName) {
   print('Presentation layer created for $featureName');
 }
 
-/// Function to create the GitHub Workflow in the .github/workflows folder.
-void createGitHubWorkflow() {
-  gitHubWorklowFile;
 
-  final workflowDir = Directory('.github/workflows');
-  if (!workflowDir.existsSync()) {
-    workflowDir.createSync(recursive: true);
-    print('.github/workflows directory created.');
-  }
-  final workflowFile = File('.github/workflows/main.yaml');
-  workflowFile.writeAsStringSync(gitHubWorklowFile);
-  print('GitHub workflow file created at .github/workflows/main.yaml');
-}

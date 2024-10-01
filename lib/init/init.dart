@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:artisan/files/analysis_options.yaml.dart';
 import 'package:artisan/files/di_config_file.dart';
 import 'package:artisan/files/di_file.dart';
+import 'package:artisan/files/main.yaml.dart';
 import 'package:artisan/files/main_file.dart';
 import 'package:artisan/files/num_extension_file.dart';
 import 'package:artisan/files/pubspec.yaml.dart';
@@ -40,6 +41,9 @@ Future<void> init() async {
 
   /// [Add Di]
   addDi();
+
+  /// [Create GitHub Workflow]
+  createGitHubWorkflow();
 }
 
 String getDirectory(String address) {
@@ -114,8 +118,6 @@ Future<void> addAssetsFolder() async {
   print("Assets folder with pngs and svgs subfolders created.");
 }
 
-
-
 Future<void> addAnalysisOptions() async {
   print("Adding analysis_options.yaml");
   final analysisOptionsExisting =
@@ -171,6 +173,23 @@ final router = GoRouter(
   pathsFile.writeAsStringSync(pathsContent);
 
   routerFile.writeAsStringSync(routerContents);
+}
+
+/// Function to create the GitHub Workflow in the .github/workflows folder.
+void createGitHubWorkflow() {
+  gitHubWorklowFile;
+
+  final workflowDir = Directory('.github/workflows');
+  if (!workflowDir.existsSync()) {
+    workflowDir.createSync(recursive: true);
+    print('.github/workflows directory created.');
+  }else{
+    print('.github/workflows directory already exists.');
+  }
+
+  final workflowFile = File('.github/workflows/main.yaml');
+  workflowFile.writeAsStringSync(gitHubWorklowFile);
+  print('GitHub workflow file created at .github/workflows/main.yaml');
 }
 
 void addDi() {
