@@ -16,7 +16,7 @@ void main(List<String> args) {
       init();
       log("Initializing project...");
       break;
-    case 'make:feature':
+    case 'create:feature':
       if (args.length > 1) {
         createFeature(args[1]);
       } else {
@@ -24,7 +24,7 @@ void main(List<String> args) {
       }
       break;
 
-    case 'make:workflow':
+    case 'create:workflow':
       createGitHubWorkflow();
       break;
 
