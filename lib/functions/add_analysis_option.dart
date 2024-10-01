@@ -10,7 +10,7 @@ Future<void> addAnalysisOptions() async {
     final analysisOptionsFile = File(analysisOptionsFilePath);
 
     // Use the content from the imported file
-    final newContent =
+    const newContent =
         analysisOptionsFileContent; // This should reference the defined content
 
     // Check if the file already exists
