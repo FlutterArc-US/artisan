@@ -1,23 +1,38 @@
 import 'dart:io';
 import 'package:artisan/extensions/color_print_extension.dart';
+import 'package:artisan/functions/create_feature.dart';
 
+/// Function to create a new view file with auto imports
 Future<void> createView(String viewName, String featureName) async {
   try {
-    // Define the path for the views directory
-    final featurePath = "${Directory.current.path}/lib/presentation/${featureName}/views";
-    final viewFilePath = "$featurePath/${viewName}_view.dart";
+    // Determine the base path of the project dynamically
+    final projectPath = Directory.current.path;
+
+    // Define the directory for the feature
+    final featureDirectory =
+    Directory('$projectPath/lib/presentation/$featureName/views');
 
     // Create the feature directory if it doesn't exist
-    final featureDir = Directory(featurePath);
-    if (!featureDir.existsSync()) {
-      'Creating feature directory: $featurePath'.printGreen();
-      featureDir.createSync(recursive: true);
+    if (!await featureDirectory.exists()) {
+      await featureDirectory.create(recursive: true);
+      'Feature directory created: $featureName'.printGreen();
     }
 
-    // Content for the view file
+    // Define the path for the new view file
+    final viewFilePath = '${featureDirectory.path}/${viewName}_view.dart';
+
+    // Check if the view file already exists
+    if (await File(viewFilePath).exists()) {
+      'View file already exists: $viewFilePath'.printRed();
+      return;
+    }
+
+    // Define the content for the view file
     final viewContent = '''
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:${getPackageName(projectPath)}/presentation/$featureName/views/${viewName}_view.dart'; 
+import 'package:${getPackageName(projectPath)}/util/router/paths.dart';
 
 class ${viewName.capitalize()}View extends StatelessWidget {
   const ${viewName.capitalize()}View({super.key});
@@ -34,24 +49,17 @@ class ${viewName.capitalize()}View extends StatelessWidget {
 }
 ''';
 
-    // Create the view file
-    if (!File(viewFilePath).existsSync()) {
-      'Creating view file: $viewFilePath'.printGreen();
-      File(viewFilePath).writeAsStringSync(viewContent);
-    } else {
-      'View file already exists, overwriting: $viewFilePath'.printYellow();
-      File(viewFilePath).writeAsStringSync(viewContent);
-    }
+    // Write the new view content to the file
+    await File(viewFilePath).writeAsString(viewContent);
+    'View file created successfully: $viewFilePath'.printGreen();
 
-    // Add route to RoutePaths and router.dart
-    await updateRouting(viewName, featureName);
-
-    'View and routing created successfully for $viewName in $featureName feature.'.printBlue();
+    // Update router paths and routes
+    await updateRouterPaths(featureName, viewName);
   } catch (e) {
-    // Error handling with colorful prints
+    // Handle errors
     switch (e.runtimeType) {
       case FileSystemException:
-        'Error: Failed to create the view file or directory.'.printRed();
+        'Error: Unable to create or write to the view file.'.printRed();
         break;
       default:
         'An unknown error occurred: $e'.printRed();
@@ -59,41 +67,66 @@ class ${viewName.capitalize()}View extends StatelessWidget {
   }
 }
 
-Future<void> updateRouting(String viewName, String featureName) async {
-  // Define the paths for the router and paths files
-  final routerFile = File("${Directory.current.path}/lib/util/router/router.dart");
-  final pathsFile = File("${Directory.current.path}/lib/util/router/paths.dart");
-
-  // Update RoutePaths
-  if (pathsFile.existsSync()) {
-    final currentPathsContent = await pathsFile.readAsString();
-    if (!currentPathsContent.contains("static const String ${viewName.toLowerCase()} = '/${viewName.toLowerCase()}';")) {
-      final newPathContent = "  static const String ${viewName.toLowerCase()} = '/${viewName.toLowerCase()}';\n";
-      final updatedPathsContent = currentPathsContent.replaceFirst("class RoutePaths {", "class RoutePaths {\n$newPathContent");
-      pathsFile.writeAsStringSync(updatedPathsContent);
-      '${viewName} path added to RoutePaths.'.printGreen();
+/// Function to extract the package name from the pubspec.yaml
+String getPackageName(String projectPath) {
+  final pubspecFile = File('$projectPath/pubspec.yaml');
+  if (pubspecFile.existsSync()) {
+    final content = pubspecFile.readAsStringSync();
+    final lines = content.split('\n');
+    for (var line in lines) {
+      if (line.startsWith('name: ')) {
+        return line.replaceAll('name: ', '').trim();
+      }
     }
   }
+  return 'unknown_project'; // Fallback if the package name is not found
+}
 
-  // Update router file
-  if (routerFile.existsSync()) {
-    final currentRouterContent = await routerFile.readAsString();
-    if (!currentRouterContent.contains("GoRoute(\n      path: RoutePaths.${viewName.toLowerCase()},\n      builder: (context, state) {\n        return const ${viewName.capitalize()}View();\n      },\n    ),")) {
-      final newRoute = '''
-    GoRoute(
-      path: RoutePaths.${viewName.toLowerCase()},
-      builder: (context, state) {
-        return const ${viewName.capitalize()}View();
-      },
-    ),\n''';
-      final updatedRouterContent = currentRouterContent.replaceFirst("routes: [", "routes: [\n$newRoute");
-      routerFile.writeAsStringSync(updatedRouterContent);
-      '${viewName} route added to router.'.printGreen();
-    }
+/// Function to update router paths and routes
+Future<void> updateRouterPaths(String featureName, String viewName) async {
+  // Define the path for paths.dart
+  final pathsFile =
+  File('${Directory.current.path}/lib/util/router/paths.dart');
+
+  // Check if paths.dart file exists
+  if (!await pathsFile.exists()) {
+    await pathsFile.create(recursive: true);
+  }
+
+  // Read existing content and append new path
+  String pathsContent = await pathsFile.readAsString();
+  final newPath = "static const String ${viewName.toLowerCase()} = '/$featureName/${viewName.toLowerCase()}';\n";
+  if (!pathsContent.contains(newPath)) {
+    pathsContent += newPath;
+    await pathsFile.writeAsString(pathsContent);
+    'Path added successfully: ${viewName.toLowerCase()}'.printGreen();
+  }
+
+  // Update router.dart similarly
+  final routerFile =
+  File('${Directory.current.path}/lib/util/router/router.dart');
+
+  if (!await routerFile.exists()) {
+    await routerFile.create(recursive: true);
+  }
+
+  String routerContent = await routerFile.readAsString();
+  final routeEntry = '''
+  GoRoute(
+    path: RoutePaths.${viewName.toLowerCase()},
+    builder: (context, state) {
+      return const ${viewName.capitalize()}View();
+    },
+  ),
+  ''';
+  if (!routerContent.contains(routeEntry)) {
+    routerContent = routerContent.replaceFirst('routes: [', 'routes: [\n$routeEntry');
+    await routerFile.writeAsString(routerContent);
+    'Route added successfully: ${viewName.toLowerCase()}'.printGreen();
   }
 }
 
-// Extension to capitalize the first letter
+// Extension to capitalize the first letter of a string
 extension StringCapitalization on String {
-  String capitalize() => this.isEmpty ? '' : this[0].toUpperCase() + substring(1);
+  String capitalize() => this[0].toUpperCase() + this.substring(1);
 }
