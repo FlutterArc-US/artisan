@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:artisan/files/repository_imp.dart';
 import 'package:artisan/files/repository_imp_method.dart';
 import 'package:artisan/functions/create_view.dart';
-import 'package:artisan/functions/name_cases/naming_conventions_extension.dart';
+import 'package:artisan/extensions/naming_conventions_extension.dart';
 
 import 'name_cases/conver_to_camel_case.dart';
 import 'name_cases/convert_to_pascal_case.dart';

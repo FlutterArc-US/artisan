@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:artisan/extensions/color_print_extension.dart';
 import 'package:artisan/functions/create_feature.dart';
-import 'package:artisan/functions/name_cases/naming_conventions_extension.dart';
+import 'package:artisan/extensions/naming_conventions_extension.dart';
 import 'package:artisan/functions/update_router_paths.dart';
 import 'package:artisan/functions/update_router_routes.dart';
 
