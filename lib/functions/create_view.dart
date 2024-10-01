@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'package:artisan/extensions/color_print_extension.dart';
-import 'package:artisan/functions/create_feature.dart';
 
 /// Function to create a new view file with auto imports
 Future<void> createView(String viewName, String featureName) async {
@@ -10,7 +9,7 @@ Future<void> createView(String viewName, String featureName) async {
 
     // Define the directory for the feature
     final featureDirectory =
-    Directory('$projectPath/lib/presentation/$featureName/views');
+    Directory('$projectPath/lib/$featureName/presentation/views');
 
     // Create the feature directory if it doesn't exist
     if (!await featureDirectory.exists()) {
@@ -23,7 +22,7 @@ Future<void> createView(String viewName, String featureName) async {
 
     // Check if the view file already exists
     if (await File(viewFilePath).exists()) {
-      'View file already exists: $viewFilePath'.printRed();
+      'Error: View file already exists: $viewFilePath'.printRed();
       return;
     }
 
@@ -31,8 +30,6 @@ Future<void> createView(String viewName, String featureName) async {
     final viewContent = '''
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:${getPackageName(projectPath)}/presentation/$featureName/views/${viewName}_view.dart'; 
-import 'package:${getPackageName(projectPath)}/util/router/paths.dart';
 
 class ${viewName.capitalize()}View extends StatelessWidget {
   const ${viewName.capitalize()}View({super.key});
@@ -53,8 +50,17 @@ class ${viewName.capitalize()}View extends StatelessWidget {
     await File(viewFilePath).writeAsString(viewContent);
     'View file created successfully: $viewFilePath'.printGreen();
 
-    // Update router paths and routes
-    await updateRouterPaths(featureName, viewName);
+    // Check and update router paths and routes
+    final routerPathsResult = await updateRouterPaths(featureName, viewName);
+    final routerResult = await updateRouterRoutes(featureName, viewName);
+
+    // Check for existing paths and routes
+    if (!routerPathsResult && !routerResult) {
+      'Error: Both path and route already exist for ${viewName.capitalize()}View.'.printRed();
+      // Clean up the created view file if paths or routes already existed
+      await File(viewFilePath).delete();
+      'View file deleted: $viewFilePath'.printRed();
+    }
   } catch (e) {
     // Handle errors
     switch (e.runtimeType) {
@@ -82,8 +88,8 @@ String getPackageName(String projectPath) {
   return 'unknown_project'; // Fallback if the package name is not found
 }
 
-/// Function to update router paths and routes
-Future<void> updateRouterPaths(String featureName, String viewName) async {
+/// Function to update router paths
+Future<bool> updateRouterPaths(String featureName, String viewName) async {
   // Define the path for paths.dart
   final pathsFile =
   File('${Directory.current.path}/lib/util/router/paths.dart');
@@ -93,16 +99,26 @@ Future<void> updateRouterPaths(String featureName, String viewName) async {
     await pathsFile.create(recursive: true);
   }
 
-  // Read existing content and append new path
+  // Read existing content
   String pathsContent = await pathsFile.readAsString();
   final newPath = "static const String ${viewName.toLowerCase()} = '/$featureName/${viewName.toLowerCase()}';\n";
-  if (!pathsContent.contains(newPath)) {
-    pathsContent += newPath;
-    await pathsFile.writeAsString(pathsContent);
-    'Path added successfully: ${viewName.toLowerCase()}'.printGreen();
+
+  // Check if the path already exists
+  if (pathsContent.contains(newPath)) {
+    'Error: Path already exists: ${viewName.toLowerCase()}'.printRed();
+    return false; // Indicate the path already existed
   }
 
-  // Update router.dart similarly
+  // Append new path
+  pathsContent += newPath;
+  await pathsFile.writeAsString(pathsContent);
+  'Path added successfully: ${viewName.toLowerCase()}'.printGreen();
+  return true; // Indicate the path was added
+}
+
+/// Function to update router routes
+Future<bool> updateRouterRoutes(String featureName, String viewName) async {
+  // Define the path for router.dart
   final routerFile =
   File('${Directory.current.path}/lib/util/router/router.dart');
 
@@ -110,6 +126,7 @@ Future<void> updateRouterPaths(String featureName, String viewName) async {
     await routerFile.create(recursive: true);
   }
 
+  // Read existing content
   String routerContent = await routerFile.readAsString();
   final routeEntry = '''
   GoRoute(
@@ -119,11 +136,18 @@ Future<void> updateRouterPaths(String featureName, String viewName) async {
     },
   ),
   ''';
-  if (!routerContent.contains(routeEntry)) {
-    routerContent = routerContent.replaceFirst('routes: [', 'routes: [\n$routeEntry');
-    await routerFile.writeAsString(routerContent);
-    'Route added successfully: ${viewName.toLowerCase()}'.printGreen();
+
+  // Check if the route already exists
+  if (routerContent.contains(routeEntry)) {
+    'Error: Route already exists for: ${viewName.capitalize()}View'.printRed();
+    return false; // Indicate the route already existed
   }
+
+  // Append the new route at the end
+  routerContent = routerContent.replaceFirst('routes: [', 'routes: [\n$routeEntry');
+  await routerFile.writeAsString(routerContent);
+  'Route added successfully: ${viewName.toLowerCase()}'.printGreen();
+  return true; // Indicate the route was added
 }
 
 // Extension to capitalize the first letter of a string
