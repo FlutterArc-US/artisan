@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:artisan/extensions/color_print_extension.dart';
 
-/// Function to create a new view file with auto imports
 Future<void> createView(String viewName, String featureName) async {
   try {
     // Determine the base path of the project dynamically
@@ -73,21 +72,6 @@ class ${viewName.capitalize()}View extends StatelessWidget {
   }
 }
 
-/// Function to extract the package name from the pubspec.yaml
-String getPackageName(String projectPath) {
-  final pubspecFile = File('$projectPath/pubspec.yaml');
-  if (pubspecFile.existsSync()) {
-    final content = pubspecFile.readAsStringSync();
-    final lines = content.split('\n');
-    for (var line in lines) {
-      if (line.startsWith('name: ')) {
-        return line.replaceAll('name: ', '').trim();
-      }
-    }
-  }
-  return 'unknown_project'; // Fallback if the package name is not found
-}
-
 /// Function to update router paths
 Future<bool> updateRouterPaths(String featureName, String viewName) async {
   // Define the path for paths.dart
@@ -101,7 +85,7 @@ Future<bool> updateRouterPaths(String featureName, String viewName) async {
 
   // Read existing content
   String pathsContent = await pathsFile.readAsString();
-  final newPath = "static const String ${viewName.toLowerCase()} = '/$featureName/${viewName.toLowerCase()}';\n";
+  final newPath = "static const String ${viewName.toLowerCase()} = '/${viewName.toLowerCase()}';\n";
 
   // Check if the path already exists
   if (pathsContent.contains(newPath)) {
@@ -109,8 +93,8 @@ Future<bool> updateRouterPaths(String featureName, String viewName) async {
     return false; // Indicate the path already existed
   }
 
-  // Append new path
-  pathsContent += newPath;
+  // Ensure to append new paths correctly while maintaining the class structure
+  pathsContent = pathsContent.replaceFirst('class RoutePaths {', 'class RoutePaths {\n  $newPath');
   await pathsFile.writeAsString(pathsContent);
   'Path added successfully: ${viewName.toLowerCase()}'.printGreen();
   return true; // Indicate the path was added
