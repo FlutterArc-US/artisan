@@ -11,24 +11,16 @@ Future<void> addAnalysisOptions() async {
     final analysisOptionsFile = File(analysisOptionsFilePath);
 
     // Use the content from the imported file
-    const newContent =
-        analysisOptionsFileContent; // This should reference the defined content
+    const newContent = analysisOptionsFileContent; // Reference to the content
 
     // Check if the file already exists
     if (await analysisOptionsFile.exists()) {
-      // File exists, update its contents
-      'File exists, updating analysis_options.yaml...'.printGreen();
+      // File exists, overwrite its contents
+      'File exists, overwriting analysis_options.yaml...'.printGreen();
 
-      // Read the existing content
-      final existingContent = await analysisOptionsFile.readAsString();
-
-      // Append the new content to the existing content
-      final updatedContent =
-          '$existingContent\n$newContent'; // Modify as needed
-
-      // Write the updated content back to the file
-      analysisOptionsFile.writeAsStringSync(updatedContent);
-      'File updated: analysis_options.yaml'.printGreen();
+      // Overwrite the content with new content
+      analysisOptionsFile.writeAsStringSync(newContent);
+      'File overwritten: analysis_options.yaml'.printGreen();
     } else {
       // File does not exist, create a new one
       'Creating new analysis_options.yaml...'.printGreen();
