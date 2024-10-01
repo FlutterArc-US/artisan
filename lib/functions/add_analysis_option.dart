@@ -20,7 +20,7 @@ Future<void> addAnalysisOptions() async {
 
       // Overwrite the content with new content
       analysisOptionsFile.writeAsStringSync(newContent);
-      'File overwritten: analysis_options.yaml'.printYellow(); // Update File
+      'File overwritten: analysis_options.yaml'.printGreen(); // Update File
     } else {
       // File does not exist, create a new one
       'Creating new analysis_options.yaml...'.printGreen(); // Create File
