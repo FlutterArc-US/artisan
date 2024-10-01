@@ -54,7 +54,15 @@ void main(List<String> arguments) {
 
     /// [Command Types]
     if (commandType == 'make') {
-      makeFile(command);
+      if (command.startsWith('feature')) {
+        // Extract the feature name and call newFeature function
+        final featureName = command.split(' ').last.trim();
+        newFeature(featureName);
+        return;
+      } else {
+        // Fallback to makeFile for other usecases
+        makeFile(command);
+      }
     }
   } catch (e) {
     print('Invalid Command ${arguments.join()}');
