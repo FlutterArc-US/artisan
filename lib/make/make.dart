@@ -1,439 +1,64 @@
 import 'dart:io';
 
-import 'package:artisan/files/datasource_file.dart';
-import 'package:artisan/files/datasource_file_imp.dart';
-import 'package:artisan/files/datasource_imp_method.dart';
-import 'package:artisan/files/model_file.dart';
-import 'package:artisan/files/repository_file.dart';
-import 'package:artisan/files/repository_imp.dart';
-import 'package:artisan/files/repository_imp_method.dart';
-import 'package:artisan/files/repository_method.dart';
-import 'package:artisan/files/usecase_file.dart';
-
-
-
-
-void newModel(String modelName, String featureName) {
-  print('Creating model $modelName in feature $featureName');
-  // Logic to generate a new model file inside the feature folder
-}
-
-void newUseCase(String useCaseName, String featureName, bool isRemote, bool isLocal) {
-  print('Creating use case $useCaseName in feature $featureName');
-  if (isRemote) {
-    print('This is a remote use case.');
+void main(List<String> args) {
+  if (args.isEmpty) {
+    print("No command provided. Use 'make:feature' to create a feature.");
+    return;
   }
-  if (isLocal) {
-    print('This is a local use case.');
-  }
-  // Logic to generate the use case inside the feature folder with respective logic for remote or local
-}
 
+  final command = args[0];
+  final name = args.length > 1 ? args[1] : null;
 
-/// [Make File]
-void makeFile(String makeCommand) {
-  final fileType = makeCommand.split(' ').first; // Extract the command type
-  final file = makeCommand
-      .split(' ')
-      .map((e) => e == fileType ? '' : e)
-      .toList()
-      .reduce((value, element) => "$value$element") // Remove extra spaces
-      .trim();
-
-  if (fileType == 'model') {
-    makeModel(file);
-  } else if (fileType == 'usecase') {
-    final usecaseName = file.split(' on ').first.trim();
-    final featureAndDatasource = file.split(' on ').last.trim();
-    final featureName = featureAndDatasource.split('--').first.trim();
-    final datasource = featureAndDatasource.split('--').last.trim();
-
-    makeUsecase(usecaseName, featureName, featureName == datasource);
-
-    if (featureName == datasource) {
-      return; // When no arguments with -- given
-    }
-
-    makeRepository(
-      usecaseName: usecaseName,
-      featureName: featureName,
-      datasourceName: datasource,
-    );
-    makeRepositoryImp(
-      usecaseName: usecaseName,
-      featureName: featureName,
-      datasourceName: datasource,
-    );
-    makeDatasource(
-      usecaseName: usecaseName,
-      featureName: featureName,
-      datasourceName: datasource,
-    );
-    makeDatasourceImp(
-      usecaseName: usecaseName,
-      featureName: featureName,
-      datasourceName: datasource,
-    );
-  } else if (fileType == 'feature') {
-    /// Handle new feature creation
-    final featureName = file.trim();
-    newFeature(featureName);
-  } else {
-    print('Invalid Command: $makeCommand');
+  switch (command) {
+    case 'make:feature':
+      if (name != null) {
+        createFeature(name);
+      } else {
+        print("Please provide a feature name.");
+      }
+      break;
+    default:
+      print("Invalid Command: $command");
   }
 }
 
+void createFeature(String featureName) {
+  print("Creating feature: $featureName");
 
-/// [Make Model]
-void makeModel(String modelName) {
-  final fileName = modelName.split(' on ').first.trim();
-  final className = convertToPascalCase(fileName).trim();
-  final featureName = modelName.split(' on ').last.trim();
-
-  final fileAddress = 'lib/features/$featureName/domain/models/$fileName';
-
-  var directory = Directory(fileAddress);
-  if (!directory.existsSync()) {
-    directory.createSync(recursive: true);
-  }
-
-  // Your logic to generate the model file
-  var content = modelFile(className, fileName);
-
-  // Create the file
-  var file = File("$fileAddress/$fileName.dart");
-  file.writeAsStringSync(content);
-
-  print('Model $modelName created successfully!');
-}
-
-///[Make New Feature]
-
-void newFeature(String featureName) {
-  // Define logic to create a new feature
-  print('Creating a new feature: $featureName');
-
-  // Example: You can create directories or files here
-  // For example, if you want to create a directory for the feature:
-  final featureDir = Directory(featureName);
+  // Create folder structure for the feature
+  final featureDir = Directory('lib/features/$featureName');
   if (!featureDir.existsSync()) {
-    featureDir.createSync(); // Create the feature directory
-    print('Feature directory created: ${featureDir.path}');
+    featureDir.createSync(recursive: true);
+    print('Feature folder created at lib/features/$featureName');
+
+    // Create Domain Layer
+    final domainDir = Directory('lib/features/$featureName/domain');
+    domainDir.createSync();
+    print('Domain folder created');
+
+    // Create Application Layer (Use Cases)
+    final usecaseDir = Directory('lib/features/$featureName/application');
+    usecaseDir.createSync();
+    print('Application (Use Case) folder created');
+
+    // Create Data Layer
+    final dataDir = Directory('lib/features/$featureName/data');
+    dataDir.createSync();
+    print('Data folder created');
+
+    // Create Presentation Layer
+    final presentationDir = Directory('lib/features/$featureName/presentation');
+    presentationDir.createSync();
+    print('Presentation folder created');
+
+    // Create Placeholder Files
+    File('lib/features/$featureName/domain/entities.dart').writeAsStringSync('// Domain entities for $featureName');
+    File('lib/features/$featureName/application/usecases.dart').writeAsStringSync('// Application use cases for $featureName');
+    File('lib/features/$featureName/data/repositories.dart').writeAsStringSync('// Data repositories for $featureName');
+    File('lib/features/$featureName/presentation/widgets.dart').writeAsStringSync('// UI widgets for $featureName');
+
+    print('Feature created successfully.');
   } else {
-    print('Feature directory already exists: ${featureDir.path}');
+    print('Feature folder already exists.');
   }
-
-  // Add any additional logic for creating files related to the feature
-}
-
-/// [Make Usecase]
-void makeUsecase(String usecaseName, String featureName, bool onlyUsecase) {
-  final fileAddress = 'lib/features/$featureName/domain/usecases';
-
-  var directory = Directory(fileAddress);
-  if (!directory.existsSync()) {
-    directory.createSync(recursive: true);
-  }
-
-  // Your logic to generate the model file
-  var content = onlyUsecase
-      ? onlyUsecaseFile(usecaseName, featureName)
-      : usecaseFile(usecaseName, featureName);
-
-  // Create the file
-  var file = File("$fileAddress/$usecaseName.dart");
-  file.writeAsStringSync(content);
-
-  print('Usecase $usecaseName created successfully!');
-}
-
-/// [Make Repository]
-void makeRepository({
-  required String usecaseName,
-  required String featureName,
-  required String datasourceName,
-}) async {
-  final fileAddress = 'lib/features/$featureName/domain/repository';
-  var directory = Directory(fileAddress);
-  if (!directory.existsSync()) {
-    directory.createSync(recursive: true);
-  }
-
-  // Your logic to generate the model file
-  var content = repositoryFile(usecaseName, featureName);
-
-  // Create the file
-  var file = File("$fileAddress/${featureName}_repository.dart");
-
-  if (file.existsSync()) {
-    final sink = file.readAsLinesSync();
-    await file.writeAsString('');
-    if (sink.isEmpty) {
-      file.writeAsStringSync(content);
-    } else {
-      while (sink.last.isEmpty) {
-        sink.removeLast();
-      }
-
-      final writeSink = file.openWrite(mode: FileMode.writeOnlyAppend);
-      final indexToPlaceImport =
-          sink.indexOf("////********** END IMPORTS **********////");
-
-      final indexToPlaceMethod =
-          sink.indexOf("////********** END METHODS **********////");
-
-      for (var i = 0; i < sink.length; i++) {
-        final line = sink[i];
-        if (i == indexToPlaceImport) {
-          writeSink.writeln("import '../usecases/$usecaseName.dart';");
-        }
-
-        if (i == indexToPlaceMethod) {
-          writeSink.writeln(newRepoMethod(usecaseName, featureName));
-        }
-        writeSink.writeln(line);
-      }
-    }
-  } else {
-    file.writeAsStringSync(content);
-  }
-}
-
-/// [Make Repository]
-void makeRepositoryImp({
-  required String usecaseName,
-  required String featureName,
-  required String datasourceName,
-}) async {
-  final fileAddress = 'lib/features/$featureName/domain/repository';
-  var directory = Directory(fileAddress);
-  if (!directory.existsSync()) {
-    directory.createSync(recursive: true);
-  }
-
-  // Your logic to generate the model file
-  var content = repositoryFileImp(usecaseName, featureName, datasourceName);
-
-  // Create the file
-  var file = File("$fileAddress/${featureName}_repository_imp.dart");
-
-  if (file.existsSync()) {
-    final sink = file.readAsLinesSync();
-    await file.writeAsString('');
-    if (sink.isEmpty) {
-      file.writeAsStringSync(content);
-    } else {
-      while (sink.last.isEmpty) {
-        sink.removeLast();
-      }
-
-      final writeSink = file.openWrite(mode: FileMode.writeOnlyAppend);
-      final indexToPlaceImport =
-          sink.indexOf("////********** END IMPORTS **********////");
-
-      final indexToPlaceMethod =
-          sink.indexOf("////********** END METHODS **********////");
-
-      final indexToReceiveValues =
-          sink.indexOf('////********** START RECEIVE VALUES **********////');
-      final indexToEndReceiveValues =
-          sink.indexOf('////********** END RECEIVE VALUES **********////');
-
-      final indexOfEndVariables =
-          sink.indexOf("////********** END VARIABLES **********////");
-
-      final indexOfEndSetValues =
-          sink.indexOf('////********** END SET VALUES **********////');
-
-      final isImportedDatasource = sink
-          .getRange(indexToReceiveValues, indexToEndReceiveValues + 1)
-          .any((element) => element.contains(
-              '${convertToCamelCase(featureName)}${convertToPascalCase(datasourceName)}DataSource'));
-
-      for (var i = 0; i < sink.length; i++) {
-        var line = sink[i];
-        if (!isImportedDatasource) {
-          if (indexToPlaceImport == i) {
-            writeSink.writeln(
-                "import '../../data/source/$datasourceName/${featureName}_${datasourceName}_datasource.dart';");
-          }
-
-          if (indexToEndReceiveValues == i) {
-            writeSink.writeln(
-                "    required ${convertToPascalCase(featureName)}${convertToPascalCase(datasourceName)}DataSource ${convertToCamelCase(featureName)}${convertToPascalCase(datasourceName)}DataSource,");
-          }
-
-          if ((indexOfEndVariables == i)) {
-            writeSink.writeln(
-                "  final ${convertToPascalCase(featureName)}${convertToPascalCase(datasourceName)}DataSource _${convertToCamelCase(featureName)}${convertToPascalCase(datasourceName)}DataSource;");
-          }
-
-          if (indexOfEndSetValues == i) {
-            writeSink.writeln(
-                '        _${convertToCamelCase(featureName)}${convertToPascalCase(datasourceName)}DataSource = ${convertToCamelCase(featureName)}${convertToPascalCase(datasourceName)}DataSource');
-          }
-
-          if (indexOfEndSetValues - 1 == i) {
-            line += ',';
-          }
-        }
-
-        if (i == indexToPlaceImport) {
-          writeSink.writeln("import '../usecases/$usecaseName.dart';");
-        }
-
-        if (i == indexToPlaceMethod) {
-          writeSink.writeln(newRepoMethodImp(
-            usecaseName,
-            featureName,
-            datasourceName,
-          ));
-        }
-
-        writeSink.writeln(line);
-      }
-    }
-  } else {
-    file.writeAsStringSync(content);
-  }
-}
-
-/// [Make Datasource Imp]
-void makeDatasourceImp({
-  required String usecaseName,
-  required String featureName,
-  required String datasourceName,
-}) async {
-  final fileAddress = 'lib/features/$featureName/data/source/$datasourceName';
-  var directory = Directory(fileAddress);
-  if (!directory.existsSync()) {
-    directory.createSync(recursive: true);
-  }
-
-  // Your logic to generate the model file
-  var content = datasourceFileImp(usecaseName, featureName, datasourceName);
-
-  // Create the file
-  var file =
-      File("$fileAddress/${featureName}_${datasourceName}_datasource_imp.dart");
-
-  if (file.existsSync()) {
-    final sink = file.readAsLinesSync();
-    await file.writeAsString('');
-    if (sink.isEmpty) {
-      file.writeAsStringSync(content);
-    } else {
-      while (sink.last.isEmpty) {
-        sink.removeLast();
-      }
-
-      final writeSink = file.openWrite(mode: FileMode.writeOnlyAppend);
-      final indexToPlaceImport =
-          sink.indexOf("////********** END IMPORTS **********////");
-
-      final indexToPlaceMethod =
-          sink.indexOf("////********** END METHODS **********////");
-
-      for (var i = 0; i < sink.length; i++) {
-        var line = sink[i];
-
-        if (i == indexToPlaceImport) {
-          writeSink
-              .writeln("import '../../../domain/usecases/$usecaseName.dart';");
-        }
-
-        if (i == indexToPlaceMethod) {
-          writeSink.writeln(newDatasourceMethodImp(
-            usecaseName,
-            featureName,
-            datasourceName,
-          ));
-        }
-
-        writeSink.writeln(line);
-      }
-    }
-  } else {
-    file.writeAsStringSync(content);
-  }
-}
-
-/// [Make DataSource]
-void makeDatasource({
-  required String usecaseName,
-  required String featureName,
-  required String datasourceName,
-}) async {
-  final fileAddress = 'lib/features/$featureName/data/source/$datasourceName';
-
-  var directory = Directory(fileAddress);
-  if (!directory.existsSync()) {
-    directory.createSync(recursive: true);
-  }
-
-  // Your logic to generate the model file
-  var content = datasourceFile(usecaseName, featureName, datasourceName);
-
-  // Create the file
-  var file =
-      File("$fileAddress/${featureName}_${datasourceName}_datasource.dart");
-
-  if (file.existsSync()) {
-    final sink = file.readAsLinesSync();
-    await file.writeAsString('');
-    if (sink.isEmpty) {
-      file.writeAsStringSync(content);
-    } else {
-      while (sink.last.isEmpty) {
-        sink.removeLast();
-      }
-
-      final writeSink = file.openWrite(mode: FileMode.writeOnlyAppend);
-      final indexToPlaceImport =
-          sink.indexOf("////********** END IMPORTS **********////");
-
-      final indexToPlaceMethod =
-          sink.indexOf("////********** END METHODS **********////");
-
-      for (var i = 0; i < sink.length; i++) {
-        final line = sink[i];
-
-        if (i == indexToPlaceImport) {
-          writeSink
-              .writeln("import '../../../domain/usecases/$usecaseName.dart';");
-        }
-
-        if (i == indexToPlaceMethod) {
-          writeSink.writeln(newRepoMethod(usecaseName, featureName));
-        }
-        writeSink.writeln(line);
-      }
-    }
-  } else {
-    file.writeAsStringSync(content);
-  }
-}
-
-/// [Convert to PascalCase]
-String convertToPascalCase(String input) {
-  var words = input.split('_');
-  var result = '';
-
-  for (final word in words) {
-    result += word.trim()[0].toUpperCase() + word.trim().substring(1);
-  }
-
-  return result;
-}
-
-/// [Convert to camelCase]
-String convertToCamelCase(String input) {
-  var words = input.split('_');
-  var result = words.first;
-
-  for (var i = 1; i < words.length; i++) {
-    result += words[i].trim()[0].toUpperCase() + words[i].trim().substring(1);
-  }
-
-  return result;
 }
