@@ -20,8 +20,9 @@ class RoutePaths {
 
     // Content for the router.dart file
     final routerContents = '''
-    import 'package:$projectName/util/router/paths.dart';
+import 'package:$projectName/util/router/paths.dart';
 import 'package:go_router/go_router.dart';
+
 final router = GoRouter(
   routes: [],
 );

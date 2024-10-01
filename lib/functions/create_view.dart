@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:artisan/extensions/color_print_extension.dart';
+import 'package:artisan/functions/create_feature.dart';
 import 'package:artisan/functions/update_router_paths.dart';
 import 'package:artisan/functions/update_router_routes.dart';
 
@@ -14,8 +15,9 @@ Future<void> createView(String viewName, String featureName) async {
 
     // Create the feature directory if it doesn't exist
     if (!await featureDirectory.exists()) {
-      await featureDirectory.create(recursive: true);
-      'Feature directory created: $featureName'.printGreen();
+       createFeature(featureName);
+       'Feature not found, creating feature: $featureName'.printYellow();
+      'NewFeature created: $featureName'.printGreen();
     }
 
     // Define the path for the new view file
