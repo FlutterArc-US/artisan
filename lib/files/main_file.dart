@@ -72,4 +72,8 @@ class _ProviderAppState extends State<ProviderApp> {
 // dart run artisan make:usecase save_token on auth --local
 // dart run artisan assets
 // dart run custom_lint
+// dart run artisan make:feature authentication
+// dart run artisan make:feature home
+// artisan make:usecase createUser on authentication --local
+// dart run artisan make:feature profile
 ''';
