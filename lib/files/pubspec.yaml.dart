@@ -1,5 +1,5 @@
 const pubspecFile = '''
-description: A new Flutter project.
+description: Flutter project with Artisan.
 
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
 

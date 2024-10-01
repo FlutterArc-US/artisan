@@ -1,5 +1,4 @@
 const analysisOptionsFile = '''
-
 include: package:flutter_lints/flutter.yaml
 
 analyzer:
@@ -175,3 +174,4 @@ linter:
 #    - use_to_and_as_if_applicable
 #    - valid_regexps
 #    - void_checks
+''';
