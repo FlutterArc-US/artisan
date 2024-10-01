@@ -25,7 +25,6 @@ void main(List<String> arguments) {
 
   if (command.startsWith('add')) {
     final addRunes = command.split(':').last.trim();
-
     final addItem = addRunes.split(' ').first;
 
     if (addItem == 'color') {
@@ -54,15 +53,40 @@ void main(List<String> arguments) {
 
     /// [Command Types]
     if (commandType == 'make') {
+      // Handle make:feature
       if (command.startsWith('feature')) {
-        // Extract the feature name and call newFeature function
         final featureName = command.split(' ').last.trim();
         newFeature(featureName);
         return;
-      } else {
-        // Fallback to makeFile for other usecases
-        makeFile(command);
       }
+
+      // Handle make:model
+      if (command.startsWith('model')) {
+        final parts = command.split('on');
+        final modelName = parts.first.split(' ').last.trim();
+        final featureName = parts.last.trim();
+        newModel(modelName, featureName);
+        return;
+      }
+
+      // Handle make:usecase with optional flags --remote or --local
+      if (command.startsWith('usecase')) {
+        final parts = command.split('on');
+        final useCaseName = parts.first.split(' ').last.trim();
+        final featureAndFlags = parts.last.trim();
+
+        final featureName = featureAndFlags.split(' ').first;
+        final flags = featureAndFlags.split(' ').skip(1).toList();
+
+        bool isRemote = flags.contains('--remote');
+        bool isLocal = flags.contains('--local');
+
+        newUseCase(useCaseName, featureName, isRemote, isLocal);
+        return;
+      }
+
+      // Fallback to makeFile for other cases
+      makeFile(command);
     }
   } catch (e) {
     print('Invalid Command ${arguments.join()}');

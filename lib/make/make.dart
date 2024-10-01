@@ -10,6 +10,26 @@ import 'package:artisan/files/repository_imp_method.dart';
 import 'package:artisan/files/repository_method.dart';
 import 'package:artisan/files/usecase_file.dart';
 
+
+
+
+void newModel(String modelName, String featureName) {
+  print('Creating model $modelName in feature $featureName');
+  // Logic to generate a new model file inside the feature folder
+}
+
+void newUseCase(String useCaseName, String featureName, bool isRemote, bool isLocal) {
+  print('Creating use case $useCaseName in feature $featureName');
+  if (isRemote) {
+    print('This is a remote use case.');
+  }
+  if (isLocal) {
+    print('This is a local use case.');
+  }
+  // Logic to generate the use case inside the feature folder with respective logic for remote or local
+}
+
+
 /// [Make File]
 makeFile(String makeCommand) {
   final fileType = makeCommand.split(' ').first;
