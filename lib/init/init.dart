@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:artisan/files/analysis_options.yaml.dart';
 import 'package:artisan/files/di_config_file.dart';
 import 'package:artisan/files/di_file.dart';
 import 'package:artisan/files/main_file.dart';
@@ -18,6 +19,9 @@ Future<void> init() async {
 
   /// [Add Pubspec]
   addPubspecYaml();
+
+  /// [Add Analysis Options]
+  addAnalysisOptions();
 
   /// [Add Common]
   addCommon();
@@ -91,6 +95,15 @@ Future<void> addPubspecYaml() async {
   final contents = '${lines.first}\n$pubspecFile';
   pubspecExisting.writeAsStringSync(contents);
   print("Added pubspec.yaml");
+}
+
+Future<void> addAnalysisOptions() async {
+  print("Adding analysis_options.yaml");
+  final analysisOptionsExisting = File("${Directory.current.path}/analysis_options.yaml");
+  final lines = analysisOptionsExisting.readAsLinesSync();
+  final contents = '${lines.first}\n$analysisOptionsFile';
+  analysisOptionsExisting.writeAsStringSync(contents);
+  print("Added analysis_options.yaml");
 }
 
 Future<void> addMain() async {
