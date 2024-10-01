@@ -86,7 +86,7 @@ dev_dependencies:
   artisan:
     git:
       url: https://github.com/Wolfiz-2-0/artisan
-      ref: Umer_Other_Modifications
+      ref: Artisan_Beta
 
 flutter_gen:
   output: lib/gen/ # Optional (default: lib/gen/)
