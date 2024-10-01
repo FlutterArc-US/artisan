@@ -100,25 +100,16 @@ Future<void> addPubspecYaml() async {
   print("Added pubspec.yaml");
 }
 
-//add Directory in main project assets and assets/pngs and assets/svgs
-
+//add Folder in main project with name assets
 Future<void> addAssetsFolder() async {
-  final assetsFolder = File("${Directory.current.path}/assets");
-  final pngsFolder = File("${Directory.current.path}/assets/pngs");
-  final svgsFolder = File("${Directory.current.path}/assets/svgs");
-
+  print("Adding assets folder");
+  final assetsFolder = Directory("${Directory.current.path}/assets");
   if (!assetsFolder.existsSync()) {
-    assetsFolder.createSync(recursive: true);
+    assetsFolder.createSync();
   }
-
-  if (!pngsFolder.existsSync()) {
-    pngsFolder.createSync(recursive: true);
-  }
-
-  if (!svgsFolder.existsSync()) {
-    svgsFolder.createSync(recursive: true);
-  }
+  print("Added assets folder");
 }
+
 
 Future<void> addAnalysisOptions() async {
   print("Adding analysis_options.yaml");
