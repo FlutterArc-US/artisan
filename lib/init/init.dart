@@ -103,9 +103,9 @@ Future<void> addPubspecYaml() async {
 //add Directory in main project assets and assets/pngs and assets/svgs
 
 Future<void> addAssetsFolder() async {
-  final assetsFolder = Directory("${Directory.current.path}/assets");
-  final pngsFolder = Directory("${Directory.current.path}/assets/pngs");
-  final svgsFolder = Directory("${Directory.current.path}/assets/svgs");
+  final assetsFolder = File("${Directory.current.path}/assets");
+  final pngsFolder = File("${Directory.current.path}/assets/pngs");
+  final svgsFolder = File("${Directory.current.path}/assets/svgs");
 
   if (!assetsFolder.existsSync()) {
     assetsFolder.createSync(recursive: true);
