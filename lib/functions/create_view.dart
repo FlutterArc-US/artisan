@@ -6,9 +6,9 @@ Future<void> createView(String viewName, String featureName) async {
     // Determine the base path of the project dynamically
     final projectPath = Directory.current.path;
 
-    // Define the directory for the feature
+    // Define the directory for the feature correctly
     final featureDirectory =
-    Directory('$projectPath/lib/$featureName/presentation/views');
+    Directory('$projectPath/lib/features/$featureName/presentation/views');
 
     // Create the feature directory if it doesn't exist
     if (!await featureDirectory.exists()) {
@@ -25,10 +25,11 @@ Future<void> createView(String viewName, String featureName) async {
       return;
     }
 
-    // Define the content for the view file
+    // Define the content for the view file, including the necessary imports
     final viewContent = '''
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:artisan_learning/util/router/paths.dart'; // Auto-import for paths
 
 class ${viewName.capitalize()}View extends StatelessWidget {
   const ${viewName.capitalize()}View({super.key});
