@@ -1,4 +1,4 @@
-const gitHubWorklowFile = '''
+const gitHubWorkflowFile = '''
 name: Flutter_Tests
 
 on:
