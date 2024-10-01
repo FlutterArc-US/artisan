@@ -1,4 +1,4 @@
-const analysisOptionsFile = '''
+const analysisOptionsFileContent = '''
 include: package:flutter_lints/flutter.yaml
 
 analyzer:
