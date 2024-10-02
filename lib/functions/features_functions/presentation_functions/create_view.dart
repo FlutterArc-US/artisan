@@ -54,7 +54,7 @@ Future<void> createView(String viewName, String featureName) async {
     }
 
     // Define the path for the new view file
-    final viewFilePath = '${featureDirectory.path}/${viewName}_view.dart';
+    final viewFilePath = '${featureDirectory.path}/${viewName.toSnakeCase()}_view.dart';
 
     // Check if the view file already exists
     if (await File(viewFilePath).exists()) {
