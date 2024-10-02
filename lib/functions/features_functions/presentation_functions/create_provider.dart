@@ -35,6 +35,7 @@ part '${providerName.toSnakeCase()}.g.dart';
     await File(providerFilePath).writeAsString(providerContent);
     'Provider file created successfully: ${providerFilePath.toSnakeCase()}'
         .printBoldGreen();
+    'Now please run build runner command to resolve errors'.printBoldPurple();
   } catch (e) {
     switch (e.runtimeType) {
       case FileSystemException:
