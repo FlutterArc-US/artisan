@@ -4,12 +4,12 @@ import 'package:artisan/extensions/color_print_extension.dart';
 import 'package:artisan/extensions/naming_conventions_extension.dart';
 import 'package:artisan/functions/features_functions/create_feature.dart';
 
-Future<void> createWidget(String providerName, String featureName) async {
+Future<void> createProvider(String providerName, String featureName) async {
   try {
     final projectPath = Directory.current.path;
 
     final featureDirectory = Directory(
-        '$projectPath/lib/features/$featureName/presentation/widgets');
+        '$projectPath/lib/features/$featureName/providers');
 
     if (!await featureDirectory.exists()) {
       createFeature(featureName);
@@ -17,7 +17,7 @@ Future<void> createWidget(String providerName, String featureName) async {
     }
 
     final providerFilePath =
-        '${featureDirectory.path}/${providerName.toSnakeCase()}_widget.dart';
+        '${featureDirectory.path}/${providerName.toSnakeCase()}_provider.dart';
 
     if (await File(providerFilePath).exists()) {
       'Error: Provider File already exists: $providerFilePath'.printBoldRed();

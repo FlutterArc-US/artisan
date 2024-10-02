@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:artisan/functions/add_github_workflow.dart';
 import 'package:artisan/functions/features_functions/create_feature.dart';
+import 'package:artisan/functions/features_functions/presentation_functions/create_provider.dart';
 import 'package:artisan/functions/features_functions/presentation_functions/create_view.dart'; // Import the createView function
 import 'package:artisan/functions/features_functions/presentation_functions/create_widget.dart';
 import 'package:artisan/init/init.dart';
@@ -48,7 +49,7 @@ void main(List<String> args) {
 
     case 'create:provider':
       if (args.length > 2) {
-        createWidget(args[1], args[2]); // Pass the view name and feature name
+        createProvider(args[1], args[2]); // Pass the view name and feature name
       } else {
         log("Please provide a provider name and feature name.");
       }
