@@ -37,11 +37,20 @@ void main(List<String> args) {
         log("Please provide a view name and feature name.");
       }
       break;
+
     case 'create:widget':
       if (args.length > 2) {
         createWidget(args[1], args[2]); // Pass the view name and feature name
       } else {
         log("Please provide a widget name and feature name.");
+      }
+      break;
+
+    case 'create:provider':
+      if (args.length > 2) {
+        createWidget(args[1], args[2]); // Pass the view name and feature name
+      } else {
+        log("Please provide a provider name and feature name.");
       }
       break;
 
