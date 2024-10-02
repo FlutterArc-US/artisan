@@ -5,7 +5,7 @@ import 'package:artisan/functions/add_github_workflow.dart';
 import 'package:artisan/functions/add_infrastructure.dart';
 import 'package:artisan/functions/add_main.dart';
 import 'package:artisan/functions/add_pubspec_yaml.dart';
-import 'package:artisan/functions/add_router.dart';
+import 'package:artisan/functions/routes_functions/add_router.dart';
 import 'package:artisan/helpers/persistence_helper.dart';
 
 import '../functions/add_di.dart';

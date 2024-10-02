@@ -1,3 +1,4 @@
+import 'package:artisan/extensions/naming_conventions_extension.dart';
 import 'package:artisan/functions/name_cases/conver_to_camel_case.dart';
 import 'package:artisan/functions/name_cases/convert_to_pascal_case.dart';
 import 'package:artisan/make/make.dart';
@@ -24,7 +25,7 @@ class ${className}UsecaseOutput extends Output {
 
 @lazySingleton
 class ${className}Usecase extends Usecase<${className}UsecaseInput, ${className}UsecaseOutput> {
-  final ${convertToPascalCase(featureName)}Repository _${convertToCamelCase(featureName)}Repository;
+  final ${featureName.toPascalCase}Repository _${convertToCamelCase(featureName)}Repository;
 
   ${className}Usecase({required ${convertToPascalCase(featureName)}Repository ${convertToCamelCase(featureName)}Repository})
       : _${convertToCamelCase(featureName)}Repository = ${convertToCamelCase(featureName)}Repository;
