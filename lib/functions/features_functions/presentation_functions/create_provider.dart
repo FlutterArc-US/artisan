@@ -9,7 +9,7 @@ Future<void> createProvider(String providerName, String featureName) async {
     final projectPath = Directory.current.path;
 
     final featureDirectory = Directory(
-        '$projectPath/lib/features/$featureName/providers');
+        '$projectPath/lib/features/$featureName/presentation/providers');
 
     if (!await featureDirectory.exists()) {
       createFeature(featureName);
