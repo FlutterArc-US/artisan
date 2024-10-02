@@ -16,7 +16,8 @@ Future<void> createWidget(String widgetName, String featureName) async {
       'Feature not found, creating feature: $featureName'.printBoldOrange();
     }
 
-    final widgetFilePath = '${featureDirectory.path}/${widgetName}_widget.dart';
+    final widgetFilePath =
+        '${featureDirectory.path}/${widgetName.toSnakeCase()}_widget.dart';
 
     if (await File(widgetFilePath).exists()) {
       'Error: Widget File already exists: $widgetFilePath'.printBoldRed();
@@ -41,7 +42,8 @@ class ${widgetName.toPascalCase()}Widget extends StatelessWidget {
 ''';
 
     await File(widgetFilePath).writeAsString(widgetContent);
-    'Widget file created successfully: $widgetFilePath'.printBoldGreen();
+    'Widget file created successfully: ${widgetFilePath.toSnakeCase()}'
+        .printBoldGreen();
   } catch (e) {
     switch (e.runtimeType) {
       case FileSystemException:
