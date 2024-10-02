@@ -73,11 +73,13 @@ class ${viewName.toPascalCase()}View extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 1.sw,
-      height: 1.sh,
-      color: Colors.indigoAccent,
-      child: const Placeholder(),
+    return Scaffold(
+      body: Container(
+        width: 1.sw,
+        height: 1.sh,
+        color: Colors.indigoAccent,
+        child: const Placeholder(),
+      ),
     );
   }
 }

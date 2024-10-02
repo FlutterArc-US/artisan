@@ -1,11 +1,14 @@
 extension StringCaseConversion on String {
-  // Convert to Camel Case
+  // Helper function to split input by both underscores and capital letters
+  List<String> _splitIntoWords() {
+    final regExp = RegExp(r'(_)|(?<=[a-z])(?=[A-Z])|(?<=[A-Z])(?=[A-Z][a-z])');
+    return this.split(regExp).where((word) => word.isNotEmpty).toList();
+  }
+
+  // Convert to Camel Case: helloWorld
   String toCamelCase() {
-    return this
-        .trim()
-        .split(' ')
-        .map((word) => word.toLowerCase())
-        .toList()
+    final words = _splitIntoWords().map((word) => word.toLowerCase()).toList();
+    return words
         .asMap()
         .map((index, word) =>
             MapEntry(index, index == 0 ? word : word.capitalizeFirst()))
@@ -13,14 +16,14 @@ extension StringCaseConversion on String {
         .join();
   }
 
-  // Convert to Pascal Case
+  // Convert to Pascal Case: HelloWorld
   String toPascalCase() {
-    return this.trim().split(' ').map((word) => word.capitalizeFirst()).join();
+    return _splitIntoWords().map((word) => word.capitalizeFirst()).join();
   }
 
-  // Convert to Snake Case
+  // Convert to Snake Case: hello_world
   String toSnakeCase() {
-    return this.trim().split(' ').map((word) => word.toLowerCase()).join('_');
+    return _splitIntoWords().map((word) => word.toLowerCase()).join('_');
   }
 
   // Convert to Kebab Case
@@ -83,7 +86,7 @@ extension StringCaseConversion on String {
   // Helper method to capitalize the first letter of a string
   String capitalizeFirst() {
     if (this.isEmpty) return '';
-    return this[0].toUpperCase() + this.substring(1);
+    return this[0].toUpperCase() + this.substring(1).toLowerCase();
   }
 }
 
