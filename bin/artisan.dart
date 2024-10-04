@@ -35,42 +35,6 @@ void main(List<String> args) {
       createGitHubWorkflow();
       break;
 
-    /// [Create Page View]
-    case 'create:view':
-      if (args.length > 2) {
-        final viewName = args[1];
-        final featureName = args[2];
-
-        // Check for specific commands and execute appropriate function
-        if (args.contains('--stful')) {
-          createStatefulView(viewName, featureName); // Creates Stateful Widget
-          'Stateful view created successfully for $viewName.'.printBoldGreen();
-        } else if (args.contains('--stless')) {
-          createStatelessView(
-              viewName, featureName); // Creates Stateless Widget
-          'Stateless view created successfully for $viewName.'.printBoldGreen();
-        } else if (args.contains('--cstful')) {
-          createConsumerStatefulView(
-              viewName, featureName); // Creates Consumer Stateful Widget
-          'Consumer stateful view created successfully for $viewName.'
-              .printBoldGreen();
-        } else if (args.contains('--cstless')) {
-          createConsumerStatelessView(
-              viewName, featureName); // Creates Consumer Stateless Widget
-          'Consumer stateless view created successfully for $viewName.'
-              .printBoldGreen();
-        } else {
-          // Default to Stateless Widget if no option is provided
-          createStatelessView(viewName, featureName);
-          'Stateless view created successfully for $viewName (default).'
-              .printBoldGreen();
-        }
-      } else {
-        // Show error message if insufficient arguments are provided
-        'Error: Please provide both a view name and feature name.'.printRed();
-      }
-      break;
-
     case 'create:widget':
       if (args.length > 2) {
         createWidget(args[1], args[2]); // Pass the view name and feature name
@@ -84,6 +48,83 @@ void main(List<String> args) {
         createProvider(args[1], args[2]); // Pass the view name and feature name
       } else {
         log("Please provide a provider name and feature name.");
+      }
+      break;
+
+    /// [Create Page View]
+    case 'create:view':
+      if (args.length > 2) {
+        final viewName = args[1];
+        final featureName = args[2];
+        String viewType = 'default'; // Default to stateless view
+
+        // Check for optional parameters for the type of view to create
+        if (args.contains('--stful')) {
+          viewType = 'stateful';
+        } else if (args.contains('--stless')) {
+          viewType = 'stateless';
+        } else if (args.contains('--cstful')) {
+          viewType = 'consumer_stateful';
+        } else if (args.contains('--cstless')) {
+          viewType = 'consumer_stateless';
+        } else {
+          // Check if any other argument starting with `--` is provided (i.e., an invalid flag)
+          bool hasInvalidFlag = args.any((arg) =>
+              arg.startsWith('--') &&
+              !['--stful', '--stless', '--cstful', '--cstless'].contains(arg));
+
+          if (hasInvalidFlag) {
+            // Invalid flag detected, print error message
+            'Invalid command. Please use one of the following commands:'
+                .printRed();
+            '''
+  dart run artisan create:view MyView MyFeature          (creates default stateless view)
+  dart run artisan create:view MyView MyFeature --stless (creates stateless view)
+  dart run artisan create:view MyView MyFeature --stful  (creates stateful view)
+  dart run artisan create:view MyView MyFeature --cstless (creates consumer stateless view)
+  dart run artisan create:view MyView MyFeature --cstful  (creates consumer stateful view)
+  '''
+                .printBoldGreen();
+            return;
+          }
+        }
+
+        // Switch case to handle different view types
+        switch (viewType) {
+          case 'stateful':
+            createStatefulView(viewName, featureName);
+            'Stateful view created successfully for $viewName.'
+                .printBoldGreen();
+            break;
+
+          case 'stateless':
+            createStatelessView(viewName, featureName);
+            'Stateless view created successfully for $viewName.'
+                .printBoldGreen();
+            break;
+
+          case 'consumer_stateful':
+            createConsumerStatefulView(viewName, featureName);
+            'Consumer stateful view created successfully for $viewName.'
+                .printBoldGreen();
+            break;
+
+          case 'consumer_stateless':
+            createConsumerStatelessView(viewName, featureName);
+            'Consumer stateless view created successfully for $viewName.'
+                .printBoldGreen();
+            break;
+
+          default:
+            createStatelessView(
+                viewName, featureName); // Default to stateless view
+            'Stateless view created successfully for $viewName (default).'
+                .printBoldGreen();
+            break;
+        }
+      } else {
+        // Show error message if insufficient arguments are provided
+        'Error: Please provide both a view name and feature name.'.printRed();
       }
       break;
 
