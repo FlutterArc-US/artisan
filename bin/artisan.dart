@@ -3,8 +3,8 @@ import 'dart:developer';
 import 'package:artisan/functions/add_github_workflow.dart';
 import 'package:artisan/functions/features_functions/create_feature.dart';
 import 'package:artisan/functions/features_functions/presentation_functions/create_provider.dart';
-import 'package:artisan/functions/features_functions/presentation_functions/create_stfl_view.dart';
-import 'package:artisan/functions/features_functions/presentation_functions/create_stls_view.dart'; // Import the createView function
+import 'package:artisan/functions/features_functions/presentation_functions/create_stful_view.dart';
+import 'package:artisan/functions/features_functions/presentation_functions/create_stless_view.dart'; // Import the createView function
 import 'package:artisan/functions/features_functions/presentation_functions/create_widget.dart';
 import 'package:artisan/init/init.dart';
 
@@ -70,3 +70,5 @@ void main(List<String> args) {
       log("Invalid Command: $command");
   }
 }
+
+

@@ -13,12 +13,12 @@ Future<void> createStatelessView(String viewName, String featureName) async {
     final featureDirectory = Directory('$projectPath/lib/features/$featureName/presentation/views');
     if (!await featureDirectory.exists()) {
       createFeature(featureName);
-      print('Feature not found, creating feature: $featureName');
+      'Feature not found, creating feature: $featureName'.printBoldOrange();
     }
 
     final viewFilePath = '${featureDirectory.path}/${viewName.toSnakeCase()}_view.dart';
     if (await File(viewFilePath).exists()) {
-      print('Error: View file already exists: $viewFilePath');
+      'Error: View file already exists: $viewFilePath'.printBoldRed();
       return;
     }
 
@@ -49,6 +49,6 @@ class ${viewName.toPascalCase()}View extends StatelessWidget {
     await updateRouterPaths(featureName, viewName);
     await updateRouterRoutes(featureName, viewName);
   } catch (e) {
-    print('An error occurred: $e');
+    'An error occurred: $e'.printBoldRed();
   }
 }
