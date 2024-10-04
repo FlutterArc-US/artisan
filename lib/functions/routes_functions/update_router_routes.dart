@@ -20,7 +20,7 @@ Future<bool> updateRouterRoutes(String featureName, String viewName) async {
 
   // Define the import statement for the new view file
   final viewFileImport =
-      "import 'package:${Directory.current.path.split(Platform.pathSeparator).last}/features/$featureName/presentation/views/${viewName.toLowerCase()}_view.dart';";
+      "import 'package:${Directory.current.path.split(Platform.pathSeparator).last}/features/$featureName/presentation/views/${viewName.toSnakeCase()}_view.dart';";
 
   // Check if the import statement already exists
   if (!routerContent.contains(viewFileImport)) {
