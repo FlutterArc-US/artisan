@@ -10,16 +10,18 @@ import 'package:artisan/functions/routes_functions/update_router_routes.dart';
 Future<void> createStatefulView(String viewName, String featureName) async {
   try {
     final projectPath = Directory.current.path;
-    final featureDirectory = Directory('$projectPath/lib/features/$featureName/presentation/views');
-    if (!await featureDirectory.exists()) {
-      createFeature(featureName);
-      'Feature not found, creating feature: $featureName'.printBoldOrange();
-    }
-
-    final viewFilePath = '${featureDirectory.path}/${viewName.toSnakeCase()}_view.dart';
+    final featureDirectory =
+        Directory('$projectPath/lib/features/$featureName/presentation/views');
+    final viewFilePath =
+        '${featureDirectory.path}/${viewName.toSnakeCase()}_view.dart';
     if (await File(viewFilePath).exists()) {
       'Error: View file already exists: $viewFilePath'.printBoldRed();
       return;
+    }
+
+    if (!await featureDirectory.exists()) {
+      createFeature(featureName);
+      'Feature not found, creating feature: $featureName'.printBoldOrange();
     }
 
     final viewContent = '''
