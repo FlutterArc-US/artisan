@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:artisan/functions/add_github_workflow.dart';
 import 'package:artisan/functions/features_functions/create_feature.dart';
 import 'package:artisan/functions/features_functions/presentation_functions/create_provider.dart';
-import 'package:artisan/functions/features_functions/presentation_functions/create_view.dart'; // Import the createView function
+import 'package:artisan/functions/features_functions/presentation_functions/create_stls_view.dart'; // Import the createView function
 import 'package:artisan/functions/features_functions/presentation_functions/create_widget.dart';
 import 'package:artisan/init/init.dart';
 
@@ -31,9 +31,19 @@ void main(List<String> args) {
       createGitHubWorkflow();
       break;
 
+    ///[Create Page View]
     case 'create:view':
       if (args.length > 2) {
-        createView(args[1], args[2]); // Pass the view name and feature name
+        final viewName = args[1];
+        final featureName = args[2];
+
+        // Check for optional parameter for Stateful/Stateless
+        if (args.contains('--stful')) {
+          createStatefulView(viewName, featureName); // Create Stateful Widget
+        } else {
+          // Default case for Stateless widget or if --stls is passed
+          createStatelessView(viewName, featureName); // Create Stateless Widget
+        }
       } else {
         log("Please provide a view name and feature name.");
       }
