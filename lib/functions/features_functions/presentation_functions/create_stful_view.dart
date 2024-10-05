@@ -17,17 +17,11 @@ Future<void> createStatefulView(String viewName, String featureName) async {
 
     // 1. Check if the view file already exists
     if (await File(viewFilePath).exists()) {
-      'Error: View file already exists: $viewFilePath'.printBoldRed();
+      'Error: View file already exists:'.printBoldRed();
+      viewFilePath.printClickablePath();
       return; // Abort the operation if the view file exists
     }
 
-    // 2. Check if the feature directory exists
-    if (await File(viewFilePath).exists()) {
-      'Error: View file already exists:'.printBoldRed();
-      viewFilePath.printClickablePath();
-      print('file://$viewFilePath');
-      return;
-    }
 
     if (!await featureDirectory.exists()) {
       createFeature(featureName);
@@ -46,7 +40,6 @@ Future<void> createStatefulView(String viewName, String featureName) async {
     final viewContent = '''
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:artisan_learning/util/router/paths.dart'; // Auto-import for paths
 
 class ${viewName.toPascalCase()}View extends StatefulWidget {
   const ${viewName.toPascalCase()}View({super.key});
