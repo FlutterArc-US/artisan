@@ -25,6 +25,7 @@ Future<void> createStatefulView(String viewName, String featureName) async {
     if (await File(viewFilePath).exists()) {
       'Error: View file already exists:'.printBoldRed();
       viewFilePath.printClickablePath();
+      print('file://$viewFilePath');
       return;
     }
 
