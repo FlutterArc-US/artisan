@@ -23,7 +23,8 @@ Future<void> createStatefulView(String viewName, String featureName) async {
 
     // 2. Check if the feature directory exists
     if (await File(viewFilePath).exists()) {
-      'Error: View file already exists: $viewFilePath'.printClickableRed();
+      'Error: View file already exists:'.printBoldRed();
+      viewFilePath.printClickablePath();
       return;
     }
 
@@ -70,7 +71,8 @@ class _${viewName.toPascalCase()}ViewState extends State<${viewName.toPascalCase
 
     // 5. Create the view file
     await File(viewFilePath).writeAsString(viewContent);
-    'Stateful View file created successfully: $viewFilePath'.printClickableGreen();
+    'Stateful View file created successfully:'.printBoldGreen();
+    viewFilePath.printClickablePath();
 
     // 6. Update router paths and routes after the view file is created successfully
     await updateRouterPaths(featureName, viewName);
