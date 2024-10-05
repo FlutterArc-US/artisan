@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:artisan/extensions/clickable_string_console_path.dart';
 import 'package:artisan/extensions/color_print_extension.dart';
 import 'package:artisan/extensions/naming_conventions_extension.dart';
 import 'package:artisan/functions/features_functions/create_feature.dart';
@@ -69,7 +70,7 @@ class _${viewName.toPascalCase()}ViewState extends State<${viewName.toPascalCase
 
     // 5. Create the view file
     await File(viewFilePath).writeAsString(viewContent);
-    'Stateful View file created successfully: $viewFilePath'.printBoldGreen();
+    'Stateful View file created successfully: $viewFilePath'.printClickableGreen();
 
     // 6. Update router paths and routes after the view file is created successfully
     await updateRouterPaths(featureName, viewName);
