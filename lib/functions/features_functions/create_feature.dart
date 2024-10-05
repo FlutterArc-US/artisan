@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:artisan/extensions/clickable_string_console_path.dart';
 import 'package:artisan/extensions/color_print_extension.dart';
 import 'package:artisan/functions/create_data_layer.dart';
 import 'package:artisan/functions/create_domain_layer.dart';
@@ -14,12 +15,14 @@ void createFeature(String featureName) {
   if (!featureDir.existsSync()) {
     featureDir.createSync(recursive: true);
     'Feature folder created at lib/features/$featureName'.printGreen();
+    'lib/features/$featureName'.printClickablePath();
 
     createDataLayer(featureName);
     createDomainLayer(featureName);
     createPresentationLayer(featureName);
 
     'Feature $featureName created successfully.'.printGreen();
+
   } else {
     'Feature folder already exists.'.printRed();
   }

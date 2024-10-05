@@ -22,7 +22,6 @@ Future<void> createStatefulView(String viewName, String featureName) async {
       return; // Abort the operation if the view file exists
     }
 
-
     if (!await featureDirectory.exists()) {
       createFeature(featureName);
       'Feature not found, creating feature: $featureName'.printBoldOrange();

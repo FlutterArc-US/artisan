@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:artisan/extensions/clickable_string_console_path.dart';
 import 'package:artisan/extensions/color_print_extension.dart';
 import 'package:artisan/extensions/naming_conventions_extension.dart';
 import 'package:artisan/functions/features_functions/create_feature.dart';
@@ -20,7 +21,8 @@ Future<void> createProvider(String providerName, String featureName) async {
         '${featureDirectory.path}/${providerName.toSnakeCase()}_provider.dart';
 
     if (await File(providerFilePath).exists()) {
-      'Error: Provider File already exists: $providerFilePath'.printBoldRed();
+      'Error: Provider File already exists: '.printBoldRed();
+      providerFilePath.printClickablePath();
       return;
     }
 
@@ -33,13 +35,13 @@ part '${providerName.toSnakeCase()}.g.dart';
 ''';
 
     await File(providerFilePath).writeAsString(providerContent);
-    'Provider file created successfully: ${providerFilePath.toSnakeCase()}'
-        .printBoldGreen();
+    'Provider file created successfully:'.printBoldGreen();
+    providerFilePath.toSnakeCase().printClickablePath();
     'Now please run build runner command to resolve errors'.printBoldPurple();
   } catch (e) {
     switch (e.runtimeType) {
       case FileSystemException:
-        'Error: Unable to create or write to the view file.'.printRed();
+        'Error: Unable to create or write to the provider file.'.printRed();
         break;
       default:
         'An unknown error occurred: $e'.printBoldRed();

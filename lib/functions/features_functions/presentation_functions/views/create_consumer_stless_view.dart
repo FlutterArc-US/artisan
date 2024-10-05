@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:artisan/extensions/clickable_string_console_path.dart';
 import 'package:artisan/extensions/color_print_extension.dart';
 import 'package:artisan/extensions/naming_conventions_extension.dart';
 import 'package:artisan/functions/features_functions/create_feature.dart';
@@ -21,7 +22,8 @@ Future<void> createConsumerStatelessView(
     final viewFilePath =
         '${featureDirectory.path}/${viewName.toSnakeCase()}_view.dart';
     if (await File(viewFilePath).exists()) {
-      'Error: View file already exists: $viewFilePath'.printBoldRed();
+      'Error: View file already exists:'.printBoldRed();
+      viewFilePath.printClickablePath();
       return;
     }
 
@@ -48,7 +50,8 @@ class ${viewName.toPascalCase()}View extends ConsumerWidget {
 ''';
 
     await File(viewFilePath).writeAsString(viewContent);
-    'Stateless View file created successfully: $viewFilePath'.printBoldGreen();
+    'Stateless View file created successfully: '.printBoldGreen();
+    viewFilePath.printClickablePath();
     await updateRouterPaths(featureName, viewName);
     await updateRouterRoutes(featureName, viewName);
   } catch (e) {

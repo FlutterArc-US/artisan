@@ -3,12 +3,12 @@ import 'dart:developer';
 import 'package:artisan/extensions/color_print_extension.dart';
 import 'package:artisan/functions/add_github_workflow.dart';
 import 'package:artisan/functions/features_functions/create_feature.dart';
-import 'package:artisan/functions/features_functions/presentation_functions/create_consumer_stful_view.dart';
+import 'package:artisan/functions/features_functions/presentation_functions/views/create_consumer_stful_view.dart';
 import 'package:artisan/functions/features_functions/presentation_functions/create_consumer_stless_view.dart';
-import 'package:artisan/functions/features_functions/presentation_functions/create_provider.dart';
-import 'package:artisan/functions/features_functions/presentation_functions/create_stful_view.dart';
+import 'package:artisan/functions/features_functions/presentation_functions/providers/create_provider.dart';
+import 'package:artisan/functions/features_functions/presentation_functions/views/create_stful_view.dart';
 import 'package:artisan/functions/features_functions/presentation_functions/create_stless_view.dart'; // Import the createView function
-import 'package:artisan/functions/features_functions/presentation_functions/create_widget.dart';
+import 'package:artisan/functions/features_functions/presentation_functions/widgets/create_widget.dart';
 import 'package:artisan/init/init.dart';
 
 void main(List<String> args) {

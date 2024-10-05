@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:artisan/extensions/clickable_string_console_path.dart';
 import 'package:artisan/extensions/color_print_extension.dart';
 import 'package:artisan/extensions/naming_conventions_extension.dart';
 import 'package:artisan/functions/features_functions/create_feature.dart';
@@ -7,8 +8,7 @@ import 'package:artisan/functions/routes_functions/update_router_paths.dart';
 import 'package:artisan/functions/routes_functions/update_router_routes.dart';
 
 /// Function to create a new stateless view file
-Future<void> createConsumerStatefulView(
-    String viewName, String featureName) async {
+Future<void> createStatelessView(String viewName, String featureName) async {
   try {
     final projectPath = Directory.current.path;
     final featureDirectory =
@@ -21,23 +21,19 @@ Future<void> createConsumerStatefulView(
     final viewFilePath =
         '${featureDirectory.path}/${viewName.toSnakeCase()}_view.dart';
     if (await File(viewFilePath).exists()) {
-      'Error: View file already exists: $viewFilePath'.printBoldRed();
+      'Error: View file already exists: '.printBoldRed();
+      viewFilePath.printClickablePath();
       return;
     }
 
     final viewContent = '''
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:artisan_learning/util/router/paths.dart'; // Auto-import for paths
 
-class ${viewName.toPascalCase()}View extends ConsumerStatefulWidget {
+class ${viewName.toPascalCase()}View extends StatelessWidget {
   const ${viewName.toPascalCase()}View({super.key});
 
-  @override
-  ConsumerState createState() => _${viewName.toPascalCase()}ViewState();
-}
-
-class _${viewName.toPascalCase()}ViewState extends ConsumerState<${viewName.toPascalCase()}View> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,7 +49,8 @@ class _${viewName.toPascalCase()}ViewState extends ConsumerState<${viewName.toPa
 ''';
 
     await File(viewFilePath).writeAsString(viewContent);
-    'Stateless View file created successfully: $viewFilePath'.printBoldGreen();
+    'Stateless View file created successfully: '.printBoldGreen();
+    viewFilePath.printClickablePath();
     await updateRouterPaths(featureName, viewName);
     await updateRouterRoutes(featureName, viewName);
   } catch (e) {

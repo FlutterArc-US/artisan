@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:artisan/extensions/clickable_string_console_path.dart';
 import 'package:artisan/extensions/color_print_extension.dart';
 import 'package:artisan/extensions/naming_conventions_extension.dart';
 import 'package:artisan/functions/features_functions/create_feature.dart';
@@ -20,7 +21,8 @@ Future<void> createWidget(String widgetName, String featureName) async {
         '${featureDirectory.path}/${widgetName.toSnakeCase()}_widget.dart';
 
     if (await File(widgetFilePath).exists()) {
-      'Error: Widget File already exists: $widgetFilePath'.printBoldRed();
+      'Error: Widget File already exists: '.printBoldRed();
+      widgetFilePath.printClickablePath();
       return;
     }
 
@@ -42,8 +44,8 @@ class ${widgetName.toPascalCase()}Widget extends StatelessWidget {
 ''';
 
     await File(widgetFilePath).writeAsString(widgetContent);
-    'Widget file created successfully: ${widgetFilePath.toSnakeCase()}'
-        .printBoldGreen();
+    'Widget file created successfully: '.printBoldGreen();
+    widgetFilePath.toSnakeCase().printClickablePath();
   } catch (e) {
     switch (e.runtimeType) {
       case FileSystemException:
