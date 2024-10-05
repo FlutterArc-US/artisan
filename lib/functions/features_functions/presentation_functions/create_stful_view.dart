@@ -21,14 +21,14 @@ Future<void> createStatefulView(String viewName, String featureName) async {
     }
 
     // 2. Check if the feature directory exists
+    if (await File(viewFilePath).exists()) {
+      'Error: View file already exists: $viewFilePath'.printBoldRed();
+      return;
+    }
+
     if (!await featureDirectory.exists()) {
-      'Feature directory not found, creating feature: $featureName'
-          .printBoldOrange();
-      // Abort if creating the feature fails
-      if (!await createFeature(featureName)) {
-        'Error: Failed to create feature: $featureName'.printBoldRed();
-        return;
-      }
+      createFeature(featureName);
+      'Feature not found, creating feature: $featureName'.printBoldOrange();
     }
 
     // 3. Check if the route already exists before creating the view
