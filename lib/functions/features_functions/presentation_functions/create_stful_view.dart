@@ -23,7 +23,7 @@ Future<void> createStatefulView(String viewName, String featureName) async {
 
     // 2. Check if the feature directory exists
     if (await File(viewFilePath).exists()) {
-      'Error: View file already exists: $viewFilePath'.printBoldRed();
+      'Error: View file already exists: $viewFilePath'.printClickableRed();
       return;
     }
 
