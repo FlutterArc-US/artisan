@@ -10,12 +10,13 @@ import 'package:artisan/functions/create_presentation_layer.dart';
 /// Function to create a feature with the specified structure.
 void createFeature(String featureName) {
   "Creating feature: $featureName".printGreen();
+  final projectPath = Directory.current.path;
 
   final featureDir = Directory('lib/features/$featureName');
   if (!featureDir.existsSync()) {
     featureDir.createSync(recursive: true);
     'Feature folder created at lib/features/$featureName'.printGreen();
-    'lib/features/$featureName'.printClickablePath();
+    '$projectPath/lib/features/$featureName'.printClickablePath();
 
     createDataLayer(featureName);
     createDomainLayer(featureName);
