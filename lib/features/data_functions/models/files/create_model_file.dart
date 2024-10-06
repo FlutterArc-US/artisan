@@ -1,11 +1,10 @@
-import 'dart:io';
-
 import 'package:artisan/extensions/naming_conventions_extension.dart';
+import 'package:artisan/functions/get_app_package_name.dart';
 
 String createModelFile(String modelName, String featureName) {
   final modelContent = '''
 import 'package:freezed_annotation/freezed_annotation.dart';
-import '/features/${featureName.toSnakeCase()}/domain/models/${modelName.toSnakeCase()}_entity.dart';
+import '$getPackageName()/lib/features/${featureName.toSnakeCase()}/domain/entities/${modelName.toSnakeCase()}_entity.dart';
 
 part 'rest_${modelName.toSnakeCase()}_model.freezed.dart';
 part 'rest_${modelName.toSnakeCase()}_model.g.dart';
