@@ -29,9 +29,9 @@ Future<void> createConsumerStatefulView(
     }
 
     var contentFile = consumerStfulViewFile(viewName, featureName);
-
     var file = File(viewFilePath);
     file.writeAsStringSync(contentFile);
+
     'Stateless View file created successfully: '.printBoldGreen();
     viewFilePath.printClickablePath();
     await updateRouterPaths(featureName, viewName);

@@ -4,6 +4,7 @@ import 'package:artisan/extensions/clickable_string_console_path.dart';
 import 'package:artisan/extensions/color_print_extension.dart';
 import 'package:artisan/extensions/naming_conventions_extension.dart';
 import 'package:artisan/functions/features_functions/create_feature.dart';
+import 'package:artisan/functions/features_functions/presentation_functions/widgets/file/create_widget_file.dart';
 
 Future<void> createWidget(String widgetName, String featureName) async {
   try {
@@ -26,24 +27,11 @@ Future<void> createWidget(String widgetName, String featureName) async {
       return;
     }
 
-    final widgetContent = '''
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-class ${widgetName.toPascalCase()}Widget extends StatelessWidget {
-  const ${widgetName.toPascalCase()}Widget({super.key});
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 1.sw,
-      height: 1.sh,
-      color: Colors.indigoAccent,
-      child: const Placeholder(),
-    );
-  }
-}
-''';
+    var contentFile = createWidgetFile(widgetName);
 
-    await File(widgetFilePath).writeAsString(widgetContent);
+    var file = File(widgetFilePath);
+    file.writeAsStringSync(contentFile);
+
     'Widget file created successfully: '.printBoldGreen();
     widgetFilePath.toSnakeCase().printClickablePath();
   } catch (e) {

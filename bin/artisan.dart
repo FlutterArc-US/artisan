@@ -4,15 +4,15 @@ import 'package:artisan/extensions/color_print_extension.dart';
 import 'package:artisan/extensions/naming_conventions_extension.dart';
 import 'package:artisan/functions/add_github_workflow.dart';
 import 'package:artisan/functions/features_functions/create_feature.dart';
-import 'package:artisan/functions/features_functions/presentation_functions/providers/create_future_notifier_provider.dart';
-import 'package:artisan/functions/features_functions/presentation_functions/providers/create_future_variable_provider.dart';
-import 'package:artisan/functions/features_functions/presentation_functions/providers/create_notifier_provider.dart';
+import 'package:artisan/functions/features_functions/presentation_functions/providers/functions/create_future_notifier_provider_function.dart';
+import 'package:artisan/functions/features_functions/presentation_functions/providers/functions/create_future_variable_provider_function.dart';
+import 'package:artisan/functions/features_functions/presentation_functions/providers/functions/create_notifier_provider_function.dart';
+import 'package:artisan/functions/features_functions/presentation_functions/providers/functions/create_variable_provider_function.dart';
 import 'package:artisan/functions/features_functions/presentation_functions/views/functions/create_consumer_stful_view_function.dart';
-import 'package:artisan/functions/features_functions/presentation_functions/providers/create_variable_provider.dart';
 import 'package:artisan/functions/features_functions/presentation_functions/views/functions/create_consumer_stless_view_function.dart';
 import 'package:artisan/functions/features_functions/presentation_functions/views/functions/create_stful_view_function.dart';
 import 'package:artisan/functions/features_functions/presentation_functions/views/functions/create_stless_view_function.dart';
-import 'package:artisan/functions/features_functions/presentation_functions/widgets/create_widget.dart';
+import 'package:artisan/functions/features_functions/presentation_functions/widgets/function/create_widget_function.dart';
 import 'package:artisan/init/init.dart';
 
 void main(List<String> args) {

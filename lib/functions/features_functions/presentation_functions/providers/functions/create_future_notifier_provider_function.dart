@@ -4,8 +4,9 @@ import 'package:artisan/extensions/clickable_string_console_path.dart';
 import 'package:artisan/extensions/color_print_extension.dart';
 import 'package:artisan/extensions/naming_conventions_extension.dart';
 import 'package:artisan/functions/features_functions/create_feature.dart';
+import 'package:artisan/functions/features_functions/presentation_functions/providers/files/create_future_notifier_provider_file.dart';
 
-Future<void> createVariableProvider(
+Future<void> createFutureNotifierProvider(
     String providerName, String featureName) async {
   try {
     final projectPath = Directory.current.path;
@@ -27,18 +28,11 @@ Future<void> createVariableProvider(
       return;
     }
 
-    final providerContent = '''
-import 'package:riverpod_annotation/riverpod_annotation.dart';
+    var contentFile =
+        createFutureNotifierProviderFile(providerName, featureName);
+    var file = File(providerFilePath);
+    file.writeAsString(contentFile);
 
-part '${providerName.toSnakeCase()}_provider.g.dart';
-
-@riverpod
-String ${providerName.toCamelCase()}(${providerName.toPascalCase()}Ref ref) {
-  return 'Hello World';
-}
-''';
-
-    await File(providerFilePath).writeAsString(providerContent);
     'Provider file created successfully:'.printBoldGreen();
     providerFilePath.toSnakeCase().printClickablePath();
     'Now please run build runner command to resolve errors'.printBoldPurple();
