@@ -29,7 +29,6 @@ Future<void> createStatelessView(String viewName, String featureName) async {
     final viewContent = '''
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:artisan_learning/util/router/paths.dart'; // Auto-import for paths
 
 class ${viewName.toPascalCase()}View extends StatelessWidget {
   const ${viewName.toPascalCase()}View({super.key});
