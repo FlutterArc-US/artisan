@@ -4,6 +4,7 @@ import 'package:artisan/extensions/clickable_string_console_path.dart';
 import 'package:artisan/extensions/color_print_extension.dart';
 import 'package:artisan/extensions/naming_conventions_extension.dart';
 import 'package:artisan/functions/features_functions/create_feature.dart';
+import 'package:artisan/functions/features_functions/presentation_functions/views/files/create_stless_view_file.dart';
 import 'package:artisan/functions/routes_functions/update_router_paths.dart';
 import 'package:artisan/functions/routes_functions/update_router_routes.dart';
 
@@ -26,28 +27,10 @@ Future<void> createStatelessView(String viewName, String featureName) async {
       return;
     }
 
-    final viewContent = '''
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+    var contentFile = statelessViewFile(viewName, featureName);
 
-class ${viewName.toPascalCase()}View extends StatelessWidget {
-  const ${viewName.toPascalCase()}View({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        width: 1.sw,
-        height: 1.sh,
-        color: Colors.indigoAccent,
-        child: const Placeholder(),
-      ),
-    );
-  }
-}
-''';
-
-    await File(viewFilePath).writeAsString(viewContent);
+    var file = File(viewFilePath);
+    file.writeAsStringSync(contentFile);
     'Stateless View file created successfully: '.printBoldGreen();
     viewFilePath.printClickablePath();
     await updateRouterPaths(featureName, viewName);

@@ -3,6 +3,7 @@ import 'package:artisan/extensions/clickable_string_console_path.dart';
 import 'package:artisan/extensions/color_print_extension.dart';
 import 'package:artisan/extensions/naming_conventions_extension.dart';
 import 'package:artisan/functions/features_functions/create_feature.dart';
+import 'package:artisan/functions/features_functions/presentation_functions/views/files/create_stful_view_file.dart';
 import 'package:artisan/functions/routes_functions/update_router_paths.dart';
 import 'package:artisan/functions/routes_functions/update_router_routes.dart';
 
@@ -33,33 +34,10 @@ Future<void> createStatefulView(String viewName, String featureName) async {
       return;
     }
 
-    final viewContent = '''
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+    var contentFile = statefulViewFile(viewName, featureName);
 
-class ${viewName.toPascalCase()}View extends StatefulWidget {
-  const ${viewName.toPascalCase()}View({super.key});
-
-  @override
-  State<${viewName.toPascalCase()}View> createState() => _${viewName.toPascalCase()}ViewState();
-}
-
-class _${viewName.toPascalCase()}ViewState extends State<${viewName.toPascalCase()}View> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        width: 1.sw,
-        height: 1.sh,
-        color: Colors.indigoAccent,
-        child: const Placeholder(),
-      ),
-    );
-  }
-}
-''';
-
-    await File(viewFilePath).writeAsString(viewContent);
+    var file = File(viewFilePath);
+    file.writeAsStringSync(contentFile);
     'Stateful View file created successfully:'.printBoldGreen();
     viewFilePath.printClickablePath();
 
