@@ -4,8 +4,10 @@ String createWidgetFile(String widgetName) {
   final widgetContent = '''
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 class ${widgetName.toPascalCase()}Widget extends StatelessWidget {
   const ${widgetName.toPascalCase()}Widget({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Container(
