@@ -30,7 +30,7 @@ Future<void> createVariableProvider(
     final providerContent = '''
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part '${providerName.toSnakeCase()}.g.dart';
+part '${providerName.toSnakeCase()}_provider.g.dart';
 
 @riverpod
 String ${providerName.toCamelCase()}(${providerName.toPascalCase()}Ref ref) {

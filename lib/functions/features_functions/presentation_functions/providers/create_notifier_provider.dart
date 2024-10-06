@@ -30,7 +30,7 @@ Future<void> createNotifierProvider(
     final providerContent = '''
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part '${providerName.toSnakeCase()}.g.dart';
+part '${providerName.toSnakeCase()}_provider.g.dart';
 
 @riverpod
 class ${providerName.toPascalCase()} extends _\$${providerName.toPascalCase()} {
