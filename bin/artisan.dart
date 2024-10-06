@@ -4,9 +4,11 @@ import 'package:artisan/extensions/color_print_extension.dart';
 import 'package:artisan/extensions/naming_conventions_extension.dart';
 import 'package:artisan/functions/add_github_workflow.dart';
 import 'package:artisan/functions/features_functions/create_feature.dart';
+import 'package:artisan/functions/features_functions/presentation_functions/providers/create_future_notifier_provider.dart';
+import 'package:artisan/functions/features_functions/presentation_functions/providers/create_future_variable_provider.dart';
 import 'package:artisan/functions/features_functions/presentation_functions/providers/create_notifier_provider.dart';
 import 'package:artisan/functions/features_functions/presentation_functions/views/create_consumer_stful_view.dart';
-import 'package:artisan/functions/features_functions/presentation_functions/providers/create_provider.dart';
+import 'package:artisan/functions/features_functions/presentation_functions/providers/create_variable_provider.dart';
 import 'package:artisan/functions/features_functions/presentation_functions/views/create_consumer_stless_view.dart';
 import 'package:artisan/functions/features_functions/presentation_functions/views/create_stful_view.dart';
 import 'package:artisan/functions/features_functions/presentation_functions/views/create_stless_view.dart';
@@ -83,9 +85,31 @@ void main(List<String> args) {
 
         switch (providerType) {
           case 'variableProvider':
-            createNotifierProvider(providerName, featureName);
-            'Provider ${providerName.toPascalCase()} creted successfully'
+            createVariableProvider(providerName, featureName);
+            'Variable Provider ${providerName.toPascalCase()} created successfully'
                 .printBoldGreen();
+            break;
+
+          case 'futureVariableProvider':
+            createFutureVariableProvider(providerName, featureName);
+            'Future Variable Provider ${providerName.toPascalCase()} created successfully'
+                .printBoldGreen();
+            break;
+          case 'notifierProvider':
+            createNotifierProvider(providerName, featureName);
+            'Notifier Provider ${providerName.toPascalCase()} created successfully'
+                .printBoldGreen();
+            break;
+          case 'futureNotifierProvider':
+            createFutureNotifierProvider(providerName, featureName);
+            'Future Notifier Provider ${providerName.toPascalCase()} created successfully'
+                .printBoldGreen();
+            break;
+          default:
+            createVariableProvider(providerName, featureName);
+            'Variable Provider ${providerName.toPascalCase()} created successfully'
+                .printBoldGreen();
+            break;
         }
       } else {
         'Please provide a valid provider name and feature name.'.printBoldRed();
