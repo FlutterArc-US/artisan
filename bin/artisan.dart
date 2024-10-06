@@ -4,6 +4,8 @@ import 'package:artisan/extensions/color_print_extension.dart';
 import 'package:artisan/extensions/naming_conventions_extension.dart';
 import 'package:artisan/functions/add_github_workflow.dart';
 import 'package:artisan/functions/features_functions/create_feature.dart';
+import 'package:artisan/functions/features_functions/data_functions/models/functions/create_model_function.dart';
+import 'package:artisan/functions/features_functions/domain_functions/entities/functions/create_entity_function.dart';
 import 'package:artisan/functions/features_functions/presentation_functions/providers/functions/create_future_notifier_provider_function.dart';
 import 'package:artisan/functions/features_functions/presentation_functions/providers/functions/create_future_variable_provider_function.dart';
 import 'package:artisan/functions/features_functions/presentation_functions/providers/functions/create_notifier_provider_function.dart';
@@ -41,9 +43,18 @@ void main(List<String> args) {
 
     case 'create:widget':
       if (args.length > 2) {
-        createWidget(args[1], args[2]); // Pass the view name and feature name
+        createWidget(args[1], args[2]);
       } else {
-        log("Please provide a widget name and feature name.");
+        "Please provide a widget name and feature name.".printBoldRed();
+      }
+      break;
+
+    case 'create:model':
+      if (args.length > 2) {
+        createModel(args[1], args[2]);
+        createEntity(args[1], args[2]);
+      } else {
+        "Please provide a valid model name and feature name.".printBoldRed();
       }
       break;
 
