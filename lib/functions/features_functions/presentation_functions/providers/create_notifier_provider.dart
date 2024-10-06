@@ -33,7 +33,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part '${providerName.toSnakeCase()}.g.dart';
 
 @riverpod
-class ${providerName.toPascalCase()} extends _'\$${providerName.toPascalCase()}' {
+class ${providerName.toPascalCase()} extends _\$${providerName.toPascalCase()} {
   @override
   void build() {
     return;

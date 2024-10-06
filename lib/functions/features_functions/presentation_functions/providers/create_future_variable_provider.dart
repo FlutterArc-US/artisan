@@ -33,7 +33,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part '${providerName.toSnakeCase()}.g.dart';
 
 @riverpod
-Future<void> ${providerName.toCamelCase()}('${providerName.toPascalCase()}'Ref ref) async {
+Future<void> ${providerName.toCamelCase()}(${providerName.toPascalCase()}Ref ref) async {
   return ;
 }
 ''';
