@@ -8,7 +8,7 @@ class ${entityName.toPascalCase}Entity {
   final String city;
   final String streetAddress;
 
-  ${entityName}Entity({
+  ${entityName.toPascalCase()}Entity({
     required this.state,
     required this.postalCode,
     required this.city,
