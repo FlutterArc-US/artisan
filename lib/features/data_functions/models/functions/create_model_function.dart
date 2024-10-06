@@ -11,7 +11,7 @@ Future<void> createModel(String modelName, String featureName) async {
     final projectPath = Directory.current.path;
 
     final featureDirectory =
-        Directory('$projectPath/lib/features/$featureName/data/models');
+        Directory('$projectPath/lib/features/$featureName/data/models/${modelName.toSnakeCase()}');
 
     if (!await featureDirectory.exists()) {
       createFeature(featureName);

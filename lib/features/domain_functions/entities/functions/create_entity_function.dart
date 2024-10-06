@@ -11,7 +11,7 @@ Future<void> createEntity(String entityName, String featureName) async {
     final projectPath = Directory.current.path;
 
     final featureDirectory =
-        Directory('$projectPath/lib/features/$featureName/domain/entities');
+        Directory('$projectPath/lib/features/$featureName/domain/entities/${entityName.toSnakeCase()}');
 
     if (!await featureDirectory.exists()) {
       createFeature(featureName);
