@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:artisan/extensions/clickable_string_console_path.dart';

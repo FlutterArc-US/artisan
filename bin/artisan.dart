@@ -1,8 +1,10 @@
 import 'dart:developer';
 
 import 'package:artisan/extensions/color_print_extension.dart';
+import 'package:artisan/extensions/naming_conventions_extension.dart';
 import 'package:artisan/functions/add_github_workflow.dart';
 import 'package:artisan/functions/features_functions/create_feature.dart';
+import 'package:artisan/functions/features_functions/presentation_functions/providers/create_notifier_provider.dart';
 import 'package:artisan/functions/features_functions/presentation_functions/views/create_consumer_stful_view.dart';
 import 'package:artisan/functions/features_functions/presentation_functions/providers/create_provider.dart';
 import 'package:artisan/functions/features_functions/presentation_functions/views/create_consumer_stless_view.dart';
@@ -45,9 +47,48 @@ void main(List<String> args) {
 
     case 'create:provider':
       if (args.length > 2) {
-        createProvider(args[1], args[2]); // Pass the view name and feature name
+        final providerName = args[1];
+        final featureName = args[2];
+        String providerType = 'default';
+
+        if (args.contains('--np')) {
+          providerType = 'notifierProvider';
+        } else if (args.contains('--fnp')) {
+          providerType = 'futureNotifierProvider';
+        } else if (args.contains('--vp')) {
+          providerType = 'variableProvider';
+        } else if (args.contains('--fvp')) {
+          providerType = 'futureVariableProvider';
+        } else {
+          // Check if any other argument starting with `--` is provided (i.e., an invalid flag)
+          bool hasInvalidFlag = args.any((arg) =>
+              arg.startsWith('--') &&
+              !['--np', '--fnp', '--vp', '--fvp'].contains(arg));
+
+          if (hasInvalidFlag) {
+            // Invalid flag detected, print error message
+            'Invalid command. Please use one of the following commands:'
+                .printRed();
+            '''
+  dart run artisan create:provider ProviderName MyFeature          (creates variable provider)
+  dart run artisan create:provider ProviderName MyFeature --vp (creates variable provider)
+  dart run artisan create:provider ProviderName MyFeature --fvp  (creates future variable provider)
+  dart run artisan create:provider ProviderName MyFeature --np (creates notifier provider)
+  dart run artisan create:provider ProviderName MyFeature --fnp  (creates future notifier provider)
+  '''
+                .printBoldGreen();
+            return;
+          }
+        }
+
+        switch (providerType) {
+          case 'variableProvider':
+            createNotifierProvider(providerName, featureName);
+            'Provider ${providerName.toPascalCase()} creted successfully'
+                .printBoldGreen();
+        }
       } else {
-        log("Please provide a provider name and feature name.");
+        'Please provide a valid provider name and feature name.'.printBoldRed();
       }
       break;
 

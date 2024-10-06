@@ -5,7 +5,8 @@ import 'package:artisan/extensions/color_print_extension.dart';
 import 'package:artisan/extensions/naming_conventions_extension.dart';
 import 'package:artisan/functions/features_functions/create_feature.dart';
 
-Future<void> createProvider(String providerName, String featureName) async {
+Future<void> createNotifierProvider(
+    String providerName, String featureName) async {
   try {
     final projectPath = Directory.current.path;
 
@@ -31,7 +32,13 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part '${providerName.toSnakeCase()}.g.dart';
 
-@
+@riverpod
+class ${providerName.toPascalCase()} extends _'\$${providerName.toPascalCase()}' {
+  @override
+  void build() {
+    return;
+  }
+}
 ''';
 
     await File(providerFilePath).writeAsString(providerContent);
@@ -48,5 +55,3 @@ part '${providerName.toSnakeCase()}.g.dart';
     }
   }
 }
-
-
