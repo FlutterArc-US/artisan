@@ -35,8 +35,8 @@ part '${providerName.toSnakeCase()}.g.dart';
 @riverpod
 class ${providerName.toPascalCase()} extends _'\$${providerName.toPascalCase()}' {
   @override
-  FutureOr<void> build() async {
-    return ;
+  FutureOr<String> build() async {
+    return  'Hello World';
   }
 }
 ''';

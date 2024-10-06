@@ -33,8 +33,8 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part '${providerName.toSnakeCase()}.g.dart';
 
 @riverpod
-void ${providerName.toCamelCase()}(${providerName.toPascalCase()}Ref ref) {
-  return ;
+String ${providerName.toCamelCase()}(${providerName.toPascalCase()}Ref ref) {
+  return 'Hello World';
 }
 ''';
 
