@@ -28,9 +28,7 @@ Future<void> createWidget(String widgetName, String featureName) async {
     }
 
     var contentFile = createWidgetFile(widgetName);
-
-    var file = File(widgetFilePath);
-    file.writeAsStringSync(contentFile);
+    File(widgetFilePath).writeAsStringSync(contentFile);
 
     'Widget file created successfully: '.printBoldGreen();
     widgetFilePath.toSnakeCase().printClickablePath();
