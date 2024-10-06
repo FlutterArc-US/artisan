@@ -9,9 +9,9 @@ import 'package:artisan/functions/features_functions/presentation_functions/prov
 import 'package:artisan/functions/features_functions/presentation_functions/providers/create_notifier_provider.dart';
 import 'package:artisan/functions/features_functions/presentation_functions/views/functions/create_consumer_stful_view_function.dart';
 import 'package:artisan/functions/features_functions/presentation_functions/providers/create_variable_provider.dart';
-import 'package:artisan/functions/features_functions/presentation_functions/views/create_consumer_stless_view_function.dart';
-import 'package:artisan/functions/features_functions/presentation_functions/views/create_stful_view_function.dart';
-import 'package:artisan/functions/features_functions/presentation_functions/views/create_stless_view_function.dart';
+import 'package:artisan/functions/features_functions/presentation_functions/views/functions/create_consumer_stless_view_function.dart';
+import 'package:artisan/functions/features_functions/presentation_functions/views/functions/create_stful_view_function.dart';
+import 'package:artisan/functions/features_functions/presentation_functions/views/functions/create_stless_view_function.dart';
 import 'package:artisan/functions/features_functions/presentation_functions/widgets/create_widget.dart';
 import 'package:artisan/init/init.dart';
 
