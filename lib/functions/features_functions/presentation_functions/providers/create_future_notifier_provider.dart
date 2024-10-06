@@ -33,7 +33,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part '${providerName.toSnakeCase()}_provider.g.dart';
 
 @riverpod
-class ${providerName.toPascalCase()} extends _'\$${providerName.toPascalCase()}' {
+class ${providerName.toPascalCase()} extends _\$${providerName.toPascalCase()} {
   @override
   FutureOr<String> build() async {
     return  'Hello World';
