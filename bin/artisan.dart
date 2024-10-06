@@ -7,11 +7,11 @@ import 'package:artisan/functions/features_functions/create_feature.dart';
 import 'package:artisan/functions/features_functions/presentation_functions/providers/create_future_notifier_provider.dart';
 import 'package:artisan/functions/features_functions/presentation_functions/providers/create_future_variable_provider.dart';
 import 'package:artisan/functions/features_functions/presentation_functions/providers/create_notifier_provider.dart';
-import 'package:artisan/functions/features_functions/presentation_functions/views/create_consumer_stful_view.dart';
+import 'package:artisan/functions/features_functions/presentation_functions/views/functions/create_consumer_stful_view_function.dart';
 import 'package:artisan/functions/features_functions/presentation_functions/providers/create_variable_provider.dart';
-import 'package:artisan/functions/features_functions/presentation_functions/views/create_consumer_stless_view.dart';
-import 'package:artisan/functions/features_functions/presentation_functions/views/create_stful_view.dart';
-import 'package:artisan/functions/features_functions/presentation_functions/views/create_stless_view.dart';
+import 'package:artisan/functions/features_functions/presentation_functions/views/create_consumer_stless_view_function.dart';
+import 'package:artisan/functions/features_functions/presentation_functions/views/create_stful_view_function.dart';
+import 'package:artisan/functions/features_functions/presentation_functions/views/create_stless_view_function.dart';
 import 'package:artisan/functions/features_functions/presentation_functions/widgets/create_widget.dart';
 import 'package:artisan/init/init.dart';
 

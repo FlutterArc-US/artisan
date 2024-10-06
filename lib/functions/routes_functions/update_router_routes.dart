@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:artisan/extensions/color_print_extension.dart';
-import 'package:artisan/functions/features_functions/presentation_functions/views/create_stless_view.dart';
+import 'package:artisan/functions/features_functions/presentation_functions/views/functions/create_stless_view_function.dart';
 import 'package:artisan/extensions/naming_conventions_extension.dart';
 
 /// Function to update router routes
