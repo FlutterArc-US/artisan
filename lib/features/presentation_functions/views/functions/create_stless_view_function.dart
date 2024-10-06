@@ -3,14 +3,13 @@ import 'dart:io';
 import 'package:artisan/extensions/clickable_string_console_path.dart';
 import 'package:artisan/extensions/color_print_extension.dart';
 import 'package:artisan/extensions/naming_conventions_extension.dart';
-import 'package:artisan/functions/features_functions/create_feature.dart';
-import 'package:artisan/functions/features_functions/presentation_functions/views/files/create_consumer_stless_view_file.dart';
+import 'package:artisan/features/create_feature.dart';
+import 'package:artisan/features/presentation_functions/views/files/create_stless_view_file.dart';
 import 'package:artisan/functions/routes_functions/update_router_paths.dart';
 import 'package:artisan/functions/routes_functions/update_router_routes.dart';
 
 /// Function to create a new stateless view file
-Future<void> createConsumerStatelessView(
-    String viewName, String featureName) async {
+Future<void> createStatelessView(String viewName, String featureName) async {
   try {
     final projectPath = Directory.current.path;
     final featureDirectory =
@@ -23,12 +22,12 @@ Future<void> createConsumerStatelessView(
     final viewFilePath =
         '${featureDirectory.path}/${viewName.toSnakeCase()}_view.dart';
     if (await File(viewFilePath).exists()) {
-      'Error: View file already exists:'.printBoldRed();
+      'Error: View file already exists: '.printBoldRed();
       viewFilePath.printClickablePath();
       return;
     }
 
-    var contentFile = consumerStlessViewFile(viewName, featureName);
+    var contentFile = statelessViewFile(viewName, featureName);
 
     var file = File(viewFilePath);
     file.writeAsStringSync(contentFile);

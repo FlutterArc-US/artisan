@@ -3,35 +3,35 @@ import 'dart:io';
 import 'package:artisan/extensions/clickable_string_console_path.dart';
 import 'package:artisan/extensions/color_print_extension.dart';
 import 'package:artisan/extensions/naming_conventions_extension.dart';
-import 'package:artisan/functions/features_functions/create_feature.dart';
-import 'package:artisan/functions/features_functions/domain_functions/entities/files/create_entity_file.dart';
+import 'package:artisan/features/create_feature.dart';
+import 'package:artisan/features/domain_functions/entities/files/create_entity_file.dart';
 
-Future<void> createModel(String modelName, String featureName) async {
+Future<void> createEntity(String entityName, String featureName) async {
   try {
     final projectPath = Directory.current.path;
 
     final featureDirectory =
-    Directory('$projectPath/lib/features/$featureName/data/models');
+        Directory('$projectPath/lib/features/$featureName/domain/entities');
 
     if (!await featureDirectory.exists()) {
       createFeature(featureName);
       'Feature not found, creating feature: $featureName'.printBoldOrange();
     }
 
-    final modelFilePath =
-        '${featureDirectory.path}/${modelName.toSnakeCase()}_model.dart';
+    final entityFilePath =
+        '${featureDirectory.path}/${entityName.toSnakeCase()}_entity.dart';
 
-    if (await File(modelFilePath).exists()) {
-      'Error: Model File already exists: '.printBoldRed();
-      modelFilePath.printClickablePath();
+    if (await File(entityFilePath).exists()) {
+      'Error: Entity File already exists: '.printBoldRed();
+      entityFilePath.printClickablePath();
       return;
     }
 
-    var contentFile = createEntityFile(modelName);
-    File(modelFilePath).writeAsStringSync(contentFile);
+    var contentFile = createEntityFile(entityName);
+    File(entityFilePath).writeAsStringSync(contentFile);
 
     'Entity file created successfully: '.printBoldGreen();
-    modelFilePath.toSnakeCase().printClickablePath();
+    entityFilePath.toSnakeCase().printClickablePath();
   } catch (e) {
     switch (e.runtimeType) {
       case FileSystemException:

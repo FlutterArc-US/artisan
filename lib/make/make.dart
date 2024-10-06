@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:artisan/functions/features_functions/create_feature.dart';
+import 'package:artisan/features/create_feature.dart';
 
 void main(List<String> args) {
   if (args.isEmpty) {
