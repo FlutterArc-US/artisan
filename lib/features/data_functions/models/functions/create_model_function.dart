@@ -30,7 +30,7 @@ Future<void> createModel(String modelName, String featureName) async {
     var contentFile = createModelFile(modelName, featureName);
     File(modelFilePath).writeAsStringSync(contentFile);
 
-    'Entity file created successfully: '.printBoldGreen();
+    'Model file created successfully: '.printBoldGreen();
     modelFilePath.toSnakeCase().printClickablePath();
   } catch (e) {
     switch (e.runtimeType) {
