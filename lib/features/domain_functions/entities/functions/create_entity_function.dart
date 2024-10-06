@@ -19,7 +19,7 @@ Future<void> createEntity(String entityName, String featureName) async {
     }
 
     final entityFilePath =
-        '${featureDirectory.path}/${entityName.toSnakeCase()}_entity.dart';
+        '${featureDirectory.path}/${entityName.toSnakeCase()}/${entityName.toSnakeCase()}_entity.dart';
 
     if (await File(entityFilePath).exists()) {
       'Error: Entity File already exists: '.printBoldRed();
