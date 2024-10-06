@@ -3,10 +3,9 @@ import 'dart:io';
 import 'package:artisan/extensions/naming_conventions_extension.dart';
 
 String createModelFile(String modelName, String featureName) {
-  final String path = Directory.current.path;
   final modelContent = '''
 import 'package:freezed_annotation/freezed_annotation.dart';
-import '$path/lib/features/${featureName.toSnakeCase()}/domain/models/${modelName.toSnakeCase()}_entity.dart';
+import '/features/${featureName.toSnakeCase()}/domain/models/${modelName.toSnakeCase()}_entity.dart';
 
 part 'rest_${modelName.toSnakeCase()}_model.freezed.dart';
 part 'rest_${modelName.toSnakeCase()}_model.g.dart';
@@ -18,7 +17,7 @@ class Rest${modelName.toPascalCase()}Entity extends ${modelName.toPascalCase()}E
     required String name,
   }) = _Rest${modelName.toPascalCase()}Entity;
 
-  factory RestAddressEntity.fromJson(Map<String, Object?> json) =>
+  factory Rest${modelName.toPascalCase()}Entity.fromJson(Map<String, Object?> json) =>
       _\$Rest${modelName.toPascalCase()}EntityFromJson(json);
 }
   ''';
