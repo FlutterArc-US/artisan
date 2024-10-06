@@ -53,19 +53,19 @@ void main(List<String> args) {
         final featureName = args[2];
         String providerType = 'default';
 
-        if (args.contains('--np')) {
-          providerType = 'notifierProvider';
-        } else if (args.contains('--fnp')) {
-          providerType = 'futureNotifierProvider';
-        } else if (args.contains('--vp')) {
+        if (args.contains('--vp')) {
           providerType = 'variableProvider';
         } else if (args.contains('--fvp')) {
           providerType = 'futureVariableProvider';
+        } else if (args.contains('--np')) {
+          providerType = 'notifierProvider';
+        } else if (args.contains('--fnp')) {
+          providerType = 'futureNotifierProvider';
         } else {
           // Check if any other argument starting with `--` is provided (i.e., an invalid flag)
           bool hasInvalidFlag = args.any((arg) =>
               arg.startsWith('--') &&
-              !['--np', '--fnp', '--vp', '--fvp'].contains(arg));
+              !['--vp', '--fvp', '--np', '--fnp'].contains(arg));
 
           if (hasInvalidFlag) {
             // Invalid flag detected, print error message
