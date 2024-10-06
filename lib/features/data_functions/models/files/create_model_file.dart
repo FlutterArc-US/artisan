@@ -5,8 +5,8 @@ String createModelFile(String modelName, String featureName) {
 import 'package:freezed_annotation/freezed_annotation.dart';
 import '../features/${featureName.toSnakeCase()}/domain/models/${modelName.toSnakeCase()}/${modelName.toSnakeCase()}_entity.dart';
 
-part 'rest_${modelName.toSnakeCase}_entity.freezed.dart';
-part 'rest_${modelName.toSnakeCase}_entity.g.dart';
+part 'rest_${modelName.toSnakeCase()}_entity.freezed.dart';
+part 'rest_${modelName.toSnakeCase()}_entity.g.dart';
 
 @freezed
 class Rest${modelName.toPascalCase()}Entity extends ${modelName.toPascalCase()}Entity with _\$Rest${modelName.toPascalCase()}Entity {
