@@ -15,6 +15,8 @@ import 'package:artisan/features/presentation_functions/views/functions/create_c
 import 'package:artisan/features/presentation_functions/views/functions/create_stful_view_function.dart';
 import 'package:artisan/features/presentation_functions/views/functions/create_stless_view_function.dart';
 import 'package:artisan/features/presentation_functions/widgets/function/create_widget_function.dart';
+import 'package:artisan/functions/create_data_source.dart';
+import 'package:artisan/functions/create_data_source_imp.dart';
 import 'package:artisan/functions/create_repository.dart';
 import 'package:artisan/functions/create_repository_imp.dart';
 import 'package:artisan/functions/create_usecase.dart';
@@ -54,15 +56,87 @@ void main(List<String> args) {
 
     case 'create:usecase':
       if (args.length > 2) {
-        createUsecase(args[1], args[2], false);
-        createRepository(
-            usecaseName: args[1],
-            featureName: args[2],
-            datasourceName: 'remote');
-        createRepositoryImp(
-            usecaseName: args[1],
-            featureName: args[2],
-            datasourceName: 'remote');
+        final usecaseName = args[1];
+        final featureName = args[2];
+        String datasourceType = 'default'; // Default to local repository
+
+        // Check for optional parameters
+        if (args.contains('--local')) {
+          datasourceType = 'local';
+        } else if (args.contains('--remote')) {
+          datasourceType = 'remote';
+        } else if (args.contains('--both')) {
+          datasourceType = 'both';
+        }
+
+        switch (datasourceType) {
+          case 'local':
+            createUsecase(usecaseName, featureName, true);
+            createRepository(
+                usecaseName: usecaseName,
+                featureName: featureName,
+                datasourceName: featureName);
+            createRepositoryImp(
+                usecaseName: usecaseName,
+                featureName: featureName,
+                datasourceName: featureName);
+            createDatasource(
+                usecaseName: usecaseName,
+                featureName: featureName,
+                datasourceName: featureName);
+            createDatasourceImp(
+                usecaseName: usecaseName,
+                featureName: featureName,
+                datasourceName: featureName);
+            'Local use case $usecaseName created successfully for $featureName.'
+                .printBoldGreen();
+            break;
+
+          case 'remote':
+            createUsecase(usecaseName, featureName, false);
+            createRepository(
+                usecaseName: usecaseName,
+                featureName: featureName,
+                datasourceName: 'RemoteDatasource');
+            createRepositoryImp(
+                usecaseName: usecaseName,
+                featureName: featureName,
+                datasourceName: 'RemoteDatasource');
+            createDatasource(
+                usecaseName: usecaseName,
+                featureName: featureName,
+                datasourceName: 'RemoteDatasource');
+            createDatasourceImp(
+                usecaseName: usecaseName,
+                featureName: featureName,
+                datasourceName: 'RemoteDatasource');
+            'Remote use case $usecaseName created successfully for $featureName.'
+                .printBoldGreen();
+            break;
+
+          default:
+            createUsecase(usecaseName, featureName,
+                true); // Default to local if no flag provided
+            createRepository(
+                usecaseName: usecaseName,
+                featureName: featureName,
+                datasourceName: featureName);
+            createRepositoryImp(
+                usecaseName: usecaseName,
+                featureName: featureName,
+                datasourceName: featureName);
+            createDatasource(
+                usecaseName: usecaseName,
+                featureName: featureName,
+                datasourceName: featureName);
+            createDatasourceImp(
+                usecaseName: usecaseName,
+                featureName: featureName,
+                datasourceName: featureName);
+            'Use case $usecaseName created successfully for $featureName (default to local).'
+                .printBoldGreen();
+            break;
+        }
       } else {
         "Please provide a usecase name and feature name.".printBoldRed();
       }
