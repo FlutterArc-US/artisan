@@ -12,10 +12,10 @@ String repositoryFileImp(
 
   return '''
 ////********** START IMPORTS **********////
-import '${featureName}_repository.dart';
+import '${featureName.toSnakeCase()}_repository.dart';
 import 'package:injectable/injectable.dart';
-import '../../data/source/$dataSource/${featureName}_${dataSource}_datasource.dart';
-import '../usecases/$usecaseFileName.dart';
+import '../../data/source/${dataSource.toSnakeCase()}/${featureName.toSnakeCase()}_${dataSource.toSnakeCase()}_datasource.dart';
+import '../usecases/${usecaseFileName.toSnakeCase()}.dart';
 ////********** END IMPORTS **********////
 
 @LazySingleton(as: ${featureName.toPascalCase()}Repository)

@@ -16,6 +16,7 @@ import 'package:artisan/features/presentation_functions/views/functions/create_s
 import 'package:artisan/features/presentation_functions/views/functions/create_stless_view_function.dart';
 import 'package:artisan/features/presentation_functions/widgets/function/create_widget_function.dart';
 import 'package:artisan/functions/create_repository.dart';
+import 'package:artisan/functions/create_repository_imp.dart';
 import 'package:artisan/functions/create_usecase.dart';
 import 'package:artisan/init/init.dart';
 
@@ -57,7 +58,11 @@ void main(List<String> args) {
         createRepository(
             usecaseName: args[1],
             featureName: args[2],
-            datasourceName: 'default');
+            datasourceName: 'remote');
+        createRepositoryImp(
+            usecaseName: args[1],
+            featureName: args[2],
+            datasourceName: 'remote');
       } else {
         "Please provide a usecase name and feature name.".printBoldRed();
       }

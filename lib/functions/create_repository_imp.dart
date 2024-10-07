@@ -12,7 +12,7 @@ void createRepositoryImp({
   required String featureName,
   required String datasourceName,
 }) async {
-  final fileAddress = 'lib/features/$featureName/domain/repository';
+  final fileAddress = 'lib/features/${featureName.toSnakeCase()}/domain/repository';
   var directory = Directory(fileAddress);
   if (!directory.existsSync()) {
     directory.createSync(recursive: true);
@@ -22,7 +22,7 @@ void createRepositoryImp({
   var content = repositoryFileImp(usecaseName, featureName, datasourceName);
 
   // Create the file
-  var file = File("$fileAddress/${featureName}_repository_imp.dart");
+  var file = File("$fileAddress/${featureName.toSnakeCase()}_repository_imp.dart");
 
   if (file.existsSync()) {
     final sink = file.readAsLinesSync();
