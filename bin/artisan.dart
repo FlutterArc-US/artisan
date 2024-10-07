@@ -15,6 +15,7 @@ import 'package:artisan/features/presentation_functions/views/functions/create_c
 import 'package:artisan/features/presentation_functions/views/functions/create_stful_view_function.dart';
 import 'package:artisan/features/presentation_functions/views/functions/create_stless_view_function.dart';
 import 'package:artisan/features/presentation_functions/widgets/function/create_widget_function.dart';
+import 'package:artisan/functions/create_repository.dart';
 import 'package:artisan/functions/create_usecase.dart';
 import 'package:artisan/init/init.dart';
 
@@ -53,6 +54,10 @@ void main(List<String> args) {
     case 'create:usecase':
       if (args.length > 2) {
         createUsecase(args[1], args[2], false);
+        createRepository(
+            usecaseName: args[1],
+            featureName: args[2],
+            datasourceName: 'default');
       } else {
         "Please provide a usecase name and feature name.".printBoldRed();
       }
