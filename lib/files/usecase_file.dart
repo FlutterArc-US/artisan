@@ -5,7 +5,7 @@ import 'package:artisan/make/make.dart';
 
 //////*********************** Usecase File ***********************//////
 String usecaseFile(String fileName, String featureName) {
-  final className = fileName.toPascalCase;
+  final className = fileName.toPascalCase();
   final file = '''
 import 'package:injectable/injectable.dart';
 

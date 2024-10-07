@@ -20,7 +20,7 @@ void createUsecase(String usecaseName, String featureName, bool onlyUsecase) {
       : usecaseFile(usecaseName, featureName);
 
   // Create the file
-  var file = File("$fileAddress/${usecaseName.toSnakeCase}_usecase.dart");
+  var file = File("$fileAddress/${usecaseName.toSnakeCase()}_usecase.dart");
   file.writeAsStringSync(content);
 
   'Usecase $usecaseName created successfully!'.printBoldGreen();
