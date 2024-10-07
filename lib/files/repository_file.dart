@@ -16,7 +16,7 @@ String repositoryFile(
   return '''
 ////********** START IMPORTS **********////
 import 'package:${getPackageName()}/infrastructure/repository.dart';
-import 'package:${getPackageName()}/features/auth/domain/usecases/${usecaseFileName.toSnakeCase()}.dart';
+import 'package:${getPackageName()}/features/${featureName.toSnakeCase()}/domain/usecases/${usecaseFileName.toSnakeCase()}.dart';
 ////********** END IMPORTS **********////
 
 abstract class ${convertToPascalCase(featureName)}Repository extends Repository {
