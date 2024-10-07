@@ -1,4 +1,5 @@
 import 'package:artisan/extensions/naming_conventions_extension.dart';
+import 'package:artisan/functions/get_app_package_name.dart';
 
 //////*********************** Repository File ***********************//////
 String repositoryFileImp(
@@ -9,13 +10,14 @@ String repositoryFileImp(
   final usecaseClassName = usecaseFileName.toPascalCase();
   final usecaseMethodName =
       usecaseFileName.toCamelCase().replaceAll('Usecase', '');
+  final basePath = 'package:${getPackageName()}';
 
   return '''
 ////********** START IMPORTS **********////
 import '${featureName.toSnakeCase()}_repository.dart';
 import 'package:injectable/injectable.dart';
-import '../../data/source/${dataSource.toSnakeCase()}/${featureName.toSnakeCase()}_${dataSource.toSnakeCase()}_datasource.dart';
-import '../usecases/${usecaseFileName.toSnakeCase()}.dart';
+import 'package: $basePath/features/${featureName.toSnakeCase()}/data/source/${dataSource.toSnakeCase()}/${featureName.toSnakeCase()}_${dataSource.toSnakeCase()}_datasource.dart';
+import 'package:${getPackageName()}/features/${featureName.toSnakeCase()}/domain/usecases/${usecaseFileName.toSnakeCase()}_usecase.dart';
 ////********** END IMPORTS **********////
 
 @LazySingleton(as: ${featureName.toPascalCase()}Repository)

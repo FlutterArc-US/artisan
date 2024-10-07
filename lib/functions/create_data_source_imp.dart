@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:artisan/extensions/naming_conventions_extension.dart';
 import 'package:artisan/files/datasource_file_imp.dart';
 import 'package:artisan/files/datasource_imp_method.dart';
 
@@ -9,7 +10,7 @@ void createDatasourceImp({
   required String featureName,
   required String datasourceName,
 }) async {
-  final fileAddress = 'lib/features/$featureName/data/source/$datasourceName';
+  final fileAddress = 'lib/features/$featureName/data/source/${datasourceName.toSnakeCase()}';
   var directory = Directory(fileAddress);
   if (!directory.existsSync()) {
     directory.createSync(recursive: true);
