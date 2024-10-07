@@ -1,8 +1,4 @@
-import 'package:artisan/functions/create_repository_imp.dart';
-import 'package:artisan/functions/name_cases/conver_to_camel_case.dart';
-import 'package:artisan/functions/name_cases/convert_to_pascal_case.dart';
 import 'package:artisan/extensions/naming_conventions_extension.dart';
-import 'package:artisan/make/make.dart';
 
 //////*********************** Repository File ***********************//////
 String datasourceFile(
@@ -17,7 +13,7 @@ import '../../../../../infrastructure/datasource.dart';
 import '../../../domain/usecases/$usecaseFileName.dart';
 ////********** END IMPORTS **********////
 
-abstract class ${convertToPascalCase(featureName)}${convertToPascalCase(datasource)}DataSource extends DataSource {
+abstract class ${featureName.toPascalCase()}${datasource.toPascalCase()}DataSource extends DataSource {
   ////********** START METHODS **********////
   /// [${usecaseClassName}UsecaseInput] is received to [$usecaseMethodName] method as parameter
   /// [${usecaseClassName}UsecaseOutput] is returned from [$usecaseMethodName] method

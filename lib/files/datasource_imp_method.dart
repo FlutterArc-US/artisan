@@ -1,6 +1,4 @@
-import 'package:artisan/functions/name_cases/conver_to_camel_case.dart';
-import 'package:artisan/functions/name_cases/convert_to_pascal_case.dart';
-import 'package:artisan/make/make.dart';
+import 'package:artisan/extensions/naming_conventions_extension.dart';
 
 //////*********************** Repository File Method Imp ***********************//////
 String newDatasourceMethodImp(
@@ -8,9 +6,9 @@ String newDatasourceMethodImp(
   String featureName,
   String datasourceName,
 ) {
-  final usecaseClassName = convertToPascalCase(usecaseFileName);
+  final usecaseClassName = usecaseFileName.toPascalCase;
   final usecaseMethodName =
-      convertToCamelCase(usecaseFileName).replaceAll('Usecase', '');
+      usecaseFileName.toCamelCase().replaceAll('Usecase', '');
 
   return '''
 

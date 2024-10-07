@@ -1,7 +1,4 @@
 import 'package:artisan/extensions/naming_conventions_extension.dart';
-import 'package:artisan/functions/name_cases/conver_to_camel_case.dart';
-import 'package:artisan/functions/name_cases/convert_to_pascal_case.dart';
-import 'package:artisan/make/make.dart';
 
 //////*********************** Usecase File ***********************//////
 String usecaseFile(String fileName, String featureName) {
@@ -27,7 +24,7 @@ class ${className}UsecaseOutput extends Output {
 class ${className}Usecase extends Usecase<${className}UsecaseInput, ${className}UsecaseOutput> {
   final ${featureName.toPascalCase()}Repository _${featureName.toCamelCase()}Repository;
 
-  ${className}Usecase({required ${convertToPascalCase(featureName)}Repository ${convertToCamelCase(featureName)}Repository})
+  ${className}Usecase({required ${featureName.toPascalCase()}Repository ${featureName.toCamelCase()}Repository})
       : _${featureName.toCamelCase()}Repository = ${featureName.toCamelCase()}Repository;
 
   @override
@@ -43,7 +40,7 @@ class ${className}Usecase extends Usecase<${className}UsecaseInput, ${className}
 
 //////*********************** Only Usecase File ***********************//////
 String onlyUsecaseFile(String fileName, String featureName) {
-  final className = convertToPascalCase(fileName);
+  final className = fileName.toPascalCase();
   final file = '''
 import 'package:injectable/injectable.dart';
 

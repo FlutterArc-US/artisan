@@ -1,9 +1,4 @@
-import 'package:artisan/files/datasource_file.dart';
-import 'package:artisan/functions/name_cases/conver_to_camel_case.dart';
 import 'package:artisan/extensions/naming_conventions_extension.dart';
-import 'package:artisan/make/make.dart';
-
-import '../functions/name_cases/convert_to_pascal_case.dart';
 
 //////*********************** Repository File ***********************//////
 String repositoryFileImp(
@@ -11,8 +6,9 @@ String repositoryFileImp(
   String featureName,
   String dataSource,
 ) {
-  final usecaseClassName = convertToPascalCase(usecaseFileName);
-  final usecaseMethodName = usecaseFileName.toCamelCase().replaceAll('Usecase', '');
+  final usecaseClassName = usecaseFileName.toPascalCase();
+  final usecaseMethodName =
+      usecaseFileName.toCamelCase().replaceAll('Usecase', '');
 
   return '''
 ////********** START IMPORTS **********////
@@ -22,19 +18,19 @@ import '../../data/source/$dataSource/${featureName}_${dataSource}_datasource.da
 import '../usecases/$usecaseFileName.dart';
 ////********** END IMPORTS **********////
 
-@LazySingleton(as: ${convertToPascalCase(featureName)}Repository)
-class ${convertToPascalCase(featureName)}RepositoryImp implements ${convertToPascalCase(featureName)}Repository {
+@LazySingleton(as: ${featureName.toPascalCase()}Repository)
+class ${featureName.toPascalCase()}RepositoryImp implements ${featureName.toPascalCase()}Repository {
 ////********** START VARIABLES **********////
-  final ${convertToPascalCase(featureName)}${convertToPascalCase(dataSource)}DataSource _${convertToCamelCase(featureName)}${convertToPascalCase(dataSource)}DataSource;
+  final ${featureName.toPascalCase()}${dataSource.toPascalCase()}DataSource _${featureName.toCamelCase()}${dataSource.toPascalCase()}DataSource;
 ////********** END VARIABLES **********////
 
-${convertToPascalCase(featureName)}RepositoryImp({
+${featureName.toPascalCase()}RepositoryImp({
 ////********** START RECEIVE VALUES **********////
-    required ${convertToPascalCase(featureName)}${convertToPascalCase(dataSource)}DataSource ${convertToCamelCase(featureName)}${convertToPascalCase(dataSource)}DataSource,
+    required ${featureName.toPascalCase()}${dataSource.toPascalCase()}DataSource ${featureName.toCamelCase()}${dataSource.toPascalCase()}DataSource,
 ////********** END RECEIVE VALUES **********////
   })  :
 ////********** START SET VALUES **********////
-        _${convertToCamelCase(featureName)}${convertToPascalCase(dataSource)}DataSource = ${convertToCamelCase(featureName)}${convertToPascalCase(dataSource)}DataSource
+        _${featureName.toCamelCase()}${dataSource.toPascalCase()}DataSource = ${featureName.toCamelCase()}${dataSource.toPascalCase()}DataSource
 ////********** END SET VALUES **********////
   ;
 
@@ -43,7 +39,7 @@ ${convertToPascalCase(featureName)}RepositoryImp({
   /// [${usecaseClassName}UsecaseOutput] is returned from [$usecaseMethodName] method
   @override
   Future<${usecaseClassName}UsecaseOutput> $usecaseMethodName(${usecaseClassName}UsecaseInput input) async {
-    return _${convertToCamelCase(featureName)}${convertToPascalCase(dataSource)}DataSource.$usecaseMethodName(input);
+    return _${featureName.toCamelCase()}${dataSource.toPascalCase()}DataSource.$usecaseMethodName(input);
   }
 
 ////********** END METHODS **********////
