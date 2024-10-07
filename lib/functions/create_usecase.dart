@@ -1,5 +1,8 @@
 import 'dart:io';
 
+import 'package:artisan/extensions/clickable_string_console_path.dart';
+import 'package:artisan/extensions/color_print_extension.dart';
+import 'package:artisan/extensions/naming_conventions_extension.dart';
 import 'package:artisan/files/usecase_file.dart';
 
 /// [Make Usecase]
@@ -17,8 +20,8 @@ void createUsecase(String usecaseName, String featureName, bool onlyUsecase) {
       : usecaseFile(usecaseName, featureName);
 
   // Create the file
-  var file = File("$fileAddress/$usecaseName.dart");
+  var file = File("$fileAddress/${usecaseName.toSnakeCase}_usecase.dart");
   file.writeAsStringSync(content);
 
-  print('Usecase $usecaseName created successfully!');
+  'Usecase $usecaseName created successfully!'.printBoldGreen();
 }
