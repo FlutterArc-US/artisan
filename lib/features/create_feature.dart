@@ -12,18 +12,19 @@ void createFeature(String featureName) {
   "Creating feature: $featureName".printGreen();
   final projectPath = Directory.current.path;
 
-  final featureDir = Directory('lib/features/${featureName.toSnakeCase}');
+  final featureDir = Directory('lib/features/${featureName.toSnakeCase()}');
   if (!featureDir.existsSync()) {
     featureDir.createSync(recursive: true);
-    'Feature folder created at lib/features/$featureName'.printGreen();
-    '$projectPath/lib/features/$featureName'.printClickablePath();
+    'Feature folder created at lib/features/${featureName.toSnakeCase()}'
+        .printGreen();
+    '$projectPath/lib/features/${featureName.toSnakeCase()}'
+        .printClickablePath();
 
     createDataLayer(featureName);
     createDomainLayer(featureName);
     createPresentationLayer(featureName);
 
     'Feature $featureName created successfully.'.printGreen();
-
   } else {
     'Feature folder already exists.'.printRed();
   }
