@@ -11,11 +11,10 @@ Future<void> createEntity(String entityName, String featureName) async {
     final projectPath = Directory.current.path;
 
     final featureDirectory = Directory(
-        '$projectPath/lib/features/$featureName/data/entities/${entityName.toSnakeCase()}');
+        '$projectPath/lib/features/$featureName/domain/entities/${entityName.toSnakeCase()}');
 
     if (!await featureDirectory.exists()) {
       createFeature(featureName);
-      featureDirectory.createSync(recursive: true);
       'Feature directory not found, creating directory: $featureDirectory'
           .printBoldOrange();
     }

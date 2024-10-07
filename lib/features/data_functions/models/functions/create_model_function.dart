@@ -17,7 +17,6 @@ Future<void> createModel(String modelName, String featureName) async {
     // Check if the directory exists; if not, create it (recursively)
     if (!await featureDirectory.exists()) {
       createFeature(featureName);
-      featureDirectory.createSync(recursive: true);
       'Feature directory not found, creating directory: $featureDirectory'
           .printBoldOrange();
       Directory(
