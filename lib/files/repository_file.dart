@@ -12,14 +12,15 @@ String repositoryFile(
   final usecaseClassName = usecaseFileName.toPascalCase();
   final usecaseMethodName =
       usecaseFileName.toCamelCase().replaceAll('Usecase', '');
+  final basePath =  'package:${getPackageName()}';
 
   return '''
 ////********** START IMPORTS **********////
-import 'package:${getPackageName()}/infrastructure/repository.dart';
+import '$basePath/infrastructure/repository.dart';
 import 'package:${getPackageName()}/features/${featureName.toSnakeCase()}/domain/usecases/${usecaseFileName.toSnakeCase()}.dart';
 ////********** END IMPORTS **********////
 
-abstract class ${convertToPascalCase(featureName)}Repository extends Repository {
+abstract class ${featureName.toPascalCase()}Repository extends Repository {
 ////********** START METHODS **********////
   /// [${usecaseClassName}UsecaseInput] is received to [$usecaseMethodName] method as parameter
   /// [${usecaseClassName}UsecaseOutput] is returned from [$usecaseMethodName] method

@@ -10,14 +10,14 @@ part 'rest_${modelName.toSnakeCase()}_model.freezed.dart';
 part 'rest_${modelName.toSnakeCase()}_model.g.dart';
 
 @freezed
-class Rest${modelName.toPascalCase()}Entity extends ${modelName.toPascalCase()}Entity with _\$Rest${modelName.toPascalCase()}Entity {
-  const factory Rest${modelName.toPascalCase()}Entity({
+class Rest${modelName.toPascalCase()}Model extends ${modelName.toPascalCase()}Entity with _\$Rest${modelName.toPascalCase()}Model {
+  const factory Rest${modelName.toPascalCase()}Model({
     required int id,
     required String name,
-  }) = _Rest${modelName.toPascalCase()}Entity;
+  }) = _Rest${modelName.toPascalCase()}Model;
 
-  factory Rest${modelName.toPascalCase()}Entity.fromJson(Map<String, Object?> json) =>
-      _\$Rest${modelName.toPascalCase()}EntityFromJson(json);
+  factory Rest${modelName.toPascalCase()}Model.fromJson(Map<String, Object?> json) =>
+      _\$Rest${modelName.toPascalCase()}ModelFromJson(json);
 }
   ''';
   return modelContent;
