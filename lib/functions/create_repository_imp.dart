@@ -62,7 +62,7 @@ void createRepositoryImp({
         if (!isImportedDatasource) {
           if (indexToPlaceImport == i) {
             writeSink.writeln(
-                "import '../../data/source/$datasourceName/${featureName}_${datasourceName}_datasource.dart';");
+                "import '../../data/source/$datasourceName/${featureName.toSnakeCase()}_${datasourceName.toSnakeCase()}_datasource.dart';");
           }
 
           if (indexToEndReceiveValues == i) {

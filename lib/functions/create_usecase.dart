@@ -7,7 +7,7 @@ import 'package:artisan/files/usecase_file.dart';
 
 /// [Make Usecase]
 void createUsecase(String usecaseName, String featureName, bool onlyUsecase) {
-  final fileAddress = 'lib/features/$featureName/domain/usecases';
+  final fileAddress = 'lib/features/${featureName.toSnakeCase()}/domain/usecases';
 
   var directory = Directory(fileAddress);
   if (!directory.existsSync()) {

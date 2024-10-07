@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:artisan/extensions/naming_conventions_extension.dart';
 import 'package:artisan/files/repository_file.dart';
 import 'package:artisan/files/repository_method.dart';
+import 'package:artisan/functions/get_app_package_name.dart';
 
 /// [Make Repository]
 void createRepository({
@@ -10,7 +11,8 @@ void createRepository({
   required String featureName,
   required String datasourceName,
 }) async {
-  final fileAddress = 'lib/features/${featureName.toSnakeCase}/domain/repository';
+  final fileAddress =
+      'lib/features/${featureName.toSnakeCase()}/domain/repository';
   var directory = Directory(fileAddress);
   if (!directory.existsSync()) {
     directory.createSync(recursive: true);
@@ -42,7 +44,8 @@ void createRepository({
       for (var i = 0; i < sink.length; i++) {
         final line = sink[i];
         if (i == indexToPlaceImport) {
-          writeSink.writeln("import '../usecases/$usecaseName.dart';");
+          writeSink.writeln(
+              "import 'package:${getPackageName()}/features/${featureName.toSnakeCase()}/domain/usecases/${usecaseName.toSnakeCase()}_usecase.dart';");
         }
 
         if (i == indexToPlaceMethod) {
