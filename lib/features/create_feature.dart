@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:artisan/extensions/clickable_string_console_path.dart';
 import 'package:artisan/extensions/color_print_extension.dart';
+import 'package:artisan/extensions/naming_conventions_extension.dart';
 import 'package:artisan/functions/create_data_layer.dart';
 import 'package:artisan/functions/create_domain_layer.dart';
 import 'package:artisan/functions/create_presentation_layer.dart';
@@ -11,7 +12,7 @@ void createFeature(String featureName) {
   "Creating feature: $featureName".printGreen();
   final projectPath = Directory.current.path;
 
-  final featureDir = Directory('lib/features/$featureName');
+  final featureDir = Directory('lib/features/${featureName.toSnakeCase}');
   if (!featureDir.existsSync()) {
     featureDir.createSync(recursive: true);
     'Feature folder created at lib/features/$featureName'.printGreen();
