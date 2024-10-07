@@ -4,7 +4,6 @@ import 'package:artisan/extensions/clickable_string_console_path.dart';
 import 'package:artisan/extensions/color_print_extension.dart';
 import 'package:artisan/extensions/naming_conventions_extension.dart';
 import 'package:artisan/features/create_feature.dart';
-import 'package:artisan/features/data_functions/models/files/create_model_file.dart';
 import 'package:artisan/features/domain_functions/entities/files/create_entity_file.dart';
 
 Future<void> createEntity(String entityName, String featureName) async {
