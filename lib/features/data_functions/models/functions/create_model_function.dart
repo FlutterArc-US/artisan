@@ -4,21 +4,28 @@ import 'package:artisan/extensions/clickable_string_console_path.dart';
 import 'package:artisan/extensions/color_print_extension.dart';
 import 'package:artisan/extensions/naming_conventions_extension.dart';
 import 'package:artisan/features/data_functions/models/files/create_model_file.dart';
+
 Future<void> createModel(String modelName, String featureName) async {
   try {
     final projectPath = Directory.current.path;
 
     // Define the full directory path where the model will be created
-    final featureDirectory = Directory('$projectPath/lib/features/$featureName/data/models');
+    final featureDirectory =
+        Directory('$projectPath/lib/features/$featureName/data/models');
 
     // Check if the directory exists; if not, create it (recursively)
     if (!await featureDirectory.exists()) {
       featureDirectory.createSync(recursive: true);
-      'Feature directory not found, creating directory: $featureDirectory'.printBoldOrange();
+      'Feature directory not found, creating directory: $featureDirectory'
+          .printBoldOrange();
+      Directory(
+              'lib/features/$featureName/data/models/${modelName.toSnakeCase()}')
+          .createSync(recursive: true);
     }
 
     // Define the model file path
-    final modelFilePath = '${featureDirectory.path}/rest_${modelName.toSnakeCase()}_model.dart';
+    final modelFilePath =
+        '${featureDirectory.path}/rest_${modelName.toSnakeCase()}_model.dart';
 
     // Check if the file already exists to prevent overwriting
     if (await File(modelFilePath).exists()) {

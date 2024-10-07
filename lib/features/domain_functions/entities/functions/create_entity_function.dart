@@ -20,11 +20,14 @@ Future<void> createEntity(String entityName, String featureName) async {
       createFeature(featureName);
       'Feature directory not found, creating directory: $featureDirectory'
           .printBoldOrange();
+      Directory(
+          'lib/features/$featureName/data/models/${entityName.toSnakeCase()}')
+          .createSync(recursive: true);
     }
 
     // Define the model file path
     final entityFilePath =
-        '${featureDirectory.path}/${entityName.toSnakeCase()}_entity.dart';
+        '${featureDirectory.path}/${entityName.toSnakeCase()}/${entityName.toSnakeCase()}_entity.dart';
 
     // Check if the file already exists to prevent overwriting
     if (await File(entityFilePath).exists()) {
