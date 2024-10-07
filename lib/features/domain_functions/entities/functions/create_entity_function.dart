@@ -18,9 +18,15 @@ Future<void> createEntity(String entityName, String featureName) async {
       createFeature(featureName);
       'Feature directory not found, creating directory: $featureDirectory'
           .printBoldOrange();
-      Directory(
-              'lib/features/$featureName/domain/entities/${entityName.toSnakeCase()}')
-          .createSync(recursive: true);
+    }
+
+    final entityDirectory =
+        Directory('${featureDirectory.path}/${entityName.toSnakeCase()}');
+
+    if (!await entityDirectory.exists()) {
+      entityDirectory.createSync();
+      'Entity directory not found, creating directory: $entityDirectory'
+          .printBoldGreen();
     }
 
     final entityFilePath =

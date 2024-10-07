@@ -10,7 +10,6 @@ Future<void> createModel(String modelName, String featureName) async {
   try {
     final projectPath = Directory.current.path;
 
-    // Define the full directory path where the model will be created
     final featureDirectory =
         Directory('$projectPath/lib/features/$featureName/data/models');
 
@@ -19,9 +18,15 @@ Future<void> createModel(String modelName, String featureName) async {
       createFeature(featureName);
       'Feature directory not found, creating directory: $featureDirectory'
           .printBoldOrange();
-      Directory(
-              'lib/features/$featureName/data/models/${modelName.toSnakeCase()}')
-          .createSync(recursive: true);
+    }
+
+    final modelDirectory =
+        Directory('${featureDirectory.path}/${modelName.toSnakeCase()}');
+
+    if (!await modelDirectory.exists()) {
+      modelDirectory.createSync();
+      'Model directory not found, creating directory: $modelDirectory'
+          .printBoldGreen();
     }
 
     // Define the model file path
