@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:artisan/extensions/clickable_string_console_path.dart';
 import 'package:artisan/extensions/color_print_extension.dart';
 import 'package:artisan/extensions/naming_conventions_extension.dart';
+import 'package:artisan/features/create_feature.dart';
 import 'package:artisan/features/data_functions/models/files/create_model_file.dart';
 
 Future<void> createEntity(String entityName, String featureName) async {
@@ -12,8 +13,8 @@ Future<void> createEntity(String entityName, String featureName) async {
     final featureDirectory = Directory(
         '$projectPath/lib/features/$featureName/data/entities/${entityName.toSnakeCase()}');
 
-    // Check if the directory exists; if not, create it (recursively)
     if (!await featureDirectory.exists()) {
+      createFeature(featureName);
       featureDirectory.createSync(recursive: true);
       'Feature directory not found, creating directory: $featureDirectory'
           .printBoldOrange();
