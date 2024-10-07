@@ -26,7 +26,7 @@ Future<void> createModel(String modelName, String featureName) async {
 
     // Define the model file path
     final modelFilePath =
-        '${featureDirectory.path}/rest_${modelName.toSnakeCase()}_model.dart';
+        '${featureDirectory.path}/${modelName.toSnakeCase()}/rest_${modelName.toSnakeCase()}_model.dart';
 
     // Check if the file already exists to prevent overwriting
     if (await File(modelFilePath).exists()) {
