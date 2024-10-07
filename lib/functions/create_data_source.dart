@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:artisan/extensions/naming_conventions_extension.dart';
 import 'package:artisan/files/datasource_file.dart';
 import 'package:artisan/files/repository_method.dart';
 
@@ -9,7 +10,8 @@ void createDatasource({
   required String featureName,
   required String datasourceName,
 }) async {
-  final fileAddress = 'lib/features/$featureName/data/source/$datasourceName';
+  final fileAddress =
+      'lib/features/${featureName.toSnakeCase()}/data/source/${datasourceName.toSnakeCase()}';
 
   var directory = Directory(fileAddress);
   if (!directory.existsSync()) {
@@ -21,7 +23,7 @@ void createDatasource({
 
   // Create the file
   var file =
-      File("$fileAddress/${featureName}_${datasourceName}_datasource.dart");
+      File("$fileAddress/${featureName.toSnakeCase()}_${datasourceName.toSnakeCase()}_datasource.dart");
 
   if (file.existsSync()) {
     final sink = file.readAsLinesSync();
@@ -45,7 +47,7 @@ void createDatasource({
 
         if (i == indexToPlaceImport) {
           writeSink
-              .writeln("import '../../../domain/usecases/$usecaseName.dart';");
+              .writeln("import '../../../domain/usecases/${usecaseName.toSnakeCase()}.dart';");
         }
 
         if (i == indexToPlaceMethod) {
