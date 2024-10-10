@@ -3,7 +3,7 @@ import 'package:artisan/extensions/clickable_string_console_path.dart';
 import 'package:artisan/extensions/color_print_extension.dart';
 import 'package:artisan/extensions/naming_conventions_extension.dart';
 import 'package:artisan/features/create_feature.dart';
-import 'package:artisan/features/presentation_functions/views/files/create_stful_view_file.dart';
+import 'package:artisan/features/presentation/views/files/create_stful_view_file.dart';
 import 'package:artisan/functions/routes_functions/update_router_paths.dart';
 import 'package:artisan/functions/routes_functions/update_router_routes.dart';
 

@@ -2,19 +2,20 @@ import 'dart:developer';
 
 import 'package:artisan/extensions/color_print_extension.dart';
 import 'package:artisan/extensions/naming_conventions_extension.dart';
+import 'package:artisan/features/data/models/functions/create_model_function.dart';
+import 'package:artisan/features/domain/entities/functions/create_entity_function.dart';
+import 'package:artisan/features/domain/usecases/functions/create_usecase_function.dart';
+import 'package:artisan/features/presentation/providers/functions/create_future_notifier_provider_function.dart';
+import 'package:artisan/features/presentation/providers/functions/create_future_variable_provider_function.dart';
+import 'package:artisan/features/presentation/providers/functions/create_notifier_provider_function.dart';
+import 'package:artisan/features/presentation/providers/functions/create_variable_provider_function.dart';
+import 'package:artisan/features/presentation/views/functions/create_consumer_stful_view_function.dart';
+import 'package:artisan/features/presentation/views/functions/create_consumer_stless_view_function.dart';
+import 'package:artisan/features/presentation/views/functions/create_stful_view_function.dart';
+import 'package:artisan/features/presentation/views/functions/create_stless_view_function.dart';
+import 'package:artisan/features/presentation/widgets/function/create_widget_function.dart';
 import 'package:artisan/functions/add_github_workflow.dart';
 import 'package:artisan/features/create_feature.dart';
-import 'package:artisan/features/data_functions/models/functions/create_model_function.dart';
-import 'package:artisan/features/domain_functions/entities/functions/create_entity_function.dart';
-import 'package:artisan/features/presentation_functions/providers/functions/create_future_notifier_provider_function.dart';
-import 'package:artisan/features/presentation_functions/providers/functions/create_future_variable_provider_function.dart';
-import 'package:artisan/features/presentation_functions/providers/functions/create_notifier_provider_function.dart';
-import 'package:artisan/features/presentation_functions/providers/functions/create_variable_provider_function.dart';
-import 'package:artisan/features/presentation_functions/views/functions/create_consumer_stful_view_function.dart';
-import 'package:artisan/features/presentation_functions/views/functions/create_consumer_stless_view_function.dart';
-import 'package:artisan/features/presentation_functions/views/functions/create_stful_view_function.dart';
-import 'package:artisan/features/presentation_functions/views/functions/create_stless_view_function.dart';
-import 'package:artisan/features/presentation_functions/widgets/function/create_widget_function.dart';
 import 'package:artisan/functions/create_data_source.dart';
 import 'package:artisan/functions/create_data_source_imp.dart';
 import 'package:artisan/functions/create_repository.dart';
@@ -24,7 +25,7 @@ import 'package:artisan/init/init.dart';
 
 void main(List<String> args) {
   if (args.isEmpty) {
-    log("No command provided.");
+    "No command provided.".printBoldRed();
     return;
   }
 
@@ -32,13 +33,13 @@ void main(List<String> args) {
   switch (command) {
     case 'init':
       init();
-      log("Initializing project...");
+      "Initializing project...".printBoldGreen();
       break;
     case 'create:feature':
       if (args.length > 1) {
         createFeature(args[1]);
       } else {
-        log("Please provide a feature name.");
+        "Please provide a feature name.".printBoldRed();
       }
       break;
 
@@ -174,7 +175,7 @@ void main(List<String> args) {
             'Invalid command. Please use one of the following commands:'
                 .printRed();
             '''
-  dart run artisan create:provider ProviderName MyFeature          (creates variable provider)
+  dart run artisan create:provider ProviderName MyFeature   (creates variable provider)
   dart run artisan create:provider ProviderName MyFeature --vp (creates variable provider)
   dart run artisan create:provider ProviderName MyFeature --fvp  (creates future variable provider)
   dart run artisan create:provider ProviderName MyFeature --np (creates notifier provider)
@@ -299,11 +300,20 @@ void main(List<String> args) {
       // Handle invalid commands and show available options
       'Invalid command. Please use one of the following commands:'.printRed();
       '''
+  dart run artisan create:feature FeatureName   
+  dart run artisan create:workflow
+  dart run artisan create:widget WidgetName FeatureName
   dart run artisan create:view MyView MyFeature          (creates default stateless view)
   dart run artisan create:view MyView MyFeature --stless (creates stateless view)
   dart run artisan create:view MyView MyFeature --stful  (creates stateful view)
   dart run artisan create:view MyView MyFeature --cstless (creates consumer stateless view)
   dart run artisan create:view MyView MyFeature --cstful  (creates consumer stateful view)
+  
+  dart run artisan create:provider ProviderName MyFeature   (creates variable provider)
+  dart run artisan create:provider ProviderName MyFeature --vp (creates variable provider)
+  dart run artisan create:provider ProviderName MyFeature --fvp  (creates future variable provider)
+  dart run artisan create:provider ProviderName MyFeature --np (creates notifier provider)
+  dart run artisan create:provider ProviderName MyFeature --fnp  (creates future notifier provider)
   '''
           .printBoldGreen();
       break;

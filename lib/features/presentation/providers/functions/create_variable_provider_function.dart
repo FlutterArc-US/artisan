@@ -4,10 +4,9 @@ import 'package:artisan/extensions/clickable_string_console_path.dart';
 import 'package:artisan/extensions/color_print_extension.dart';
 import 'package:artisan/extensions/naming_conventions_extension.dart';
 import 'package:artisan/features/create_feature.dart';
-import 'package:artisan/features/presentation_functions/providers/files/create_future_notifier_provider_file.dart';
+import 'package:artisan/features/presentation/providers/files/create_variable_provider_file.dart';
 
-
-Future<void> createFutureNotifierProvider(
+Future<void> createVariableProvider(
     String providerName, String featureName) async {
   try {
     final projectPath = Directory.current.path;
@@ -29,11 +28,9 @@ Future<void> createFutureNotifierProvider(
       return;
     }
 
-    var contentFile =
-        createFutureNotifierProviderFile(providerName, featureName);
+    var contentFile = createVariableProviderFile(providerName, featureName);
     var file = File(providerFilePath);
-    file.writeAsString(contentFile);
-
+    await file.writeAsString(contentFile);
     'Provider file created successfully:'.printBoldGreen();
     providerFilePath.toSnakeCase().printClickablePath();
     'Now please run build runner command to resolve errors'.printBoldPurple();

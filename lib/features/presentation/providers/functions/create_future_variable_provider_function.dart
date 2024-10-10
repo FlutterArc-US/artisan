@@ -4,7 +4,7 @@ import 'package:artisan/extensions/clickable_string_console_path.dart';
 import 'package:artisan/extensions/color_print_extension.dart';
 import 'package:artisan/extensions/naming_conventions_extension.dart';
 import 'package:artisan/features/create_feature.dart';
-import 'package:artisan/features/presentation_functions/providers/files/create_future_variable_provider_file.dart';
+import 'package:artisan/features/presentation/providers/files/create_future_variable_provider_file.dart';
 
 Future<void> createFutureVariableProvider(
     String providerName, String featureName) async {

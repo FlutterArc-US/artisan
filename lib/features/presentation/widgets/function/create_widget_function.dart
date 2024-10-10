@@ -4,7 +4,7 @@ import 'package:artisan/extensions/clickable_string_console_path.dart';
 import 'package:artisan/extensions/color_print_extension.dart';
 import 'package:artisan/extensions/naming_conventions_extension.dart';
 import 'package:artisan/features/create_feature.dart';
-import 'package:artisan/features/presentation_functions/widgets/file/create_widget_file.dart';
+import 'package:artisan/features/presentation/widgets/file/create_widget_file.dart';
 
 Future<void> createWidget(String widgetName, String featureName) async {
   try {
