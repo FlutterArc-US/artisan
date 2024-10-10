@@ -36,7 +36,7 @@ String _remoteDataSourceFileImp(
 import 'package:injectable/injectable.dart';
 import 'package:logger/logger.dart';
 import '../../../../../helpers/network_call_helper/network_call_helper.dart';
-import '../../../domain/usecases/$usecaseFileName.dart';
+import '../../../domain/usecases/${usecaseFileName.toSnakeCase()}.dart';
 import '${featureName.toSnakeCase()}_remote_datasource.dart';
 ////********** END IMPORTS **********////
 
@@ -77,7 +77,7 @@ String _localDataSourceFileImp(
 import 'package:injectable/injectable.dart';
 import 'package:logger/logger.dart';
 import '../../../../../helpers/persistence/persistence_helper.dart';
-import '../../../domain/usecases/$usecaseFileName.dart';
+import '../../../domain/usecases/${usecaseFileName.toSnakeCase()}.dart';
 import '${featureName}_${dataSource}_datasource.dart';
 ////********** END IMPORTS **********////
 

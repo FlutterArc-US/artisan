@@ -47,7 +47,7 @@ void createDatasource({
 
         if (i == indexToPlaceImport) {
           writeSink
-              .writeln("import '../../../domain/usecases/${usecaseName.toSnakeCase()}.dart';");
+              .writeln("import '../../../domain/usecases/${usecaseName.toSnakeCase()}_usecase.dart';");
         }
 
         if (i == indexToPlaceMethod) {
