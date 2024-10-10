@@ -17,7 +17,7 @@ String repositoryFileImp(
 import '${featureName.toSnakeCase()}_repository.dart';
 import 'package:injectable/injectable.dart';
 import 'package: $basePath/features/${featureName.toSnakeCase()}/data/source/${dataSource.toSnakeCase()}/${featureName.toSnakeCase()}_${dataSource.toSnakeCase()}_datasource.dart';
-import 'package:${getPackageName()}/features/${featureName.toSnakeCase()}/domain/usecases/${usecaseFileName.toSnakeCase()}_usecase.dart';
+import '${getPackageName()}/features/${featureName.toSnakeCase()}/domain/usecases/${usecaseFileName.toSnakeCase()}_usecase.dart';
 ////********** END IMPORTS **********////
 
 @LazySingleton(as: ${featureName.toPascalCase()}Repository)

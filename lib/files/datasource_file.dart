@@ -10,7 +10,7 @@ String datasourceFile(
   return '''
 ////********** START IMPORTS **********////
 import '../../../../../infrastructure/datasource.dart';
-import '../../../domain/usecases/$usecaseFileName.dart';
+import '../../../domain/usecases/${usecaseFileName.toSnakeCase()}_usecase.dart';
 ////********** END IMPORTS **********////
 
 abstract class ${featureName.toPascalCase()}${datasource.toPascalCase()}DataSource extends DataSource {
