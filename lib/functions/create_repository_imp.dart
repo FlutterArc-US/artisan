@@ -86,7 +86,7 @@ void createRepositoryImp({
         }
 
         if (i == indexToPlaceImport) {
-          writeSink.writeln("import '../usecases/$usecaseName.dart';");
+          writeSink.writeln("import '../usecases/${usecaseName.toSnakeCase()}_usecase.dart';");
         }
 
         if (i == indexToPlaceMethod) {
