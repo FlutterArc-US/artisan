@@ -6,17 +6,17 @@ String newDatasourceMethodImp(
   String featureName,
   String datasourceName,
 ) {
-  final usecaseClassName = usecaseFileName.toPascalCase;
   final usecaseMethodName =
       usecaseFileName.toCamelCase().replaceAll('Usecase', '');
 
   return '''
 
-  /// [${usecaseClassName}UsecaseInput] is received to [$usecaseMethodName] method as parameter
-  /// [${usecaseClassName}UsecaseOutput] is returned from [$usecaseMethodName] method
+  /// [${usecaseFileName.toPascalCase()}UsecaseInput] is received to [$usecaseMethodName] method as parameter
+  /// [${usecaseFileName.toPascalCase()}UsecaseOutput] is returned from [$usecaseMethodName] method
   /// DS Testing 7
   @override
-  Future<${usecaseClassName}UsecaseOutput> $usecaseMethodName(${usecaseClassName}UsecaseInput input) async {
+  Future<${usecaseFileName.toCamelCase()}UsecaseOutput> $usecaseMethodName(
+      ${usecaseFileName.toPascalCase()}UsecaseInput input) async {
     throw UnimplementedError();
   }
 ''';
