@@ -9,7 +9,7 @@ void createDomainLayer(String featureName) {
       .createSync(recursive: true);
   Directory('lib/features/${featureName.toSnakeCase()}/domain/entities')
       .createSync(recursive: true);
-  Directory('lib/features/${featureName.toSnakeCase()}/domain/repositories')
+  Directory('lib/features/${featureName.toSnakeCase()}/domain/repository')
       .createSync(recursive: true);
   Directory('lib/features/${featureName.toSnakeCase()}/domain/usecases')
       .createSync(recursive: true);

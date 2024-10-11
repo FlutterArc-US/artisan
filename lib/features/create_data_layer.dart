@@ -8,7 +8,7 @@ void createDataLayer(String featureName) {
       .createSync(recursive: true);
   Directory('lib/features/${featureName.toSnakeCase()}/data/models')
       .createSync(recursive: true);
-  Directory('lib/features/${featureName.toSnakeCase()}/data/repositories')
+  Directory('lib/features/${featureName.toSnakeCase()}/data/repository')
       .createSync(recursive: true);
   Directory('lib/features/${featureName.toSnakeCase()}/data/source/local')
       .createSync(recursive: true);
