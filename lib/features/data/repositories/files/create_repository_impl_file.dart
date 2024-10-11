@@ -44,7 +44,7 @@ $newRepoMethodImp(usecaseFileName, featureName, dataSource)
 ''';
 }
 
-/// Generates the implementation of the new repository method.
+//////*********************** Repository File Method Imp ***********************//////
 String newRepoMethodImp(
     String usecaseFileName,
     String featureName,
@@ -52,7 +52,7 @@ String newRepoMethodImp(
     ) {
   final usecaseClassName = usecaseFileName.toPascalCase();
   final usecaseMethodName =
-  (usecaseFileName.toCamelCase()).replaceAll('Usecase', '');
+  usecaseFileName.toCamelCase().replaceAll('Usecase', '');
 
   return '''
 
