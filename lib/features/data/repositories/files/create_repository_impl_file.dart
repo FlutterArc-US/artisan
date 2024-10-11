@@ -38,6 +38,7 @@ ${featureName.toPascalCase()}RepositoryImp({
   ;
 
 ////********** START METHODS **********////
+///**This FunctionHave Error**///
 $newRepoMethodImp(usecaseFileName, featureName, dataSource)
 ////********** END METHODS **********////
 }
