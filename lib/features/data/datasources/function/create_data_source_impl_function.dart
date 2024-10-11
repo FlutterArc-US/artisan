@@ -43,7 +43,7 @@ void createDatasourceImp({
         var line = lines[i];
 
         if (i == importIndex) {
-          writeSink.writeln("import '../../../domain/usecases/${usecaseName.toSnakeCase()}.dart';");
+          writeSink.writeln("import '../../../domain/usecases/${usecaseName.toSnakeCase()}_usecase.dart';");
         }
 
         if (i == methodIndex) {
