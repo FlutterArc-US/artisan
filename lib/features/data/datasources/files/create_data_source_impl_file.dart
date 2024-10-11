@@ -53,7 +53,7 @@ class ${featureName.toPascalCase()}${dataSource.toPascalCase()}DataSourceImp imp
 ////********** START METHODS **********////
   ///DataSource File Testing 3
   @override
-  Future<${featureName.toPascalCase()}UsecaseOutput> ${featureName.toCamelCase()}(${featureName.toPascalCase()}UsecaseInput input) {
+  Future<${usecaseFileName.toPascalCase()}UsecaseOutput> ${usecaseFileName.toCamelCase()}(${featureName.toPascalCase()}UsecaseInput input) {
     throw UnimplementedError();
   }
 
