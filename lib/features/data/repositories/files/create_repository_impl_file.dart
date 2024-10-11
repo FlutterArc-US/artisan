@@ -39,13 +39,14 @@ ${featureName.toPascalCase()}RepositoryImp({
   ;
 
 ////********** START METHODS **********////
-///**This FunctionHave Error**///
+
  /// [${usecaseClassName}UsecaseInput] is received to [$usecaseMethodName] method as parameter
   /// [${usecaseClassName}UsecaseOutput] is returned from [$usecaseMethodName] method
   @override
   Future<${usecaseClassName}UsecaseOutput> $usecaseMethodName(${usecaseClassName}UsecaseInput input) async {
     return _${featureName.toCamelCase()}${dataSource.toPascalCase()}DataSource.$usecaseMethodName(input);
   }
+  
 ////********** END METHODS **********////
 }
 ''';
