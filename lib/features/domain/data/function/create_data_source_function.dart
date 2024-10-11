@@ -11,7 +11,7 @@ void createDatasource({
   required String datasourceName,
 }) async {
   final fileAddress =
-      'lib/features/${featureName.toSnakeCase()}/data/datasources/${datasourceName.toSnakeCase()}';
+      'lib/features/${featureName.toSnakeCase()}/data/source/${datasourceName.toSnakeCase()}';
 
   var directory = Directory(fileAddress);
   if (!directory.existsSync()) {

@@ -10,7 +10,7 @@ void createDatasourceImp({
   required String featureName,
   required String datasourceName,
 }) async {
-  final fileAddress = 'lib/features/${featureName.toSnakeCase()}/data/datasources/${datasourceName.toSnakeCase()}';
+  final fileAddress = 'lib/features/${featureName.toSnakeCase()}/data/source/${datasourceName.toSnakeCase()}';
   var directory = Directory(fileAddress);
   if (!directory.existsSync()) {
     directory.createSync(recursive: true);

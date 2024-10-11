@@ -77,19 +77,19 @@ void main(List<String> args) {
             createRepository(
                 usecaseName: usecaseName,
                 featureName: featureName,
-                datasourceName: featureName);
+                datasourceName: 'LocalDatasource');
             createRepositoryImpl(
                 usecaseName: usecaseName,
                 featureName: featureName,
-                datasourceName: featureName);
+                datasourceName: 'LocalDatasource');
             createDatasource(
                 usecaseName: usecaseName,
                 featureName: featureName,
-                datasourceName: featureName);
+                datasourceName: 'LocalDatasource');
             createDatasourceImp(
                 usecaseName: usecaseName,
                 featureName: featureName,
-                datasourceName: featureName);
+                datasourceName: 'LocalDatasource');
             'Local use case $usecaseName created successfully for $featureName.'
                 .printBoldGreen();
             break;
