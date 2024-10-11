@@ -10,11 +10,11 @@ void createDataLayer(String featureName) {
       .createSync(recursive: true);
   Directory('lib/features/${featureName.toSnakeCase()}/data/repositories')
       .createSync(recursive: true);
-  Directory('lib/features/${featureName.toSnakeCase()}/data/datasources/local_datasource')
+  Directory('lib/features/${featureName.toSnakeCase()}/data/datasources/local')
       .createSync(recursive: true);
-  Directory('lib/features/${featureName.toSnakeCase()}/data/datasources/remote_datasource')
+  Directory('lib/features/${featureName.toSnakeCase()}/data/datasources/remote')
       .createSync(recursive: true);
-  Directory('lib/features/${featureName.toSnakeCase()}/data/datasources/mock_datasource')
+  Directory('lib/features/${featureName.toSnakeCase()}/data/datasources/mock')
       .createSync(recursive: true);
 
   'Data layer created for ${featureName.toSnakeCase()}'.printBoldGreen();
