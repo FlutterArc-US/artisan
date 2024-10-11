@@ -11,13 +11,14 @@ String repositoryFileImp(
   final usecaseMethodName =
   usecaseFileName.toCamelCase().replaceAll('Usecase', '');
   final basePath = 'package:${getPackageName()}';
+  final featurePath = '$basePath/features/${featureName.toSnakeCase()}';
 
   return '''
 ////********** START IMPORTS **********////
-import '${featureName.toSnakeCase()}_repository.dart';
+import '$featurePath/domain/repository/${featureName.toSnakeCase()}_repository.dart';
 import 'package:injectable/injectable.dart';
 import '$basePath/features/${featureName.toSnakeCase()}/data/source/${dataSource.toSnakeCase()}/${featureName.toSnakeCase()}_${dataSource.toSnakeCase()}_datasource.dart';
-import '$basePath/features/${featureName.toSnakeCase()}/domain/usecases/${usecaseFileName.toSnakeCase()}_usecase.dart';
+import '$featurePath/domain/usecases/${usecaseFileName.toSnakeCase()}_usecase.dart';
 ////********** END IMPORTS **********////
 
 @LazySingleton(as: ${featureName.toPascalCase()}Repository)
