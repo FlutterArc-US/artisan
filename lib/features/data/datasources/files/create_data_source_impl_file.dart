@@ -1,10 +1,10 @@
 import 'package:artisan/extensions/naming_conventions_extension.dart';
 
 String datasourceFileImp(
-    String usecaseFileName,
-    String featureName,
-    String dataSource,
-    ) {
+  String usecaseFileName,
+  String featureName,
+  String dataSource,
+) {
   if (dataSource == "local") {
     return _localDataSourceFileImp(
       usecaseFileName,
@@ -24,10 +24,10 @@ String datasourceFileImp(
 
 /// [REMOTE DATASOURCE IMPL]
 String _remoteDataSourceFileImp(
-    String usecaseFileName,
-    String featureName,
-    String dataSource,
-    ) {
+  String usecaseFileName,
+  String featureName,
+  String dataSource,
+) {
   final usecaseClassName = usecaseFileName.toPascalCase();
 
   return '''
@@ -52,7 +52,7 @@ class ${featureName.toPascalCase()}${dataSource.toPascalCase()}DataSourceImp imp
 
 ////********** START METHODS **********////
   @override
-  Future<${usecaseClassName}UsecaseOutput> ${usecaseFileName.toCamelCase()}(${usecaseClassName}UsecaseInput input) {
+  Future<${featureName.toPascalCase()}UsecaseOutput> ${featureName.toCamelCase()}(${featureName.toPascalCase()}UsecaseInput input) {
     throw UnimplementedError();
   }
 
@@ -64,10 +64,10 @@ class ${featureName.toPascalCase()}${dataSource.toPascalCase()}DataSourceImp imp
 
 /// [LOCAL DATASOURCE IMPL]
 String _localDataSourceFileImp(
-    String usecaseFileName,
-    String featureName,
-    String dataSource,
-    ) {
+  String usecaseFileName,
+  String featureName,
+  String dataSource,
+) {
   final usecaseClassName = usecaseFileName.toPascalCase();
 
   return '''
