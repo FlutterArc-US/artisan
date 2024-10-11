@@ -1,9 +1,12 @@
-import 'dart:developer';
-
 import 'package:artisan/extensions/color_print_extension.dart';
 import 'package:artisan/extensions/naming_conventions_extension.dart';
+import 'package:artisan/features/create_feature.dart';
+import 'package:artisan/features/data/datasources/function/create_data_source_impl_function.dart';
 import 'package:artisan/features/data/models/functions/create_model_function.dart';
+import 'package:artisan/features/data/repositories/functions/create_repository_impl_function.dart';
+import 'package:artisan/features/domain/data/function/create_data_source_function.dart';
 import 'package:artisan/features/domain/entities/functions/create_entity_function.dart';
+import 'package:artisan/features/domain/repositories/functions/create_repository_function.dart';
 import 'package:artisan/features/domain/usecases/functions/create_usecase_function.dart';
 import 'package:artisan/features/presentation/providers/functions/create_future_notifier_provider_function.dart';
 import 'package:artisan/features/presentation/providers/functions/create_future_variable_provider_function.dart';
@@ -14,14 +17,8 @@ import 'package:artisan/features/presentation/views/functions/create_consumer_st
 import 'package:artisan/features/presentation/views/functions/create_stful_view_function.dart';
 import 'package:artisan/features/presentation/views/functions/create_stless_view_function.dart';
 import 'package:artisan/features/presentation/widgets/function/create_widget_function.dart';
-import 'package:artisan/functions/add_github_workflow.dart';
-import 'package:artisan/features/create_feature.dart';
-import 'package:artisan/functions/create_data_source.dart';
-import 'package:artisan/functions/create_data_source_imp.dart';
-import 'package:artisan/functions/create_repository.dart';
-import 'package:artisan/functions/create_repository_imp.dart';
-import 'package:artisan/functions/create_usecase.dart';
 import 'package:artisan/init/init.dart';
+import 'package:artisan/utils/functions/add_github_workflow.dart';
 
 void main(List<String> args) {
   if (args.isEmpty) {
@@ -38,6 +35,7 @@ void main(List<String> args) {
     case 'create:feature':
       if (args.length > 1) {
         createFeature(args[1]);
+        "Feature ${args[1]} created successfully.".printBoldGreen();
       } else {
         "Please provide a feature name.".printBoldRed();
       }
@@ -45,11 +43,14 @@ void main(List<String> args) {
 
     case 'create:workflow':
       createGitHubWorkflow();
+      "GitHub workflow created successfully.".printBoldGreen();
       break;
 
     case 'create:widget':
       if (args.length > 2) {
         createWidget(args[1], args[2]);
+        "Widget ${args[1]} created successfully for feature ${args[2]}."
+            .printBoldGreen();
       } else {
         "Please provide a widget name and feature name.".printBoldRed();
       }
@@ -116,8 +117,7 @@ void main(List<String> args) {
             break;
 
           default:
-            createUsecase(usecaseName, featureName,
-                true); // Default to local if no flag provided
+            createUsecase(usecaseName, featureName, true); // Default to local
             createRepository(
                 usecaseName: usecaseName,
                 featureName: featureName,
@@ -139,7 +139,7 @@ void main(List<String> args) {
             break;
         }
       } else {
-        "Please provide a usecase name and feature name.".printBoldRed();
+        "Please provide a use case name and feature name.".printBoldRed();
       }
       break;
 
@@ -147,6 +147,8 @@ void main(List<String> args) {
       if (args.length > 2) {
         createModel(args[1], args[2]);
         createEntity(args[1], args[2]);
+        "Model ${args[1]} created successfully for feature ${args[2]}."
+            .printBoldGreen();
       } else {
         "Please provide a valid model name and feature name.".printBoldRed();
       }
@@ -284,38 +286,17 @@ void main(List<String> args) {
             break;
 
           default:
-            createStatelessView(
-                viewName, featureName); // Default to stateless view
+            createStatelessView(viewName, featureName);
             'Stateless view created successfully for $viewName (default).'
                 .printBoldGreen();
             break;
         }
       } else {
-        // Show error message if insufficient arguments are provided
-        'Error: Please provide both a view name and feature name.'.printRed();
+        "Please provide a valid view name and feature name.".printBoldRed();
       }
       break;
 
     default:
-      // Handle invalid commands and show available options
-      'Invalid command. Please use one of the following commands:'.printRed();
-      '''
-  dart run artisan create:feature FeatureName   
-  dart run artisan create:workflow
-  dart run artisan create:widget WidgetName FeatureName
-  dart run artisan create:view MyView MyFeature          (creates default stateless view)
-  dart run artisan create:view MyView MyFeature --stless (creates stateless view)
-  dart run artisan create:view MyView MyFeature --stful  (creates stateful view)
-  dart run artisan create:view MyView MyFeature --cstless (creates consumer stateless view)
-  dart run artisan create:view MyView MyFeature --cstful  (creates consumer stateful view)
-  
-  dart run artisan create:provider ProviderName MyFeature   (creates variable provider)
-  dart run artisan create:provider ProviderName MyFeature --vp (creates variable provider)
-  dart run artisan create:provider ProviderName MyFeature --fvp  (creates future variable provider)
-  dart run artisan create:provider ProviderName MyFeature --np (creates notifier provider)
-  dart run artisan create:provider ProviderName MyFeature --fnp  (creates future notifier provider)
-  '''
-          .printBoldGreen();
-      break;
+      "Invalid command: $command.".printBoldRed();
   }
 }

@@ -1,7 +1,4 @@
-import 'dart:developer';
 import 'dart:io';
-
-import 'package:artisan/extensions/clickable_string_console_path.dart';
 import 'package:artisan/extensions/color_print_extension.dart';
 import 'package:artisan/extensions/naming_conventions_extension.dart';
 

@@ -1,7 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:artisan/functions/get_directory.dart';
+import 'package:artisan/utils/functions/get_directory.dart';
 
 ///[addInfrastructure] function creates the infrastructure folder and adds the necessary files.
 Future<void> addInfrastructure() async {

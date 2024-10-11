@@ -1,17 +1,13 @@
-import 'package:artisan/files/datasource_file.dart';
-import 'package:artisan/utils/functions/get_app_package_name.dart';
-import 'package:artisan/functions/name_cases/conver_to_camel_case.dart';
-import 'package:artisan/functions/name_cases/convert_to_pascal_case.dart';
 import 'package:artisan/extensions/naming_conventions_extension.dart';
+import 'package:artisan/utils/functions/get_app_package_name.dart';
 
-//////*********************** Repository File ***********************//////
 String repositoryFile(
-  String usecaseFileName,
-  String featureName,
-) {
+    String usecaseFileName,
+    String featureName,
+    ) {
   final usecaseClassName = usecaseFileName.toPascalCase();
   final usecaseMethodName =
-      usecaseFileName.toCamelCase().replaceAll('Usecase', '');
+  usecaseFileName.toCamelCase().replaceAll('Usecase', '');
   final basePath = 'package:${getPackageName()}';
 
   return '''
