@@ -4,7 +4,7 @@ String datasourceFile(
     String usecaseFileName, String featureName, String datasource) {
   final usecaseClassName = usecaseFileName.toPascalCase();
   final usecaseMethodName =
-  usecaseFileName.toCamelCase().replaceAll('Usecase', '');
+      usecaseFileName.toCamelCase().replaceAll('Usecase', '');
 
   return '''
 ////********** START IMPORTS **********////
@@ -14,10 +14,9 @@ import '../../../domain/usecases/${usecaseFileName.toSnakeCase()}_usecase.dart';
 
 abstract class ${featureName.toPascalCase()}${datasource.toPascalCase()}DataSource extends DataSource {
   ////********** START METHODS **********////
-  ///DataSource File Testing 1
+
   /// [${usecaseClassName}UsecaseInput] is received to [$usecaseMethodName] method as parameter
   /// [${usecaseClassName}UsecaseOutput] is returned from [$usecaseMethodName] method
-  ///DataSource File Testing 1
   Future<${usecaseClassName}UsecaseOutput> $usecaseMethodName(${usecaseClassName}UsecaseInput input);
 
   ////********** END METHODS **********////
