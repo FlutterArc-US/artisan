@@ -1,4 +1,5 @@
 import 'package:artisan/extensions/naming_conventions_extension.dart';
+import 'package:artisan/features/domain/repositories/functions/new_repo_method.dart';
 import 'package:artisan/utils/functions/get_app_package_name.dart';
 
 //////*********************** Repository File ***********************//////
@@ -39,7 +40,12 @@ ${featureName.toPascalCase()}RepositoryImp({
 
 ////********** START METHODS **********////
 ///**This FunctionHave Error**///
-$newRepoMethodImp(usecaseFileName, featureName, dataSource)
+ /// [${usecaseClassName}UsecaseInput] is received to [$usecaseMethodName] method as parameter
+  /// [${usecaseClassName}UsecaseOutput] is returned from [$usecaseMethodName] method
+  @override
+  Future<${usecaseClassName}UsecaseOutput> $usecaseMethodName(${usecaseClassName}UsecaseInput input) async {
+    return _${featureName.toCamelCase()}${dataSource.toPascalCase()}DataSource.$usecaseMethodName(input);
+  }
 ////********** END METHODS **********////
 }
 ''';
