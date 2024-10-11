@@ -15,7 +15,7 @@ String newDatasourceMethodImp(
   /// [${usecaseFileName.toPascalCase()}UsecaseOutput] is returned from [$usecaseMethodName] method
   /// DS Testing 7
   @override
-  Future<${usecaseFileName.toCamelCase()}UsecaseOutput> $usecaseMethodName(
+  Future<${usecaseFileName.toPascalCase()}UsecaseOutput> $usecaseMethodName(
       ${usecaseFileName.toPascalCase()}UsecaseInput input) async {
     throw UnimplementedError();
   }
