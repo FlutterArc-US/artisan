@@ -22,7 +22,7 @@ void createRepositoryImpl({
   var content = repositoryFileImp(usecaseName, featureName, datasourceName);
 
   var file =
-      File("$fileAddress/${featureName.toSnakeCase()}_repository_impl.dart");
+  File("$fileAddress/${featureName.toSnakeCase()}_repository_impl.dart");
   final basePath = 'package:${getPackageName()}';
   final featurePath = '$basePath/features/${featureName.toSnakeCase()}';
 
@@ -38,26 +38,26 @@ void createRepositoryImpl({
 
       final writeSink = file.openWrite(mode: FileMode.writeOnlyAppend);
       final indexToPlaceImport =
-          sink.indexOf("////********** END IMPORTS **********////");
+      sink.indexOf("////********** END IMPORTS **********////");
 
       final indexToPlaceMethod =
-          sink.indexOf("////********** END METHODS **********////");
+      sink.indexOf("////********** END METHODS **********////");
 
       final indexToReceiveValues =
-          sink.indexOf('////********** START RECEIVE VALUES **********////');
+      sink.indexOf('////********** START RECEIVE VALUES **********////');
       final indexToEndReceiveValues =
-          sink.indexOf('////********** END RECEIVE VALUES **********////');
+      sink.indexOf('////********** END RECEIVE VALUES **********////');
 
       final indexOfEndVariables =
-          sink.indexOf("////********** END VARIABLES **********////");
+      sink.indexOf("////********** END VARIABLES **********////");
 
       final indexOfEndSetValues =
-          sink.indexOf('////********** END SET VALUES **********////');
+      sink.indexOf('////********** END SET VALUES **********////');
 
       final isImportedDatasource = sink
           .getRange(indexToReceiveValues, indexToEndReceiveValues + 1)
           .any((element) => element.contains(
-              '${featureName.toCamelCase()}${datasourceName.toPascalCase()}DataSource'));
+          '${featureName.toCamelCase()}${datasourceName.toPascalCase()}DataSource'));
 
       for (var i = 0; i < sink.length; i++) {
         var line = sink[i];
