@@ -13,7 +13,6 @@ String newDatasourceMethodImp(
 
   /// [${usecaseFileName.toPascalCase()}UsecaseInput] is received to [$usecaseMethodName] method as parameter
   /// [${usecaseFileName.toPascalCase()}UsecaseOutput] is returned from [$usecaseMethodName] method
-  /// DS Testing 7
   @override
   Future<${usecaseFileName.toPascalCase()}UsecaseOutput> $usecaseMethodName(
       ${usecaseFileName.toPascalCase()}UsecaseInput input) async {

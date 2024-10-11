@@ -18,10 +18,9 @@ import 'package:${getPackageName()}/features/${featureName.toSnakeCase()}/domain
 
 abstract class ${featureName.toPascalCase()}Repository extends Repository {
 ////********** START METHODS **********////
-///DS Testing 6
-  /// [${usecaseClassName}UsecaseInput] is received Test to [$usecaseMethodName] method as parameter
-  /// [${usecaseClassName}UsecaseOutput] is returned Test from [$usecaseMethodName] method
-  ///DS Testing 6
+
+  /// [${usecaseClassName}UsecaseInput] is received to [$usecaseMethodName] method as parameter
+  /// [${usecaseClassName}UsecaseOutput] is returned from [$usecaseMethodName] method
   Future<${usecaseClassName}UsecaseOutput> $usecaseMethodName(${usecaseClassName}UsecaseInput input);
 
 ////********** END METHODS **********////

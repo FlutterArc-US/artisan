@@ -39,11 +39,9 @@ ${featureName.toPascalCase()}RepositoryImp({
   ;
 
 ////********** START METHODS **********////
-///DS Testing 5
 
  /// [${usecaseClassName}UsecaseInput] is received to [$usecaseMethodName] method as parameter
   /// [${usecaseClassName}UsecaseOutput] is returned from [$usecaseMethodName] method
-  ///DS Testing 5
   @override
   Future<${usecaseClassName}UsecaseOutput> $usecaseMethodName(${usecaseClassName}UsecaseInput input) async {
     return _${featureName.toCamelCase()}${dataSource.toPascalCase()}DataSource.$usecaseMethodName(input);
@@ -68,7 +66,6 @@ String newRepoMethodImp(
 
   /// [${usecaseClassName}UsecaseInput] is received to [$usecaseMethodName] method as parameter
   /// [${usecaseClassName}UsecaseOutput] is returned from [$usecaseMethodName] method
-  ///DS Testing 6
   @override
   Future<${usecaseClassName}UsecaseOutput> $usecaseMethodName(${usecaseClassName}UsecaseInput input) async {
     return _${featureName.toCamelCase()}${datasourceName.toPascalCase()}DataSource.$usecaseMethodName(input);
