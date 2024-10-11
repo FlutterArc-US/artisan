@@ -6,13 +6,13 @@ import 'package:artisan/functions/name_cases/convert_to_pascal_case.dart';
 
 import '../../../../files/repository_imp_method.dart';
 
-void createRepositoryImp({
+void createRepositoryImpl({
   required String usecaseName,
   required String featureName,
   required String datasourceName,
 }) async {
   final fileAddress =
-      'lib/features/${featureName.toSnakeCase()}/domain/repository';
+      'lib/features/${featureName.toSnakeCase()}/data/repository';
   var directory = Directory(fileAddress);
   if (!directory.existsSync()) {
     directory.createSync(recursive: true);
@@ -21,7 +21,7 @@ void createRepositoryImp({
   var content = repositoryFileImp(usecaseName, featureName, datasourceName);
 
   var file =
-  File("$fileAddress/${featureName.toSnakeCase()}_repository_imp.dart");
+      File("$fileAddress/${featureName.toSnakeCase()}_repository_impl.dart");
 
   if (file.existsSync()) {
     final sink = file.readAsLinesSync();
@@ -35,26 +35,26 @@ void createRepositoryImp({
 
       final writeSink = file.openWrite(mode: FileMode.writeOnlyAppend);
       final indexToPlaceImport =
-      sink.indexOf("////********** END IMPORTS **********////");
+          sink.indexOf("////********** END IMPORTS **********////");
 
       final indexToPlaceMethod =
-      sink.indexOf("////********** END METHODS **********////");
+          sink.indexOf("////********** END METHODS **********////");
 
       final indexToReceiveValues =
-      sink.indexOf('////********** START RECEIVE VALUES **********////');
+          sink.indexOf('////********** START RECEIVE VALUES **********////');
       final indexToEndReceiveValues =
-      sink.indexOf('////********** END RECEIVE VALUES **********////');
+          sink.indexOf('////********** END RECEIVE VALUES **********////');
 
       final indexOfEndVariables =
-      sink.indexOf("////********** END VARIABLES **********////");
+          sink.indexOf("////********** END VARIABLES **********////");
 
       final indexOfEndSetValues =
-      sink.indexOf('////********** END SET VALUES **********////');
+          sink.indexOf('////********** END SET VALUES **********////');
 
       final isImportedDatasource = sink
           .getRange(indexToReceiveValues, indexToEndReceiveValues + 1)
           .any((element) => element.contains(
-          '${featureName.toCamelCase()}${datasourceName.toPascalCase()}DataSource'));
+              '${featureName.toCamelCase()}${datasourceName.toPascalCase()}DataSource'));
 
       for (var i = 0; i < sink.length; i++) {
         var line = sink[i];
@@ -85,7 +85,8 @@ void createRepositoryImp({
         }
 
         if (i == indexToPlaceImport) {
-          writeSink.writeln("import '../usecases/${usecaseName.toSnakeCase()}_usecase.dart';");
+          writeSink.writeln(
+              "import '../usecases/${usecaseName.toSnakeCase()}_usecase.dart';");
         }
 
         if (i == indexToPlaceMethod) {

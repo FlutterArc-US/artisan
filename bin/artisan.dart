@@ -78,7 +78,7 @@ void main(List<String> args) {
                 usecaseName: usecaseName,
                 featureName: featureName,
                 datasourceName: featureName);
-            createRepositoryImp(
+            createRepositoryImpl(
                 usecaseName: usecaseName,
                 featureName: featureName,
                 datasourceName: featureName);
@@ -100,7 +100,7 @@ void main(List<String> args) {
                 usecaseName: usecaseName,
                 featureName: featureName,
                 datasourceName: 'RemoteDatasource');
-            createRepositoryImp(
+            createRepositoryImpl(
                 usecaseName: usecaseName,
                 featureName: featureName,
                 datasourceName: 'RemoteDatasource');
@@ -122,7 +122,7 @@ void main(List<String> args) {
                 usecaseName: usecaseName,
                 featureName: featureName,
                 datasourceName: featureName);
-            createRepositoryImp(
+            createRepositoryImpl(
                 usecaseName: usecaseName,
                 featureName: featureName,
                 datasourceName: featureName);
