@@ -76,7 +76,7 @@ String _localDataSourceFileImp(
 import 'package:injectable/injectable.dart';
 import 'package:logger/logger.dart';
 import '../../../../../helpers/persistence/persistence_helper.dart';
-import '../../../domain/usecases/${usecaseFileName.toSnakeCase()}.dart';
+import '../../../domain/usecases/${usecaseFileName.toSnakeCase()}_usecase.dart';
 import '${featureName.toSnakeCase()}_${dataSource.toSnakeCase()}_datasource.dart';
 ////********** END IMPORTS **********////
 
