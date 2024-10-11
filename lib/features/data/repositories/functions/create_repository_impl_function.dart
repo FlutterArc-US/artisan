@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:artisan/extensions/naming_conventions_extension.dart';
 import 'package:artisan/features/data/repositories/files/create_repository_impl_file.dart';
 import 'package:artisan/functions/name_cases/convert_to_pascal_case.dart';
+import 'package:artisan/utils/functions/get_app_package_name.dart';
 
 import '../../../../files/repository_imp_method.dart';
 
@@ -22,6 +23,8 @@ void createRepositoryImpl({
 
   var file =
       File("$fileAddress/${featureName.toSnakeCase()}_repository_impl.dart");
+  final basePath = 'package:${getPackageName()}';
+  final featurePath = '$basePath/features/${featureName.toSnakeCase()}';
 
   if (file.existsSync()) {
     final sink = file.readAsLinesSync();
@@ -86,7 +89,7 @@ void createRepositoryImpl({
 
         if (i == indexToPlaceImport) {
           writeSink.writeln(
-              "import '../usecases/${usecaseName.toSnakeCase()}_usecase.dart';");
+              "import '$featurePath/domain/usecases/${featureName.toSnakeCase()}_usecase.dart';");
         }
 
         if (i == indexToPlaceMethod) {
