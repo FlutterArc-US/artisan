@@ -1,82 +1,130 @@
 extension ColorfulPrint on String {
-  // Method to print text in normal style
+  // Method to print text in normal style (debug mode only)
   void printNormal() {
-    print(this);
+    assert(() {
+      print(this);
+      return true;
+    }());
   }
 
-  // Method to print text in bold style without color
+  // Method to print text in bold style without color (debug mode only)
   void printBold() {
-    print('\x1B[1m$this\x1B[0m');
+    assert(() {
+      print('\x1B[1m$this\x1B[0m');
+      return true;
+    }());
   }
 
-  // Method to print text in bold red
+  // Method to print text in bold red (debug mode only)
   void printBoldRed() {
-    print('\x1B[1m\x1B[31m$this\x1B[0m');
+    assert(() {
+      print('\x1B[1m\x1B[31m$this\x1B[0m');
+      return true;
+    }());
   }
 
-  // Method to print text in bold green
+  // Method to print text in bold green (debug mode only)
   void printBoldGreen() {
-    print('\x1B[1m\x1B[32m$this\x1B[0m');
+    assert(() {
+      print('\x1B[1m\x1B[32m$this\x1B[0m');
+      return true;
+    }());
   }
 
-  // Method to print text in bold blue
+  // Method to print text in bold blue (debug mode only)
   void printBoldBlue() {
-    print('\x1B[1m\x1B[34m$this\x1B[0m');
+    assert(() {
+      print('\x1B[1m\x1B[34m$this\x1B[0m');
+      return true;
+    }());
   }
 
-  // Method to print text in bold yellow
+  // Method to print text in bold yellow (debug mode only)
   void printBoldYellow() {
-    print('\x1B[1m\x1B[33m$this\x1B[0m');
+    assert(() {
+      print('\x1B[1m\x1B[33m$this\x1B[0m');
+      return true;
+    }());
   }
 
-  // Method to print text in bold purple
+  // Method to print text in bold purple (debug mode only)
   void printBoldPurple() {
-    print('\x1B[1m\x1B[35m$this\x1B[0m');
+    assert(() {
+      print('\x1B[1m\x1B[35m$this\x1B[0m');
+      return true;
+    }());
   }
 
-  // Method to print text in bold cyan (as a substitute for indigo)
+  // Method to print text in bold cyan (debug mode only, as a substitute for indigo)
   void printBoldCyan() {
-    print('\x1B[1m\x1B[36m$this\x1B[0m');
+    assert(() {
+      print('\x1B[1m\x1B[36m$this\x1B[0m');
+      return true;
+    }());
   }
 
-  // Method to print text in bold bright yellow (as a substitute for orange)
+  // Method to print text in bold bright yellow (debug mode only, as a substitute for orange)
   void printBoldOrange() {
-    print('\x1B[1m\x1B[93m$this\x1B[0m');
+    assert(() {
+      print('\x1B[1m\x1B[93m$this\x1B[0m');
+      return true;
+    }());
   }
 
-  // Method to print text in normal red
+  // Method to print text in normal red (debug mode only)
   void printRed() {
-    print('\x1B[31m$this\x1B[0m');
+    assert(() {
+      print('\x1B[31m$this\x1B[0m');
+      return true;
+    }());
   }
 
-  // Method to print text in normal green
+  // Method to print text in normal green (debug mode only)
   void printGreen() {
-    print('\x1B[32m$this\x1B[0m');
+    assert(() {
+      print('\x1B[32m$this\x1B[0m');
+      return true;
+    }());
   }
 
-  // Method to print text in normal blue
+  // Method to print text in normal blue (debug mode only)
   void printBlue() {
-    print('\x1B[34m$this\x1B[0m');
+    assert(() {
+      print('\x1B[34m$this\x1B[0m');
+      return true;
+    }());
   }
 
-  // Method to print text in normal yellow
+  // Method to print text in normal yellow (debug mode only)
   void printYellow() {
-    print('\x1B[33m$this\x1B[0m');
+    assert(() {
+      print('\x1B[33m$this\x1B[0m');
+      return true;
+    }());
   }
 
-  // Method to print text in normal purple
+  // Method to print text in normal purple (debug mode only)
   void printPurple() {
-    print('\x1B[35m$this\x1B[0m');
+    assert(() {
+      print('\x1B[35m$this\x1B[0m');
+      return true;
+    }());
   }
 
-  // Method to print text in normal cyan (as a substitute for indigo)
+  // Method to print text in normal cyan (debug mode only, as a substitute for indigo)
   void printCyan() {
-    print('\x1B[36m$this\x1B[0m');
+    assert(() {
+      print('\x1B[36m$this\x1B[0m');
+      return true;
+    }());
   }
 
-  // Method to print text in normal bright yellow (as a substitute for orange)
+  // Method to print text in normal bright yellow (debug mode only, as a substitute for orange)
   void printOrange() {
-    print('\x1B[93m$this\x1B[0m');
+    assert(() {
+      print('\x1B[93m$this\x1B[0m');
+      return true;
+    }());
   }
 }
 
