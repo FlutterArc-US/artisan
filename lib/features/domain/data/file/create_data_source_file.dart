@@ -1,5 +1,5 @@
 import 'package:artisan/extensions/naming_conventions_extension.dart';
-
+//////*********************** Repository File ***********************//////
 String datasourceFile(
     String usecaseFileName, String featureName, String datasource) {
   final usecaseClassName = usecaseFileName.toPascalCase();
@@ -18,7 +18,7 @@ abstract class ${featureName.toPascalCase()}${datasource.toPascalCase()}DataSour
   /// [${usecaseClassName}UsecaseOutput] is returned from [$usecaseMethodName] method
   Future<${usecaseClassName}UsecaseOutput> $usecaseMethodName(${usecaseClassName}UsecaseInput input);
 
-  ////********** END METHODS **********////
+////********** END METHODS **********////
 }
   ''';
 }
