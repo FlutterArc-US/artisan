@@ -77,20 +77,20 @@ void main(List<String> args) {
             createRepository(
                 usecaseName: usecaseName,
                 featureName: featureName,
-                datasourceName: 'LocalDatasource');
+                datasourceName: 'local');
             createRepositoryImpl(
                 usecaseName: usecaseName,
                 featureName: featureName,
-                datasourceName: 'LocalDatasource');
+                datasourceName: 'local');
             createDatasource(
                 usecaseName: usecaseName,
                 featureName: featureName,
-                datasourceName: 'LocalDatasource');
+                datasourceName: 'local');
             createDatasourceImp(
                 usecaseName: usecaseName,
                 featureName: featureName,
-                datasourceName: 'LocalDatasource');
-            'Local use case $usecaseName created successfully for $featureName.'
+                datasourceName: 'local');
+            'Local usecase $usecaseName created successfully for $featureName.'
                 .printBoldGreen();
             break;
 
@@ -99,19 +99,19 @@ void main(List<String> args) {
             createRepository(
                 usecaseName: usecaseName,
                 featureName: featureName,
-                datasourceName: 'RemoteDatasource');
+                datasourceName: 'remote');
             createRepositoryImpl(
                 usecaseName: usecaseName,
                 featureName: featureName,
-                datasourceName: 'RemoteDatasource');
+                datasourceName: 'remote');
             createDatasource(
                 usecaseName: usecaseName,
                 featureName: featureName,
-                datasourceName: 'RemoteDatasource');
+                datasourceName: 'remote');
             createDatasourceImp(
                 usecaseName: usecaseName,
                 featureName: featureName,
-                datasourceName: 'RemoteDatasource');
+                datasourceName: 'remote');
             'Remote use case $usecaseName created successfully for $featureName.'
                 .printBoldGreen();
             break;
