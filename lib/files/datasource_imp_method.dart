@@ -14,6 +14,7 @@ String newDatasourceMethodImp(
 
   /// [${usecaseClassName}UsecaseInput] is received to [$usecaseMethodName] method as parameter
   /// [${usecaseClassName}UsecaseOutput] is returned from [$usecaseMethodName] method
+  /// DS Testing 7
   @override
   Future<${usecaseClassName}UsecaseOutput> $usecaseMethodName(${usecaseClassName}UsecaseInput input) async {
     throw UnimplementedError();

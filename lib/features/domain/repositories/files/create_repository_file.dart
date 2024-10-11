@@ -21,6 +21,7 @@ abstract class ${featureName.toPascalCase()}Repository extends Repository {
 ///DS Testing 6
   /// [${usecaseClassName}UsecaseInput] is received Test to [$usecaseMethodName] method as parameter
   /// [${usecaseClassName}UsecaseOutput] is returned Test from [$usecaseMethodName] method
+  ///DS Testing 6
   Future<${usecaseClassName}UsecaseOutput> $usecaseMethodName(${usecaseClassName}UsecaseInput input);
 
 ////********** END METHODS **********////

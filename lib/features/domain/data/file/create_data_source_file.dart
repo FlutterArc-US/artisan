@@ -17,6 +17,7 @@ abstract class ${featureName.toPascalCase()}${datasource.toPascalCase()}DataSour
   ///DataSource File Testing 1
   /// [${usecaseClassName}UsecaseInput] is received to [$usecaseMethodName] method as parameter
   /// [${usecaseClassName}UsecaseOutput] is returned from [$usecaseMethodName] method
+  ///DataSource File Testing 1
   Future<${usecaseClassName}UsecaseOutput> $usecaseMethodName(${usecaseClassName}UsecaseInput input);
 
   ////********** END METHODS **********////
