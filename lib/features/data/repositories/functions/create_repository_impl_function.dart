@@ -89,7 +89,7 @@ void createRepositoryImpl({
 
         if (i == indexToPlaceImport) {
           writeSink.writeln(
-              "import '$featurePath/domain/usecases/${featureName.toSnakeCase()}_usecase.dart';");
+              "import '$featurePath/domain/usecases/${usecaseName.toSnakeCase()}_usecase.dart';");
         }
 
         if (i == indexToPlaceMethod) {
