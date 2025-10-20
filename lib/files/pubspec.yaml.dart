@@ -1,7 +1,7 @@
 const pubspecFile = '''
-description: Flutter project with Artisan Beta.
-
-publish_to: "none" # Remove this line if you wish to publish to pub.dev
+name: artisan_project
+description: Flutter project initialized with Artisan (updated).
+publish_to: "none"
 
 version: 1.0.0+1
 
@@ -11,93 +11,100 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-    
   flutter_localizations:
     sdk: flutter
- 
-  cupertino_icons: ^1.0.2
-  
-  #Router
-  go_router: ^14.2.7
-  
-  #UI
-  flutter_screenutil: ^5.7.0
+
+  # Core & UI
+  cupertino_icons: ^1.0.8
+  flutter_screenutil: ^5.9.3
   shimmer: ^3.0.0
+  flutter_svg: ^2.0.4
+  lottie: ^3.1.2
+  font_awesome_flutter: ^10.8.0
+  animated_flip_counter: ^0.3.4
+  pinput: ^5.0.0
+  google_fonts: ^6.2.1
 
-  #Riverpod
-  flutter_riverpod: ^2.5.1
-  riverpod_annotation: ^2.3.5
+  # Router
+  go_router: ^16.2.1
 
-  #DI
-  get_it: ^7.2.0
+  # Riverpod
+  flutter_riverpod: ^3.0.2
+  riverpod_annotation: ^3.0.2
+
+  # Dependency Injection
+  get_it: ^8.0.2
   injectable: ^2.1.0
 
-  #DB
+  # Database / Storage
   hive_flutter: ^1.1.0
-  hive_generator: ^2.0.1
+  shared_preferences: ^2.5.1
 
-  #Network
+  # Networking
   http: ^1.2.2
-  
-  #Firebase
-  firebase_core: ^3.6.0
+  connectivity_plus: ^7.0.0
 
-  #Information
-  logger: ^2.4.0
+  # Firebase
+  firebase_core: ^4.1.0
+  firebase_remote_config: ^6.0.1
 
-  #toast
-  fluttertoast: ^8.2.1
+  # Permissions & Device
+  permission_handler: ^12.0.0+1
+  device_info_plus: ^12.1.0
+  path_provider: ^2.1.4
+  open_file: ^3.5.10
+  flutter_image_compress: ^2.3.0
 
-  #image
-  cached_network_image: ^3.2.3
-  image_picker: ^1.1.2
-  flutter_svg: ^2.0.4
-  
-  #Intl Date Formatter
-  intl: ^0.19.0
-  
-  #URL Launcher
+  # Utilities
+  intl: ^0.20.2
+  intl_utils: ^2.8.7
   url_launcher: ^6.3.0
-
-  #Permission Handler
-  permission_handler: ^11.3.1
-
-  #Google Fonts
-  google_fonts: ^6.2.1
-  
-  #Other Dependencies
-  freezed_annotation: ^2.2.0
+  cached_network_image: ^3.4.1
+  fluttertoast: ^9.0.0
+  logger: ^2.4.0
   flutter_keyboard_visibility: ^6.0.0
-  
+  add_2_calendar: ^3.0.1
+  share_plus: ^12.0.0
+  flutter_local_notifications: ^19.2.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  flutter_lints: ^5.0.0
-  build_runner: ^2.4.13
-  freezed: ^2.3.2
-  riverpod_generator: ^2.4.3
-  injectable_generator: ^2.1.4
-  json_serializable: ^6.6.1
+  flutter_lints: ^6.0.0
+  build_runner: ^2.5.4
+  riverpod_generator: ^3.0.2
+  injectable_generator: ^2.7.0
   flutter_gen_runner: ^5.3.2
-  custom_lint: ^0.6.2
 
-  #Artisan Integration
+  # Artisan Integration
   artisan:
     git:
       url: https://github.com/Wolfiz-2-0/artisan
-      ref: Artisan_Beta
+      ref: beta
 
 flutter_gen:
-  output: lib/gen/ # Optional (default: lib/gen/)
-  line_length: 80 # Optional (default: 80)
-
+  output: lib/gen/
+  line_length: 80
   integrations:
     flutter_svg: true
-    
+
 flutter:
   uses-material-design: true
   assets:
     - assets/svgs/
     - assets/pngs/
+    - assets/lottie/
+    - assets/fonts/
+
+  fonts:
+    - family: Montserrat
+      fonts:
+        - asset: assets/fonts/Montserrat-Regular.ttf
+        - asset: assets/fonts/Montserrat-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Montserrat-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Montserrat-Bold.ttf
+          weight: 700
 ''';
