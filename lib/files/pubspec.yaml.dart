@@ -1,5 +1,4 @@
 const pubspecFile = '''
-name: artisan_project
 description: Flutter project initialized with Artisan (updated).
 publish_to: "none"
 
