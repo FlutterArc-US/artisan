@@ -1,40 +1,55 @@
 import 'dart:io';
+
 import 'package:artisan/extensions/color_print_extension.dart';
-import 'package:artisan/files/analysis_options.dart'; // Import the file that contains your analysis options
+import 'package:artisan/files/analysis_options.dart'; // Contains analysisOptionsFileContent
 
-/// Function to add or update the `analysis_options.yaml` file
+/// Adds or updates the `analysis_options.yaml` file safely and idempotently.
 Future<void> addAnalysisOptions() async {
+  const fileName = 'analysis_options.yaml';
+  final filePath = '${Directory.current.path}/$fileName';
+  final file = File(filePath);
+
   try {
-    // Define the path for the analysis_options.yaml file
-    final analysisOptionsFilePath =
-        '${Directory.current.path}/analysis_options.yaml';
-    final analysisOptionsFile = File(analysisOptionsFilePath);
+    '🔍 Checking $fileName...'.printBoldBlue();
 
-    // Use the content from the imported file
-    const newContent = analysisOptionsFileContent; // Reference to the content
+    // Ensure directory exists
+    final dir = file.parent;
+    if (!dir.existsSync()) {
+      dir.createSync(recursive: true);
+      '📁 Created directory: ${dir.path}'.printBoldGreen();
+    }
 
-    // Check if the file already exists
-    if (await analysisOptionsFile.exists()) {
-      // File exists, overwrite its contents
-      'File exists, overwriting analysis_options.yaml...'.printYellow(); // Update File
+    const newContent = analysisOptionsFileContent;
 
-      // Overwrite the content with new content
-      analysisOptionsFile.writeAsStringSync(newContent);
-      'File overwritten: analysis_options.yaml'.printGreen(); // Update File
+    // Handle file creation or update
+    if (!file.existsSync()) {
+      '🆕 Creating new $fileName...'.printBoldGreen();
+      file.writeAsStringSync(newContent);
+      '✅ $fileName created successfully.'.printBoldGreen();
     } else {
-      // File does not exist, create a new one
-      'Creating new analysis_options.yaml...'.printGreen(); // Create File
-      await analysisOptionsFile.writeAsString(newContent);
-      'File created successfully: analysis_options.yaml'.printGreen(); // Create File
+      // Compare existing content
+      final currentContent = file.readAsStringSync().trim();
+      if (currentContent == newContent) {
+        '✅ $fileName already up to date. No changes needed.'.printBoldCyan();
+      } else {
+        '⚙️ Updating existing $fileName...'.printBoldYellow();
+        file.writeAsStringSync(newContent);
+        '✅ $fileName updated successfully.'.printBoldGreen();
+      }
     }
-  } catch (e) {
-    // Error handling using Red color for errors
-    switch (e.runtimeType) {
-      case FileSystemException:
-        'Error: Unable to create or write to the file.'.printRed(); // File System Error
-        break;
-      default:
-        'An unknown error occurred: $e'.printRed(); // Other Errors
+
+    // Verify post-write
+    if (file.existsSync()) {
+      final lines = file.readAsLinesSync().length;
+      '📄 Verified $fileName with $lines lines.'.printBoldBlue();
     }
+  } on FileSystemException catch (e) {
+    '❌ File system error: ${e.message}'.printBoldRed();
+    if (e.osError?.errorCode == 13) {
+      '🔒 Permission denied while accessing $fileName'.printBoldRed();
+    }
+  } catch (e, stack) {
+    '🚨 Unexpected error in addAnalysisOptions: $e'.printBoldRed();
+    'Stack Trace:\n$stack'.printRed();
   }
 }
