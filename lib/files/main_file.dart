@@ -7,15 +7,16 @@ import './util/router/router.dart';
 import './helpers/persistence/persistence_helper.dart';
 import './util/di/di.dart';
 
+///[Artisan Version 1.0.0]
+
 final navigatorKey = GlobalKey<NavigatorState>();
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   configureDependencies();
   await sl<PersistenceHelper>().init();
   runApp(const MyApp());
 }
-
-//Testing Working of MyApp
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -33,7 +34,6 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
 
 class ProviderApp extends StatefulWidget {
   const ProviderApp({super.key});
