@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
 }
 
 class ProviderApp extends StatefulWidget {
-  const ProviderApp({Key? key}) : super(key: key);
+  const ProviderApp({super.key});
 
   @override
   State<ProviderApp> createState() => _ProviderAppState();
