@@ -7,7 +7,7 @@ import './util/router/router.dart';
 import './helpers/persistence/persistence_helper.dart';
 import './util/di/di.dart';
 
-///[Artisan Version 1.0.0]
+///[Artisan Version 1.0.1]
 
 final navigatorKey = GlobalKey<NavigatorState>();
 
