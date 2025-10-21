@@ -80,7 +80,7 @@ dev_dependencies:
   artisan:
     git:
       url: https://github.com/Wolfiz-2-0/artisan
-      ref: Artisan_Beta
+      ref: Artisan_v1
 
 flutter_gen:
   output: lib/gen/
