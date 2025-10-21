@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 extension ColorfulPrint on String {
   void _debugAnsi(String code) {
     assert(() {
-      debugPrint('\x1B[$code$this\x1B[0m');
+      debugPrint('\\x1B[\$code\$this\\x1B[0m');
       return true;
     }());
   }
@@ -61,7 +61,7 @@ void printSectionDivider({String? title, String color = 'cyan'}) {
     const divider = '────────────────────────────────────────────';
     final decorated = title == null
         ? divider
-        : '$divider\n$title\n$divider';
+        : '\$divider\\n\$title\\n\$divider';
 
     switch (color.toLowerCase()) {
       case 'red':
