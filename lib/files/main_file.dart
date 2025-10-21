@@ -7,7 +7,7 @@ import './util/router/router.dart';
 import './helpers/persistence/persistence_helper.dart';
 import './util/di/di.dart';
 
-///[Artisan Version 1.0.2]
+///[Artisan Version 1.0.3]
 
 final navigatorKey = GlobalKey<NavigatorState>();
 
@@ -17,7 +17,7 @@ void main() async {
   await sl<PersistenceHelper>().init();
   runApp(const MyApp());
 }
-
+K
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 

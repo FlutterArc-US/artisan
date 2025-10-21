@@ -12,8 +12,9 @@ import '../utils/functions/add_main.dart';
 import '../utils/functions/add_pubspec_yaml.dart';
 
 Future<void> init() async {
-  printColorfulPrints();
-  'Initializing project...'.printGreen();
+
+  /// [Add Common]
+  addCommon();
 
   /// [Add Infrastructure]
   addInfrastructure();

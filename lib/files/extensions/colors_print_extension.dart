@@ -88,12 +88,4 @@ void printSectionDivider({String? title, String color = 'cyan'}) {
     return true;
   }());
 }
-
-/// Example usage for quick test
-void main() {
-  printSectionDivider(title: '🚀 Initializing Artisan', color: 'green');
-  'Setting up project structure...'.printBoldBlue();
-  'Dependencies installed successfully!'.printBoldGreen();
-  printSectionDivider(title: '✅ Artisan Init Completed', color: 'yellow');
-}
 ''';
