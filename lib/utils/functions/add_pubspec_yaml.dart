@@ -12,3 +12,4 @@ Future<void> addPubspecYaml() async {
   pubspecExisting.writeAsStringSync(contents);
   log("Added pubspec.yaml");
 }
+
