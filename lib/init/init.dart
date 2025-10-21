@@ -13,6 +13,9 @@ import '../utils/functions/add_pubspec_yaml.dart';
 
 Future<void> init() async {
 
+  /// [Add Common]
+  addCommon();
+
   /// [Add Infrastructure]
   addInfrastructure();
 
@@ -29,7 +32,7 @@ Future<void> init() async {
   addAnalysisOptions();
 
   /// [Add Common]
-  // addCommon();
+  addCommon();
 
   /// [Add Router]
   addRouter();
