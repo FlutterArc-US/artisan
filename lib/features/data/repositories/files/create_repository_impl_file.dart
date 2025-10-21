@@ -1,6 +1,6 @@
 import 'package:artisan/extensions/naming_conventions_extension.dart';
 import 'package:artisan/features/domain/repositories/functions/new_repo_method.dart';
-import 'package:artisan/utils/functions/get_app_package_name.dart';
+import 'package:artisan/extensions/get_app_package_name.dart';
 
 //////*********************** Repository File ***********************//////
 String repositoryFileImp(

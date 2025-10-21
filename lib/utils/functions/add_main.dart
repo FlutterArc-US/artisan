@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:artisan/files/main_file.dart';
 import 'package:artisan/files/num_extension_file.dart';
 
-import 'get_app_package_name.dart';
+import '../../extensions/get_app_package_name.dart';
 
 /// [addMain] function creates the main.dart file in the lib folder.
 Future<void> addMain() async {
