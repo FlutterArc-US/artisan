@@ -2,7 +2,7 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:artisan/files/main_file.dart';
-import 'package:artisan/files/num_extension_file.dart';
+import 'package:artisan/files/extensions/num_extension_file.dart';
 
 import 'get_app_package_name.dart';
 
