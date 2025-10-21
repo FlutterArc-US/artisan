@@ -14,10 +14,10 @@ Future<void> addMain() async {
   log("✅ Added main.dart with package imports for ${getPackageName()}");
 }
 
-Future<void> addCommon() async {
-  final file = File("${Directory.current.path}/lib/common/extensions/num.dart");
-  file.createSync(recursive: true);
-  final content = resolveImports(numExtensionContents);
-  file.writeAsStringSync(content);
-  log("✅ Num Extension Added for ${getPackageName()}");
-}
+// Future<void> addCommon() async {
+//   final file = File("${Directory.current.path}/lib/common/extensions/num.dart");
+//   file.createSync(recursive: true);
+//   final content = resolveImports(numExtensionContents);
+//   file.writeAsStringSync(content);
+//   log("✅ Num Extension Added for ${getPackageName()}");
+// }
